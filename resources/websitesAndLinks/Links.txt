@@ -1,0 +1,7 @@
+Colour Palettes:
+-https://coolors.co/5dfdcb-7cc6fe-f4faff-8789c0-08090a (Primary)
+(add new colour palettes to change theme of the web application)
+
+Usefull Links:
+https://tailwindui.com/ (CSS Framework)
+
