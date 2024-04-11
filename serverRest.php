@@ -1,6 +1,6 @@
 <?php
 
-require_once 'Classeviva.php';
+require_once 'phpClass/Classeviva.php';
 
 use Papaya\Classeviva\Students\Classeviva;
 
