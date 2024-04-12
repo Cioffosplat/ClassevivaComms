@@ -2,42 +2,46 @@
     --theme0-primary-color: #5DFDCB;
     --theme0-secondary-color: #7CC6FE;
     --theme0-accent-color: #F4FAFF;
-    --theme0-text-color: #8789C0;
+    --theme0-accent2: #8789C0;
     --theme0-background-color: #08090A;
+    --theme0-text-color: #08090A;
 
     --theme1-primary-color: #221d23;
     --theme1-secondary-color: #4f3824;
     --theme1-accent-color: #d1603d;
-    --theme1-text-color: #ddb967;
+    --theme1-accent2: #ddb967;
     --theme1-background-color: #d0e37f;
+    --theme1-text-color: #F4FAFF;
 
     --theme2-primary-color: #210B2C;
     --theme2-secondary-color: #55286F;
     --theme2-accent-color: #BC96E6;
-    --theme2-text-color: #D8B4E2;
+    --theme2-accent2: #D8B4E2;
     --theme2-background-color: #AE759F;
+    --theme2-text-color: #F4FAFF;
 
     --theme3-primary-color: #EEE0CB;
     --theme3-secondary-color: #BAA898;
     --theme3-accent-color: #848586;
-    --theme3-text-color: #C2847A;
+    --theme3-accent2-color: #C2847A;
     --theme3-background-color: #280003;
+    --theme3-text-color: #08090A;
 }
 
 #header {
     background-color: var(--theme0-secondary-color);
 }
 
-#paintbrushMenu {
-    display: inline-flex;
-}
-
 #body{
     background-color: var(--theme0-background-color)
 }
 
+#paintbrushMenu{
+    background-color: var(--theme0-background-color);
+}
+
 #theme0{
-    background-color: var(--theme0-background-color)
+    background-color: var(--theme0-background-color);
 }
 #theme1{
     background-color: var(--theme1-background-color)
