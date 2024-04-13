@@ -5,7 +5,7 @@ $loggedIn = isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'];
 //login
 if (isset($_POST['username']) && isset($_POST['password']) && !$loggedIn) {
     $ch_login = curl_init();
-    $url_login = 'https://papaya.netsons.org/serverRest.php/?action=login';
+    $url_login = 'https://papaya.netsons.org/phpPages/serverRest.php/?action=login';
     curl_setopt($ch_login, CURLOPT_URL, $url_login);
     curl_setopt($ch_login, CURLOPT_POSTFIELDS, http_build_query(array('username' => $_POST['username'], 'password' => $_POST['password'])));
     curl_setopt($ch_login, CURLOPT_RETURNTRANSFER, true);
