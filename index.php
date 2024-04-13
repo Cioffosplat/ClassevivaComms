@@ -4,20 +4,24 @@
 $loggedIn = isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'];
 //login
 if (isset($_POST['username']) && isset($_POST['password']) && !$loggedIn) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
     $ch_login = curl_init();
     $url_login = 'https://papaya.netsons.org/serverRest.php/?action=login';
     curl_setopt($ch_login, CURLOPT_URL, $url_login);
-    curl_setopt($ch_login, CURLOPT_POSTFIELDS, http_build_query(array('username' => $username, 'password' => $password)));
+    curl_setopt($ch_login, CURLOPT_POSTFIELDS, http_build_query(array('username' => $_POST['username'], 'password' => $_POST['password'])));
     curl_setopt($ch_login, CURLOPT_RETURNTRANSFER, true);
     $response_login = curl_exec($ch_login);
-    $loginData = json_decode($response_login,true);
-    echo $response_login;
-    $_SESSION['ident'] = $loginData["ident"];
-    $_SESSION['id'] = filter_var($loginData["ident"], FILTER_SANITIZE_NUMBER_INT);
-    $_SESSION['token'] = $loginData["token"];
-    $_SESSION['loggedIn'] = true;
+    $loginData = json_decode($response_login, true);
+
+    if ($loginData && isset($loginData['ident']) && isset($loginData['token'])) {
+        $_SESSION['loggedIn'] = true;
+        $_SESSION['ident'] = $loginData["ident"];
+        $_SESSION['id'] = filter_var($loginData["ident"], FILTER_SANITIZE_NUMBER_INT);
+        $_SESSION['token'] = $loginData["token"];
+        header("Location: {$_SERVER['PHP_SELF']}");
+        exit;
+    } else {
+        echo "Errore nel login. Riprova.";
+    }
 }
 
 // Logout
