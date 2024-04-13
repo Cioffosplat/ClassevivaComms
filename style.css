@@ -1,4 +1,5 @@
 :root {
+    /*Colour Palettes*/
     --theme0-primary-color: #5DFDCB;
     --theme0-secondary-color: #7CC6FE;
     --theme0-accent-color: #F4FAFF;
@@ -29,6 +30,7 @@
 }
 
 #body{
+    font-family: "Ubuntu Condensed", sans-serif;
     background-color: var(--theme0-background-color)
 }
 
@@ -48,14 +50,36 @@
 
 
 #theme0{
+    background-color: var(--theme0-secondary-color)
+}
+#theme0:hover{
     background-color: var(--theme0-primary-color)
 }
+
+
 #theme1{
-    background-color: var(--theme1-background-color)
+    background-color: var(--theme1-secondary-color)
 }
+#theme1:hover{
+    background-color: var(--theme1-primary-color)
+}
+
+
 #theme2{
+    background-color: var(--theme2-secondary-color)
+}
+#theme2:hover{
     background-color: var(--theme2-primary-color)
 }
-#theme3{
-    background-color: var(--theme3-primary-color)
+#theme2:active{
+    background-color: var(--theme2-accent-color)
 }
+
+
+#theme3{
+    background-color: var(--theme3-secondary-color)
+}
+#theme3:hover{
+    background-color: var(--theme3-primary-color);
+}
+

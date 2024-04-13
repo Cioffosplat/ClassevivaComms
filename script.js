@@ -15,7 +15,6 @@ function togglePaintbrushMenu() {
 }
 document.getElementById('paintbrushButton').addEventListener('click', togglePaintbrushMenu);
 
-
 //Setting of the Themes
 function setTheme(theme) {
     sessionStorage.setItem('theme', theme);
@@ -25,5 +24,13 @@ function setTheme(theme) {
     document.getElementById('logo').src = 'resources/images/logos/logo' + theme.charAt(0).toUpperCase() + theme.slice(1) + '.jpg';
     document.getElementById('userIcon').src = 'resources/images/users/defaultUser' + theme.charAt(0).toUpperCase() + theme.slice(1) + '.jpg';
     document.getElementById('paintbrushButton').src = `resources/images/paintbrush/paintbrush${theme.charAt(0).toUpperCase() + theme.slice(1)}.png`;
+}
+
+function redirectToProfile() {
+    window.location.href = "profile.php";
+}
+
+function redirectToHomepage() {
+    window.location.href = "index.php";
 }
 

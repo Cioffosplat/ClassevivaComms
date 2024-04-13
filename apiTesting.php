@@ -1,8 +1,6 @@
 <?php
 session_start();
 
-$filter = 'asc';
-
 //login
 if (isset($_POST['username']) && isset($_POST['password'])) {
     $username = $_POST['username'];
