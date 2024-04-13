@@ -178,7 +178,7 @@ use Papaya\Classeviva\ClassevivaEvent;
         return $this->Request("/students/$id/cards");
     }
 
-    public function didactics($id = null,$token): bool|string
+    public function didactics($id,$token): bool|string
     {
         curl_setopt($this->curl, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/json',

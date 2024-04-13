@@ -13,7 +13,6 @@ function togglePaintbrushMenu() {
     const paintbrushMenu = document.getElementById('paintbrushMenu');
     paintbrushMenu.classList.toggle('show');
 }
-document.getElementById('paintbrushButton').addEventListener('click', togglePaintbrushMenu);
 
 //Setting of the Themes
 function setTheme(theme) {
@@ -34,3 +33,13 @@ function redirectToHomepage() {
     window.location.href = "index.php";
 }
 
+//Sezione per l'highlighting dell'email sbagliata
+document.getElementById('email').addEventListener('input', function(event) {
+    var email = event.target.value;
+    var isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    if (!isValidEmail) {
+        event.target.classList.add('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
+    } else {
+        event.target.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
+    }
+});

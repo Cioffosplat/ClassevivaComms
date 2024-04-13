@@ -29,7 +29,7 @@
     background-color: var(--theme0-secondary-color);
 }
 
-#body{
+body{
     font-family: "Ubuntu Condensed", sans-serif;
     background-color: var(--theme0-background-color)
 }
@@ -38,7 +38,7 @@
     display: none;
     opacity: 0;
     transform: translateY(-10px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transition: opacity 0.5s ease-in, transform 0.5s ease-in;
 }
 
 #paintbrushMenu.show {
