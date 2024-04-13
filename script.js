@@ -27,7 +27,7 @@ function setTheme(theme) {
 }
 
 function redirectToProfile() {
-    window.location.href = "phpPages/profile.php";
+    window.location.href = "profile.php";
 }
 
 function redirectToHomepage() {
