@@ -52,12 +52,12 @@ if (!$loggedIn) {
         <link href="style.css" rel="stylesheet">
     </head>
 
-    <body class="bg-gray-100">
+    <body>
     <div id="header" class="px-4 py-2 flex justify-between items-center relative">
         <img id="logoLogin" alt="Logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()" src="resources/images/logos/logoTheme0.jpg">
     </div>
 
-    <div class=" container mx-auto py-20 bg-gray-100 h-50 flex justify-center">
+    <div class="container mx-auto py-20 bg-gray-0 h-50 flex justify-center">
         <div class="bg-white p-8 rounded-lg shadow-md w-96">
             <h2 class="text-3xl mb-6">Login</h2>
             <form method="post">
