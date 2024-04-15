@@ -57,7 +57,7 @@ if (!$loggedIn) {
         <img id="logoLogin" alt="Logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()" src="resources/images/logos/logoTheme0.jpg">
     </div>
 
-    <div class="container mx-auto py-20 bg-gray-0 h-50 flex justify-center">
+    <div id= "loginPage" class="container mx-auto py-20 h-50 flex justify-center">
         <div class="bg-white p-8 rounded-lg shadow-md w-96">
             <h2 class="text-3xl mb-6">Login</h2>
             <form method="post">
@@ -103,7 +103,7 @@ if (!$loggedIn) {
     <link href="style.css" rel="stylesheet">
 </head>
 
-<body id='body' class="text-white">
+<body id='body'>
 <div id="header" class="px-4 py-2 flex justify-between items-center relative">
     <div>
         <img id="logo" alt="Logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()">
@@ -111,10 +111,10 @@ if (!$loggedIn) {
     <div class="flex items-center">
         <img id="paintbrushButton" class="paintbrush w-6 h-6 cursor-pointer" src="resources/images/paintbrush/paintbrushTheme0.png" alt="Paintbrush" onclick="togglePaintbrushMenu()">
         <div id="paintbrushMenu" class="absolute z-10 bg-gray-200 p-4 rounded-lg top-20 right-0 scale-100 origin-top shadow-2xl">
-            <button onclick="setTheme('theme0')" id='theme0' class="block my-2 p-2 text-white rounded-md focus:ring shadow-2xl">Default</button>
-            <button onclick="setTheme('theme1')" id='theme1' class="block my-2 p-2 text-white rounded-md focus:ring shadow-2xl">Theme 1</button>
-            <button onclick="setTheme('theme2')" id='theme2' class="block my-2 p-2 text-white rounded-md focus:ring shadow-2xl">Theme 2</button>
-            <button onclick="setTheme('theme3')" id='theme3' class="block my-2 p-2 text-white rounded-md focus:ring shadow-2xl">Theme 3</button>
+            <button onclick="setTheme('theme0')" id='theme0' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Default</button>
+            <button onclick="setTheme('theme1')" id='theme1' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Theme 1</button>
+            <button onclick="setTheme('theme2')" id='theme2' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Theme 2</button>
+            <button onclick="setTheme('theme3')" id='theme3' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Theme 3</button>
         </div>
         <img id="userIcon" alt="User Icon" class="w-10 h-10 rounded-full ml-2 cursor-pointer" onclick="redirectToProfile()">
     </div>
