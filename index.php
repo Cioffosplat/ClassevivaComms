@@ -80,6 +80,15 @@ if (!$loggedIn) {
                 </div>
             </form>
         </div>
+        <div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-gray-900 text-white p-4">
+            <div class="max-w-screen-lg mx-auto flex items-center justify-between">
+                <p class="text-sm">Questo sito utilizza i cookie per migliorare l'esperienza dell'utente.</p>
+                <div class="flex space-x-2">
+                    <button onclick="acceptCookies()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">Accetta</button>
+                    <button onclick="rejectCookies()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">Rifiuta</button>
+                </div>
+            </div>
+        </div>
     </div>
     </body>
 
@@ -125,6 +134,16 @@ echo "\n", $_SESSION['ident'], "\n";
 echo "\n", $_SESSION['id'], "\n";
 echo "\n", $_SESSION['token'], "\n";
 ?>
+
+<div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-gray-900 text-white p-4">
+    <div class="max-w-screen-lg mx-auto flex items-center justify-between">
+        <p class="text-sm">Questo sito utilizza i cookie per migliorare l'esperienza dell'utente.</p>
+        <div class="flex space-x-2">
+            <button onclick="acceptCookies()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">Accetta</button>
+            <button onclick="rejectCookies()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">Rifiuta</button>
+        </div>
+    </div>
+</div>
 
 
 <form method="post">

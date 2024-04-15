@@ -1,5 +1,6 @@
 //Saving function for the themes
 window.onload = function() {
+    checkCookieConsent();
     const savedTheme = sessionStorage.getItem('theme');
     if (savedTheme) {
         setTheme(savedTheme);
@@ -44,3 +45,79 @@ document.getElementById('email').addEventListener('input', function(event) {
         event.target.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
     }
 });
+
+//Sezione per il cookie banner
+function setCookieConsent(consent) {
+    // Imposta il cookie con la durata di 30 giorni
+    var d = new Date();
+    d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000)); // 30 giorni
+    var expires = "expires=" + d.toUTCString();
+    document.cookie = "cookie_consent=" + consent + ";" + expires + ";path=/";
+
+    // Imposta la variabile di sessione per salvare lo stato del consenso
+    sessionStorage.setItem("cookie_consent", consent);
+}
+
+// Funzione per controllare se l'utente ha già accettato i cookie durante la sessione attuale
+function checkCookieConsent() {
+    var consent = getCookie("cookie_consent") || sessionStorage.getItem("cookie_consent");
+    if (consent === "true") {
+        // Se l'utente ha già accettato i cookie, nascondi il banner
+        hideCookieBanner();
+    } else if (consent === "false") {
+        // Se l'utente ha già rifiutato i cookie, rimuovi il banner
+        removeCookieBanner();
+    } else {
+        // Mostra il banner per i cookie solo se non è già stato accettato o rifiutato
+        showCookieBanner();
+    }
+}
+
+
+
+// Funzione per mostrare il banner per i cookie
+function showCookieBanner() {
+    var banner = document.getElementById("cookie-banner");
+    banner.style.display = "block";
+}
+
+// Funzione per nascondere il banner per i cookie
+function hideCookieBanner() {
+    var banner = document.getElementById("cookie-banner");
+    banner.style.display = "none";
+}
+// Funzione per rimuovere il banner dei cookie
+function removeCookieBanner() {
+    var banner = document.getElementById("cookie-banner");
+    banner.parentNode.removeChild(banner);
+}
+
+
+// Funzione per gestire il clic sul pulsante Accetta
+function acceptCookies() {
+    setCookieConsent(true);
+    hideCookieBanner();
+}
+
+// Funzione per gestire il clic sul pulsante Rifiuta
+function rejectCookies() {
+    setCookieConsent(false);
+    hideCookieBanner();
+}
+
+// Ottieni il valore del cookie
+function getCookie(name) {
+    var cname = name + "=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var cookieArr = decodedCookie.split(';');
+    for(var i = 0; i < cookieArr.length; i++) {
+        var c = cookieArr[i];
+        while (c.charAt(0) === ' ') {
+            c = c.substring(1);
+        }
+        if (c.indexOf(cname) === 0) {
+            return c.substring(cname.length, c.length);
+        }
+    }
+    return "";
+}
