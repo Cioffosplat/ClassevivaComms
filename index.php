@@ -50,16 +50,17 @@ if (!$loggedIn) {
             @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap')
         </style>
         <link href="style.css" rel="stylesheet">
+        <script src="script.js"></script>
     </head>
 
     <body>
-    <div id="header" class="px-4 py-2 flex justify-between items-center relative">
-        <img id="logoLogin" alt="Logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()" src="resources/images/logos/logoTheme0.jpg">
+    <div id="headerLogin" class="px-4 py-2 flex justify-between items-center relative" style="background-color: var(--theme0-secondary-color)">
+        <img id="logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()" src="resources/images/logos/logoTheme0.jpg">
     </div>
 
     <div id= "loginPage" class="container mx-auto py-20 h-50 flex justify-center">
         <div class="bg-white p-8 rounded-lg shadow-md w-96">
-            <h2 class="text-3xl mb-6">Login</h2>
+            <h2 class="text-3xl mb-6">Login con Classeviva</h2>
             <form method="post">
                 <div class="mb-6">
                     <label for="username" class="block text-sm text-gray-700">Username/Email</label>
@@ -80,16 +81,20 @@ if (!$loggedIn) {
                 </div>
             </form>
         </div>
-        <div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-gray-900 text-white p-4">
-            <div class="max-w-screen-lg mx-auto flex items-center justify-between">
-                <p class="text-sm">Questo sito utilizza i cookie per migliorare l'esperienza dell'utente.</p>
-                <div class="flex space-x-2">
-                    <button onclick="acceptCookies()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">Accetta</button>
-                    <button onclick="rejectCookies()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">Rifiuta</button>
-                </div>
+    </div>
+    <?php
+    if(!isset($_COOKIE['cookie_consent'])){
+        echo '<div style="background-color: var(--theme0-accent2-color)"id="cookie-banner" class="cookie_banner fixed bottom-0 left-0 w-full bg-gray-900 text-white p-4">
+        <div class="max-w-screen-lg mx-auto flex items-center justify-center space-x-3">
+            <p class="text-sm">Questo sito utilizza i cookie per migliorare l\'esperienza dell\'utente. <br> Per le direttive riguardanti i cookie fare riferimento alla <a class="underline underline-offset-1" href="https://papaya.netsons.org/resources/websitesAndLinks/cookie_policy.html">Cookie Policy</a></p>
+            <div class="flex space-x-3">
+                <button onclick="acceptCookies()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">Accetta</button>
+                <button onclick="rejectCookies()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">Rifiuta</button>
             </div>
         </div>
-    </div>
+    </div>';
+    }
+    ?>
     </body>
 
     </html>
@@ -110,12 +115,13 @@ if (!$loggedIn) {
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap')
     </style>
     <link href="style.css" rel="stylesheet">
+    <script src="script.js"></script>
 </head>
 
 <body id='body'>
 <div id="header" class="px-4 py-2 flex justify-between items-center relative">
     <div>
-        <img id="logo" alt="Logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()">
+        <img id="logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()">
     </div>
     <div class="flex items-center">
         <img id="paintbrushButton" class="paintbrush w-6 h-6 cursor-pointer" src="resources/images/paintbrush/paintbrushTheme0.png" alt="Paintbrush" onclick="togglePaintbrushMenu()">
@@ -135,22 +141,23 @@ echo "\n", $_SESSION['id'], "\n";
 echo "\n", $_SESSION['token'], "\n";
 ?>
 
-<div id="cookie-banner" class="fixed bottom-0 left-0 w-full bg-gray-900 text-white p-4">
-    <div class="max-w-screen-lg mx-auto flex items-center justify-between">
-        <p class="text-sm">Questo sito utilizza i cookie per migliorare l'esperienza dell'utente.</p>
-        <div class="flex space-x-2">
-            <button onclick="acceptCookies()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">Accetta</button>
-            <button onclick="rejectCookies()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">Rifiuta</button>
+<?php
+if(!isset($_COOKIE['cookie_consent'])){
+    echo '<div style="background-color: var(--theme0-accent2-color)"id="cookie-banner" class="cookie_banner fixed bottom-0 left-0 w-full bg-gray-900 text-white p-4">
+        <div class="max-w-screen-lg mx-auto flex items-center justify-center space-x-3">
+            <p class="text-sm">Questo sito utilizza i cookie per migliorare l\'esperienza dell\'utente. <br> Per le direttive riguardanti i cookie fare riferimento alla <a class="underline underline-offset-1" href="https://papaya.netsons.org/resources/websitesAndLinks/cookie_policy.html">Cookie Policy</a></p>
+            <div class="flex space-x-3">
+                <button onclick="acceptCookies()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">Accetta</button>
+                <button onclick="rejectCookies()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">Rifiuta</button>
+            </div>
         </div>
-    </div>
-</div>
-
-
+    </div>';
+}
+?>
 <form method="post">
     <input type="hidden" name="logout" value="true">
     <input type="submit" value="Logout">
 </form>
-<script src="script.js"></script>
 </body>
 
 </html>

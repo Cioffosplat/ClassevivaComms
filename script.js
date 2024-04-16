@@ -1,12 +1,12 @@
 //Saving function for the themes
 window.onload = function() {
-    checkCookieConsent();
     const savedTheme = sessionStorage.getItem('theme');
     if (savedTheme) {
         setTheme(savedTheme);
     } else {
         setTheme('theme0');
     }
+    checkCookieConsent();
 }
 
 //Paintbrush Menu
@@ -21,8 +21,8 @@ function setTheme(theme) {
     document.getElementById('header').style.backgroundColor = 'var(--' + theme + '-secondary-color)';
     document.getElementById('body').style.backgroundColor = 'var(--' + theme + '-background-color)';
     document.getElementById('body').style.color = 'var(--' + theme + '-text-color)';
-    document.getElementById('paintbrushMenu').style.backgroundColor = 'var(--' + theme + '-accent-color)';
     document.getElementById('logo').src = 'resources/images/logos/logo' + theme.charAt(0).toUpperCase() + theme.slice(1) + '.jpg';
+    document.getElementById('paintbrushMenu').style.backgroundColor = 'var(--' + theme + '-accent-color)';
     document.getElementById('userIcon').src = 'resources/images/users/defaultUser' + theme.charAt(0).toUpperCase() + theme.slice(1) + '.jpg';
     document.getElementById('paintbrushButton').src = `resources/images/paintbrush/paintbrush${theme.charAt(0).toUpperCase() + theme.slice(1)}.png`;
 }
@@ -34,17 +34,6 @@ function redirectToProfile() {
 function redirectToHomepage() {
     window.location.href = "index.php";
 }
-
-//Sezione per l'highlighting dell'email sbagliata
-document.getElementById('email').addEventListener('input', function(event) {
-    var email = event.target.value;
-    var isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    if (!isValidEmail) {
-        event.target.classList.add('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
-    } else {
-        event.target.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-500');
-    }
-});
 
 //Sezione per il cookie banner
 function setCookieConsent(consent) {
@@ -58,17 +47,13 @@ function setCookieConsent(consent) {
     sessionStorage.setItem("cookie_consent", consent);
 }
 
-// Funzione per controllare se l'utente ha già accettato i cookie durante la sessione attuale
 function checkCookieConsent() {
     var consent = getCookie("cookie_consent") || sessionStorage.getItem("cookie_consent");
     if (consent === "true") {
-        // Se l'utente ha già accettato i cookie, nascondi il banner
         hideCookieBanner();
     } else if (consent === "false") {
-        // Se l'utente ha già rifiutato i cookie, rimuovi il banner
-        removeCookieBanner();
+        hideCookieBanner();
     } else {
-        // Mostra il banner per i cookie solo se non è già stato accettato o rifiutato
         showCookieBanner();
     }
 }
@@ -85,11 +70,6 @@ function showCookieBanner() {
 function hideCookieBanner() {
     var banner = document.getElementById("cookie-banner");
     banner.style.display = "none";
-}
-// Funzione per rimuovere il banner dei cookie
-function removeCookieBanner() {
-    var banner = document.getElementById("cookie-banner");
-    banner.parentNode.removeChild(banner);
 }
 
 
