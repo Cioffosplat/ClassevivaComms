@@ -1,63 +1,63 @@
 <?php
 
-// Includi il file autoload di Fat-Free Framework
-require_once 'vendor/autoload.php';
+require_once 'vendor/autoload.php'; // Assicurati che il tuo autoload includa la directory in cui è installato FatFree
+require_once 'phpClass/Classeviva.php';
 
-use Knocks\Classeviva\Students\Classeviva;
+use Papaya\Classeviva\Students\Classeviva;
 
-// Inizializza l'applicazione Fat-Free
-$app = \Base::instance();
+$f3 = \Base::instance();
 
-// Definisci la rotta per gestire la richiesta di login
-$app->route('POST /login', function ($app) {
-    $data = json_decode($app->body(), true);
-
-    if (!isset($data['username']) || !isset($data['password'])) {
-        $app->error(400, 'Username e password sono obbligatori');
-    }
-
-    $username = $data['username'];
-    $password = $data['password'];
+$f3->route('POST /login', function($f3) {
+    $body = json_decode($f3->BODY, true);
+    $username = $body['username'];
+    $password = $body['password'];
 
     try {
         $classeviva = new Classeviva();
         $responseLogin = $classeviva->login($username, $password);
-
-        $app->response->header('Content-Type: application/json');
-        $app->response->header('Access-Control-Allow-Origin: *');
+        $f3->status(200);
+        $f3->set('HEADERS.Content-Type', 'application/json');
         echo $responseLogin;
     } catch (Exception $e) {
-        $app->error(500, $e->getMessage());
+        $f3->status(500);
+        echo json_encode(['error' => $e->getMessage()]);
     }
 });
 
-// Definisci la rotta per gestire la richiesta dello stato
-$app->route('GET /status', function ($app) {
+$f3->route('POST /status', function($f3) {
+    $body = json_decode($f3->BODY, true);
+    $id = $body['id'];
+    $token = $body['token'];
+
     try {
         $classeviva = new Classeviva();
-        $status = $classeviva->status();
+        $status = $classeviva->status($id, $token);
         $status = json_decode($status, true);
-
-        $app->response->header('Content-Type: application/json');
-        echo json_encode($status);
+        $f3->set('HEADERS.Content-Type', 'application/json');
+        $f3->set('HEADERS.Z-Dev-Apikey', 'Tg1NWEwNGIgIC0K');
+        $f3->set('HEADERS.Z-Auth-Token', $token);
+        echo $status;
     } catch (Exception $e) {
-        $app->error(500, $e->getMessage());
+        $f3->status(500);
+        echo json_encode(['error' => $e->getMessage()]);
     }
 });
 
-// Definisci la rotta per gestire la richiesta dei voti
-$app->route('GET /grades', function ($app) {
+$f3->route('POST /grades', function($f3) {
+    $body = json_decode($f3->BODY, true);
+    $id = $body['id'];
+    $token = $body['token'];
+
     try {
         $classeviva = new Classeviva();
-        $grades = $classeviva->grades();
-
-        $app->response->header('Content-Type: application/json');
-        $app->response->header('Access-Control-Allow-Origin: *');
+        $grades = $classeviva->grades($id, $token);
+        $f3->set('HEADERS.Content-Type', 'application/json');
         echo $grades;
     } catch (Exception $e) {
-        $app->error(500, $e->getMessage());
+        $f3->status(500);
+        echo json_encode(['error' => $e->getMessage()]);
     }
 });
 
-// Esegui l'applicazione Fat-Free
-$app->run();
+$f3->run();
+?>
