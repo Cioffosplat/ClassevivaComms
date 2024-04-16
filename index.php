@@ -51,10 +51,11 @@ if (!$loggedIn) {
         </style>
         <link href="style.css" rel="stylesheet">
         <script src="script.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     </head>
 
     <body>
-    <div id="headerLogin" class="px-4 py-2 flex justify-between items-center relative" style="background-color: var(--theme0-secondary-color)">
+    <div class="px-4 py-2 flex justify-between items-center relative" style="background-color: var(--theme0-secondary-color)">
         <img id="logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()" src="resources/images/logos/logoTheme0.jpg">
     </div>
 
@@ -95,6 +96,10 @@ if (!$loggedIn) {
     </div>';
     }
     ?>
+    <!-- Form nascosto per eseguire il logout -->
+    <form id="logoutForm" method="post" style="display: none;">
+        <input type="hidden" name="logout" value="true">
+    </form>
     </body>
 
     </html>
@@ -116,6 +121,7 @@ if (!$loggedIn) {
     </style>
     <link href="style.css" rel="stylesheet">
     <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 
 <body id='body'>
@@ -158,6 +164,18 @@ if(!isset($_COOKIE['cookie_consent'])){
     <input type="hidden" name="logout" value="true">
     <input type="submit" value="Logout">
 </form>
+
+<!-- Script per gestire il logout -->
+<script>
+    window.onbeforeunload = function (){
+        $.ajax({
+            url: '<?php echo $_SERVER['PHP_SELF']; ?>',
+            method: 'POST',
+            data: {logout: true},
+        });
+    }
+</script>
+
 </body>
 
 </html>

@@ -1,5 +1,10 @@
+//Ajax Script implementation
+var script = document.createElement("SCRIPT");
+script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
+script.type = 'text/javascript';
+
 //Saving function for the themes
-window.onload = function() {
+window.onload = function () {
     const savedTheme = sessionStorage.getItem('theme');
     if (savedTheme) {
         setTheme(savedTheme);
@@ -8,6 +13,9 @@ window.onload = function() {
     }
     checkCookieConsent();
 }
+
+// Logout Function when tab is closed
+
 
 //Paintbrush Menu
 function togglePaintbrushMenu() {
@@ -37,13 +45,10 @@ function redirectToHomepage() {
 
 //Sezione per il cookie banner
 function setCookieConsent(consent) {
-    // Imposta il cookie con la durata di 30 giorni
     var d = new Date();
-    d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000)); // 30 giorni
+    d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
     var expires = "expires=" + d.toUTCString();
     document.cookie = "cookie_consent=" + consent + ";" + expires + ";path=/";
-
-    // Imposta la variabile di sessione per salvare lo stato del consenso
     sessionStorage.setItem("cookie_consent", consent);
 }
 
@@ -58,39 +63,31 @@ function checkCookieConsent() {
     }
 }
 
-
-
-// Funzione per mostrare il banner per i cookie
 function showCookieBanner() {
     var banner = document.getElementById("cookie-banner");
     banner.style.display = "block";
 }
 
-// Funzione per nascondere il banner per i cookie
 function hideCookieBanner() {
     var banner = document.getElementById("cookie-banner");
     banner.style.display = "none";
 }
 
-
-// Funzione per gestire il clic sul pulsante Accetta
 function acceptCookies() {
     setCookieConsent(true);
     hideCookieBanner();
 }
 
-// Funzione per gestire il clic sul pulsante Rifiuta
 function rejectCookies() {
     setCookieConsent(false);
     hideCookieBanner();
 }
 
-// Ottieni il valore del cookie
 function getCookie(name) {
     var cname = name + "=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var cookieArr = decodedCookie.split(';');
-    for(var i = 0; i < cookieArr.length; i++) {
+    for (var i = 0; i < cookieArr.length; i++) {
         var c = cookieArr[i];
         while (c.charAt(0) === ' ') {
             c = c.substring(1);
