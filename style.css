@@ -38,6 +38,11 @@ body{
 #header {
     background-color: var(--theme0-secondary-color);
 }
+
+#sidebar{
+    background-color: var(--theme0-accent2-color);
+}
+
 #paintbrushMenu {
     display: none;
     opacity: 0;

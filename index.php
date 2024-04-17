@@ -122,40 +122,60 @@ if (!$loggedIn) {
     </style>
     <link href="style.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="script.js"></script>
 </head>
-
 <body id='body'>
-<div id="header" class="px-20 py-2 flex justify-between items-center relative">
-    <div class = "inline-flex">
-        <div class="group flex h-15 w-15 cursor-pointer items-center justify-center rounded-3xl px-3 ">
-            <div class="space-y-2">
-                <span class="block h-1 w-10 origin-center rounded-full bg-black transition-transform ease-in-out group-hover:translate-y-1.5 group-hover:rotate-45"></span>
-                <span class="block h-1 w-8 origin-center rounded-full bg-black transition-transform ease-in-out group-hover:w-10 group-hover:-translate-y-1.5 group-hover:-rotate-45"></span>
+<div class="h-screen flex-col overflow-hidden bg-gray-200">
+    <div>
+        <div class="absolute text-white w-56 min-h-screen overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-300"
+             id="sidebar">
+            <button class="absolute top-0 right-0 m-4 text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                     stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M6  18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <div class="p-4">
+                <h1 class="text-2xl font-semibold">Sidebar</h1>
+                <ul class="mt-4">
+                    <li class="mb-2"><a href="#" class="block hover:text-indigo-400">Home</a></li>
+                    <li class="mb-2"><a href="#" class="block hover:text-indigo-400">About</a></li>
+                    <li class="mb-2"><a href="#" class="block hover:text-indigo-400">Services</a></li>
+                    <li class="mb-2"><a href="#" class="block hover:text-indigo-400">Contact</a></li>
+                </ul>
             </div>
         </div>
-        <img id="logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()">
-        <p class="text-xl pt-6 px-2 ">ClassevivaComms</p>
-    </div>
-    <div class="flex items-center px-2">
-        <img id="paintbrushButton" class="paintbrush w-7 h-7 cursor-pointer" src="resources/images/paintbrush/paintbrushTheme0.png" onclick="togglePaintbrushMenu()">
-        <div id="paintbrushMenu" class="fixed z-10 p-3 rounded-lg top-20 left-57 scale-100 origin-top shadow-2xl">
-            <button onclick="setTheme('theme0')" id='theme0' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Default</button>
-            <button onclick="setTheme('theme1')" id='theme1' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Theme 1</button>
-            <button onclick="setTheme('theme2')" id='theme2' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Theme 2</button>
-            <button onclick="setTheme('theme3')" id='theme3' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Theme 3</button>
+        <div id="header" class="px-20 py-2 flex justify-between items-center ">
+            <div class = "inline-flex">
+                <button class="px-4 text-black hover:text-gray-700" id="open-sidebar">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+                <img id="logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()">
+                <p class="text-xl pt-6 px-3 ">ClassevivaComms</p>
+            </div>
+            <div class="flex items-center px-2">
+                <img id="paintbrushButton" class="paintbrush w-7 h-7 cursor-pointer mx-2" src="resources/images/paintbrush/paintbrushTheme0.png" onclick="togglePaintbrushMenu()">
+                <div id="paintbrushMenu" class="fixed z-10 p-3 rounded-lg top-20 left-57 scale-100 origin-top shadow-2xl mx-2">
+                    <button onclick="setTheme('theme0')" id='theme0' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Default</button>
+                    <button onclick="setTheme('theme1')" id='theme1' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Theme 1</button>
+                    <button onclick="setTheme('theme2')" id='theme2' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Theme 2</button>
+                    <button onclick="setTheme('theme3')" id='theme3' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Theme 3</button>
+                </div>
+                <img id="userIcon" alt="User Icon" class="w-10 h-10 rounded-full ml-2 cursor-pointer" onclick="redirectToProfile()">
+                <?php
+                echo "<p class='px-2 mx-2'>{$_SESSION['firstName']} {$_SESSION['lastName']}</p>"
+                ?>
+            </div>
         </div>
-        <img id="userIcon" alt="User Icon" class="w-10 h-10 rounded-full ml-2 cursor-pointer" onclick="redirectToProfile()">
-        <?php
-        echo "<p class='px-2'>{$_SESSION['firstName']} {$_SESSION['lastName']}</p>"
-        ?>
     </div>
-</div>
-
 <?php
-echo "\n", $_SESSION['ident'], "\n";
-echo "\n", $_SESSION['id'], "\n";
-echo "\n", $_SESSION['token'], "\n";
+echo "<div class='flex'>
+        <p class='px-2'> {$_SESSION['ident']}</p>
+        <p class='px-2'> {$_SESSION['id']}</p>  
+        <p class='px-2'> {$_SESSION['token']}</p>
+       </div>";
 ?>
 
 <?php
@@ -175,16 +195,7 @@ if(!isset($_COOKIE['cookie_consent'])){
     <input type="hidden" name="logout" value="true">
     <input type="submit" value="Logout">
 </form>
-<!-- Logout Script -->
-<script>
-    window.onunload = function (){
-        $.ajax({
-            url: '<?php echo $_SERVER['PHP_SELF']; ?>',
-            method: 'POST',
-            data: {logout: true},
-        });
-    }
-</script>
+    <script src="script.js"></script>
 </body>
 
 </html>

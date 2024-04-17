@@ -15,7 +15,23 @@ window.onload = function () {
 }
 
 // Logout Function when tab is closed
+window.onunload = function (){
+    $.ajax({
+        url: '<?php echo $_SERVER[\'PHP_SELF\']; ?>',
+        method: 'POST',
+        data: {logout: true},
+    });
+}
 
+//Sidebar Functions
+function openSidebar() {
+    document.getElementById("sidebar").classList.remove("-translate-x-full");
+}
+function closeSidebar() {
+    document.getElementById("sidebar").classList.add("-translate-x-full");
+}
+document.getElementById("open-sidebar").addEventListener("click", openSidebar);
+document.getElementById("sidebar").querySelector("button").addEventListener("click", closeSidebar);
 
 //Paintbrush Menu
 function togglePaintbrushMenu() {
@@ -30,6 +46,7 @@ function setTheme(theme) {
     document.getElementById('body').style.backgroundColor = 'var(--' + theme + '-background-color)';
     document.getElementById('body').style.color = 'var(--' + theme + '-text-color)';
     document.getElementById('logo').src = 'resources/images/logos/logo' + theme.charAt(0).toUpperCase() + theme.slice(1) + '.jpg';
+    document.getElementById('sidebar').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
     document.getElementById('paintbrushMenu').style.backgroundColor = 'var(--' + theme + '-accent-color)';
     document.getElementById('userIcon').src = 'resources/images/users/defaultUser' + theme.charAt(0).toUpperCase() + theme.slice(1) + '.jpg';
     document.getElementById('paintbrushButton').src = `resources/images/paintbrush/paintbrush${theme.charAt(0).toUpperCase() + theme.slice(1)}.png`;
