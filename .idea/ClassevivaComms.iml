@@ -8,5 +8,9 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="jquery" level="application" />
     <orderEntry type="library" name="tailwindcss" level="application" />
+    <orderEntry type="library" name="alpinejs" level="application" />
+    <orderEntry type="library" name="alpine" level="application" />
+    <orderEntry type="library" name="twitter-bootstrap" level="application" />
+    <orderEntry type="library" name="bootstrap" level="application" />
   </component>
 </module>

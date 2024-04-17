@@ -1,7 +1,7 @@
 <?php
 
 require_once 'vendor/autoload.php'; // Assicurati che il tuo autoload includa la directory in cui è installato FatFree
-require_once 'phpClass/Classeviva.php';
+require_once 'Classeviva.php';
 
 use Papaya\Classeviva\Students\Classeviva;
 
@@ -9,8 +9,8 @@ $f3 = \Base::instance();
 
 $f3->route('POST /login', function($f3) {
     $body = json_decode($f3->BODY, true);
-    $username = $body['username'];
-    $password = $body['password'];
+    $username = 'fioccosplat@gmail.com';
+    $password = 'Fiocco2018';
 
     try {
         $classeviva = new Classeviva();

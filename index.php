@@ -18,6 +18,8 @@ if (isset($_POST['username']) && isset($_POST['password']) && !$loggedIn) {
         $_SESSION['ident'] = $loginData["ident"];
         $_SESSION['id'] = filter_var($loginData["ident"], FILTER_SANITIZE_NUMBER_INT);
         $_SESSION['token'] = $loginData["token"];
+        $_SESSION['firstName'] = $loginData["firstName"];
+        $_SESSION['lastName'] = $loginData["lastName"];
         header("Location: {$_SERVER['PHP_SELF']}");
         exit;
     } else {
@@ -46,16 +48,19 @@ if (!$loggedIn) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Login</title>
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap')
         </style>
         <link href="style.css" rel="stylesheet">
-        <script src="script.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="script.js"></script>
     </head>
 
     <body>
-    <div class="px-4 py-2 flex justify-between items-center relative" style="background-color: var(--theme0-secondary-color)">
+    <div class="px-20 py-2 flex justify-between items-center relative" style="background-color: var(--theme0-secondary-color)">
         <img id="logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()" src="resources/images/logos/logoTheme0.jpg">
     </div>
 
@@ -96,7 +101,6 @@ if (!$loggedIn) {
     </div>';
     }
     ?>
-    <!-- Form nascosto per eseguire il logout -->
     <form id="logoutForm" method="post" style="display: none;">
         <input type="hidden" name="logout" value="true">
     </form>
@@ -116,28 +120,35 @@ if (!$loggedIn) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap')
     </style>
     <link href="style.css" rel="stylesheet">
-    <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="script.js"></script>
 </head>
 
 <body id='body'>
-<div id="header" class="px-4 py-2 flex justify-between items-center relative">
-    <div>
+<div id="header" class="px-20 py-2 flex justify-between items-center relative">
+    <div class = "inline-flex">
         <img id="logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()">
+        <p class="text-xl pt-4 px-2 ">ClassevivaComms</p>
     </div>
-    <div class="flex items-center">
-        <img id="paintbrushButton" class="paintbrush w-6 h-6 cursor-pointer" src="resources/images/paintbrush/paintbrushTheme0.png" alt="Paintbrush" onclick="togglePaintbrushMenu()">
-        <div id="paintbrushMenu" class="absolute z-10 bg-gray-200 p-4 rounded-lg top-20 right-0 scale-100 origin-top shadow-2xl">
+    <div class="flex items-center px-2">
+        <img id="paintbrushButton" class="paintbrush w-7 h-7 cursor-pointer" src="resources/images/paintbrush/paintbrushTheme0.png" onclick="togglePaintbrushMenu()">
+        <div id="paintbrushMenu" class="fixed z-10 p-3 rounded-lg top-20 left-57 scale-100 origin-top shadow-2xl">
             <button onclick="setTheme('theme0')" id='theme0' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Default</button>
             <button onclick="setTheme('theme1')" id='theme1' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Theme 1</button>
             <button onclick="setTheme('theme2')" id='theme2' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Theme 2</button>
             <button onclick="setTheme('theme3')" id='theme3' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Theme 3</button>
         </div>
         <img id="userIcon" alt="User Icon" class="w-10 h-10 rounded-full ml-2 cursor-pointer" onclick="redirectToProfile()">
+        <?php
+        echo "<p class='px-2 pt-3'>{$_SESSION['firstName']} {$_SESSION['lastName']}</p>"
+        ?>
     </div>
 </div>
 
@@ -164,10 +175,9 @@ if(!isset($_COOKIE['cookie_consent'])){
     <input type="hidden" name="logout" value="true">
     <input type="submit" value="Logout">
 </form>
-
-<!-- Script per gestire il logout -->
+<!-- Logout Script -->
 <script>
-    window.onbeforeunload = function (){
+    window.onunload = function (){
         $.ajax({
             url: '<?php echo $_SERVER['PHP_SELF']; ?>',
             method: 'POST',
@@ -175,7 +185,6 @@ if(!isset($_COOKIE['cookie_consent'])){
         });
     }
 </script>
-
 </body>
 
 </html>

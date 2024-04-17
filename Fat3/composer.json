@@ -1,5 +1,6 @@
 {
     "require": {
-        "bcosca/fatfree": "^3.8"
+        "bcosca/fatfree": "^3.8",
+      "ext-curl": "*"
     }
 }
