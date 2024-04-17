@@ -6,7 +6,7 @@ $loggedIn = isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'];
 //login
 if (isset($_POST['username']) && isset($_POST['password']) && !$loggedIn) {
     $ch_login = curl_init();
-    $url_login = 'http://localhost/projects/ClassevivaComms/Fat3/login';
+    $url_login = 'http:/papaya.netsons.org/Fat3/login';
     curl_setopt($ch_login, CURLOPT_URL, $url_login);
     curl_setopt($ch_login, CURLOPT_POSTFIELDS, http_build_query(array('username' => $_POST['username'], 'password' => $_POST['password'])));
     curl_setopt($ch_login, CURLOPT_RETURNTRANSFER, true);
