@@ -6,7 +6,7 @@ $loggedIn = isset($_SESSION['loggedIn']) && $_SESSION['loggedIn'];
 //login
 if (isset($_POST['username']) && isset($_POST['password']) && !$loggedIn) {
     $ch_login = curl_init();
-    $url_login = 'https://papaya.netsons.org/serverRest.php/?action=login';
+    $url_login = 'http://localhost/projects/ClassevivaComms/Fat3/login';
     curl_setopt($ch_login, CURLOPT_URL, $url_login);
     curl_setopt($ch_login, CURLOPT_POSTFIELDS, http_build_query(array('username' => $_POST['username'], 'password' => $_POST['password'])));
     curl_setopt($ch_login, CURLOPT_RETURNTRANSFER, true);
@@ -46,16 +46,13 @@ if (!$loggedIn) {
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Login</title>
+        <title>Homepage</title>
         <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap')
         </style>
         <link href="style.css" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="script.js"></script>
     </head>
 
@@ -120,14 +117,11 @@ if (!$loggedIn) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap')
     </style>
     <link href="style.css" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="script.js"></script>
 </head>
 
@@ -141,7 +135,7 @@ if (!$loggedIn) {
             </div>
         </div>
         <img id="logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()">
-        <p class="text-xl pt-4 px-2 ">ClassevivaComms</p>
+        <p class="text-xl pt-6 px-2 ">ClassevivaComms</p>
     </div>
     <div class="flex items-center px-2">
         <img id="paintbrushButton" class="paintbrush w-7 h-7 cursor-pointer" src="resources/images/paintbrush/paintbrushTheme0.png" onclick="togglePaintbrushMenu()">
@@ -153,7 +147,7 @@ if (!$loggedIn) {
         </div>
         <img id="userIcon" alt="User Icon" class="w-10 h-10 rounded-full ml-2 cursor-pointer" onclick="redirectToProfile()">
         <?php
-        echo "<p class='px-2 pt-3'>{$_SESSION['firstName']} {$_SESSION['lastName']}</p>"
+        echo "<p class='px-2'>{$_SESSION['firstName']} {$_SESSION['lastName']}</p>"
         ?>
     </div>
 </div>
