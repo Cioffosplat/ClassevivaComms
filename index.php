@@ -134,6 +134,12 @@ if (!$loggedIn) {
 <body id='body'>
 <div id="header" class="px-20 py-2 flex justify-between items-center relative">
     <div class = "inline-flex">
+        <div class="group flex h-15 w-15 cursor-pointer items-center justify-center rounded-3xl px-3 ">
+            <div class="space-y-2">
+                <span class="block h-1 w-10 origin-center rounded-full bg-black transition-transform ease-in-out group-hover:translate-y-1.5 group-hover:rotate-45"></span>
+                <span class="block h-1 w-8 origin-center rounded-full bg-black transition-transform ease-in-out group-hover:w-10 group-hover:-translate-y-1.5 group-hover:-rotate-45"></span>
+            </div>
+        </div>
         <img id="logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()">
         <p class="text-xl pt-4 px-2 ">ClassevivaComms</p>
     </div>
