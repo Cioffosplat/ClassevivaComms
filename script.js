@@ -117,7 +117,7 @@ function checkCookieConsent() {
 
 function showCookieBanner() {
     var banner = document.getElementById("cookie-banner");
-    banner.style.display = "block";
+    banner.style.removeProperty("display");
 }
 
 function hideCookieBanner() {
