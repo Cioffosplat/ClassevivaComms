@@ -47,17 +47,19 @@ if (!$loggedIn) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Homepage</title>
-        <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
         <style>
             @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap')
         </style>
         <link href="style.css" rel="stylesheet">
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {}
+        </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="script.js"></script>
     </head>
 
     <body>
-    <div class="px-20 py-2 flex justify-between items-center relative" style="background-color: var(--theme0-secondary-color)">
+    <div id="headerLogin" class="px-20 py-2 flex justify-between items-center relative">
         <img id="logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()" src="resources/images/logos/logoTheme0.jpg">
     </div>
 
@@ -87,7 +89,7 @@ if (!$loggedIn) {
     </div>
     <?php
     if(!isset($_COOKIE['cookie_consent'])){
-        echo '<div style="background-color: var(--theme0-accent2-color)"id="cookie-banner" class="cookie_banner fixed bottom-0 left-0 w-full bg-gray-900 text-white p-4">
+        echo '<div id="cookie-banner" class="cookie_banner fixed bottom-0 left-0 w-full bg-gray-900 text-white p-4" style="background-color: var(--theme0-accent2-color)">
         <div class="max-w-screen-lg mx-auto flex items-center justify-center space-x-3">
             <p class="text-sm">Questo sito utilizza i cookie per migliorare l\'esperienza dell\'utente. <br> Per le direttive riguardanti i cookie fare riferimento alla <a class="underline underline-offset-1" href="https://papaya.netsons.org/resources/websitesAndLinks/cookie_policy.html">Cookie Policy</a></p>
             <div class="flex space-x-3">
@@ -101,8 +103,10 @@ if (!$loggedIn) {
     <form id="logoutForm" method="post" style="display: none;">
         <input type="hidden" name="logout" value="true">
     </form>
-    </body>
 
+    <script src="script.js"></script>
+
+    </body>
     </html>
     <?php
     exit;
@@ -116,15 +120,18 @@ if (!$loggedIn) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap')
     </style>
     <link href="style.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body id='body'>
-<div class="h-screen flex-col overflow-hidden bg-gray-200">
+<div id="backgroundBlur" class="fixed inset-0 transition-opacity">
+    <div class="absolute inset-0 bg-gray-700 opacity-75"></div>
+</div>
+<div id="mainPage" class="h-screen flex-col overflow-hidden bg-gray-200">
     <div>
         <div class="absolute text-white w-56 min-h-screen overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-300"
              id="sidebar">
@@ -146,7 +153,7 @@ if (!$loggedIn) {
             </div>
         </div>
         <div id="header" class="px-20 py-2 flex justify-between items-center ">
-            <div class = "inline-flex">
+            <div class="inline-flex">
                 <button class="px-4 text-black hover:text-gray-700" id="open-sidebar">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
@@ -180,7 +187,7 @@ echo "<div class='flex'>
 
 <?php
 if(!isset($_COOKIE['cookie_consent'])){
-    echo '<div style="background-color: var(--theme0-accent2-color)"id="cookie-banner" class="cookie_banner fixed bottom-0 left-0 w-full bg-gray-900 text-white p-4">
+    echo '<div id="cookie-banner" class="fixed bottom-0 left-0 w-full text-white p-4" style="background-color: var(--theme0-accent2-color)">
         <div class="max-w-screen-lg mx-auto flex items-center justify-center space-x-3">
             <p class="text-sm">Questo sito utilizza i cookie per migliorare l\'esperienza dell\'utente. <br> Per le direttive riguardanti i cookie fare riferimento alla <a class="underline underline-offset-1" href="https://papaya.netsons.org/resources/websitesAndLinks/cookie_policy.html">Cookie Policy</a></p>
             <div class="flex space-x-3">

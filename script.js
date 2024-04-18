@@ -26,9 +26,11 @@ window.onunload = function (){
 //Sidebar Functions
 function openSidebar() {
     document.getElementById("sidebar").classList.remove("-translate-x-full");
+    document.getElementById("backgroundBlur").style.display = "block";
 }
 function closeSidebar() {
     document.getElementById("sidebar").classList.add("-translate-x-full");
+    document.getElementById("backgroundBlur").style.display = "none";
 }
 document.getElementById("open-sidebar").addEventListener("click", openSidebar);
 document.getElementById("sidebar").querySelector("button").addEventListener("click", closeSidebar);
@@ -47,6 +49,7 @@ function setTheme(theme) {
     document.getElementById('body').style.color = 'var(--' + theme + '-text-color)';
     document.getElementById('logo').src = 'resources/images/logos/logo' + theme.charAt(0).toUpperCase() + theme.slice(1) + '.jpg';
     document.getElementById('sidebar').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
+    document.getElementById('cookie-banner').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
     document.getElementById('paintbrushMenu').style.backgroundColor = 'var(--' + theme + '-accent-color)';
     document.getElementById('userIcon').src = 'resources/images/users/defaultUser' + theme.charAt(0).toUpperCase() + theme.slice(1) + '.jpg';
     document.getElementById('paintbrushButton').src = `resources/images/paintbrush/paintbrush${theme.charAt(0).toUpperCase() + theme.slice(1)}.png`;

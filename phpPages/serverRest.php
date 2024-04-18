@@ -67,6 +67,24 @@ function handleGradesRequest() {
     }
 }
 
+function handleNoticeboardRequest() {
+    $id = $_POST['id'];
+    $token = $_POST['token'];
+    try {
+        $classeviva = new Classeviva();
+        $grades = $classeviva->noticeBoard($id,$token);
+        header('Content-Type: application/json');
+        header('Access-Control-Allow-Origin: *');
+        echo $grades;
+    } catch (Exception $e) {
+        $response = ['error' => $e->getMessage()];
+        header('Content-Type: application/json');
+        http_response_code(500);
+        header('Access-Control-Allow-Origin: *');
+        echo $response;
+    }
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_GET['action'])) {
         if ($_GET['action'] === 'login') {
@@ -75,7 +93,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             handleGradesRequest();
         } elseif ($_GET['action'] === 'status') {
             handleStatusRequest();
-        } else {
+        } elseif ($_GET['action'] === 'noticeboard') {
+            handleNoticeboardRequest();
+        }else {
             http_response_code(405);
             echo 'Action Not Allowed';
         }

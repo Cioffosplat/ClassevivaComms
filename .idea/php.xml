@@ -14,6 +14,7 @@
     <include_path>
       <path value="$PROJECT_DIR$/Fat3/vendor/bcosca/fatfree-core" />
       <path value="$PROJECT_DIR$/Fat3/vendor/composer" />
+      <path value="$PROJECT_DIR$/Fat3/vendor/bcosca/fatfree" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.3">

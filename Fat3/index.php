@@ -65,5 +65,21 @@ $f3->route('POST /grades', function($f3) {
     }
 });
 
+$f3->route('POST /noticeboard', function($f3) {
+    $body = json_decode($f3->BODY, true);
+    $id = $body['id'];
+    $token = $body['token'];
+
+    try {
+        $classeviva = new Classeviva();
+        $grades = $classeviva->noticeBoard($id, $token);
+        $f3->set('HEADERS.Content-Type', 'application/json');
+        echo $grades;
+    } catch (Exception $e) {
+        $f3->status(500);
+        echo json_encode(['error' => $e->getMessage()]);
+    }
+});
+
 $f3->run();
 ?>

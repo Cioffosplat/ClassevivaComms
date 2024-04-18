@@ -1,0 +1,190 @@
+openapi: "3.0.0"
+info:
+  version: "1.0.0"
+  title: "Classeviva Communication API"
+  description: "API for communicating with Classeviva platform"
+paths:
+  /login:
+    post:
+      summary: "Login to Classeviva"
+      description: "Authenticate user and obtain access token"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                user_id:
+                  type: "string"
+                password:
+                  type: "string"
+      responses:
+        '200':
+          description: "Successful login"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LoginResponse"
+                
+  /noticeboard:
+    get:
+      summary: "Get noticeboard messages"
+      description: "Retrieve messages from the noticeboard"
+      parameters:
+        - name: "access_token"
+          in: "header"
+          description: "Access token obtained during login"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        '200':
+          description: "Successful retrieval of noticeboard messages"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NoticeboardMessagesResponse"
+                
+  /noticeboard/attach:
+    get:
+      summary: "Get attachments from noticeboard messages"
+      description: "Retrieve attachments associated with noticeboard messages"
+      parameters:
+        - name: "access_token"
+          in: "header"
+          description: "Access token obtained during login"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        '200':
+          description: "Successful retrieval of noticeboard attachments"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/NoticeboardAttachmentsResponse"
+                
+  /card:
+    get:
+      summary: "Get user's card information"
+      description: "Retrieve information about the user's card"
+      parameters:
+        - name: "access_token"
+          in: "header"
+          description: "Access token obtained during login"
+          required: true
+          schema:
+            type: "string"
+      responses:
+        '200':
+          description: "Successful retrieval of user's card information"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserCardInformation"
+                
+components:
+  schemas:
+    LoginResponse:
+      type: "object"
+      properties:
+        ident:
+          type: "string"
+        firstName:
+          type: "string"
+        lastName:
+          type: "string"
+        token:
+          type: "string"
+        release:
+          type: "string"
+          format: "date-time"
+        expire:
+          type: "string"
+          format: "date-time"
+          
+    NoticeboardMessagesResponse:
+      type: "object"
+      properties:
+        items:
+          type: "array"
+          items:
+            type: "object"
+            properties:
+              pubId:
+                type: "integer"
+              pubDT:
+                type: "string"
+                format: "date-time"
+              readStatus:
+                type: "boolean"
+              evtCode:
+                type: "string"
+              cntId:
+                type: "integer"
+              cntValidFrom:
+                type: "string"
+                format: "date"
+              cntValidTo:
+                type: "string"
+                format: "date"
+              cntValidInRange:
+                type: "boolean"
+              cntStatus:
+                type: "string"
+              cntTitle:
+                type: "string"
+              cntCategory:
+                type: "string"
+              cntHasChanged:
+                type: "boolean"
+              cntHasAttach:
+                type: "boolean"
+              needJoin:
+                type: "boolean"
+              needReply:
+                type: "boolean"
+              needFile:
+                type: "boolean"
+              needSign:
+                type: "boolean"
+              evento_id:
+                type: "string"
+              dinsert_allegato:
+                type: "string"
+                format: "date-time"
+              attachments:
+                type: "array"
+                items:
+                  type: "object"
+                  properties:
+                    fileName:
+                      type: "string"
+                    attachNum:
+                      type: "integer"
+                      
+    NoticeboardAttachmentsResponse:
+      type: "array"
+      items:
+        type: "object"
+        
+    UserCardInformation:
+      type: "object"
+      properties:
+        card_number:
+          type: "string"
+        expiration_date:
+          type: "string"
+          format: "date"
+        holder_name:
+          type: "string"
+        card_type:
+          type: "string"
+        issuer:
+          type: "string"
+        balance:
+          type: "number"
+          format: "double"
+        currency:
+          type: "string"
