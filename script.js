@@ -70,7 +70,8 @@ function togglePaintbrushMenu() {
 function setTheme(theme) {
     sessionStorage.setItem('theme', theme);
     document.getElementById('header').style.backgroundColor = 'var(--' + theme + '-secondary-color)';
-    document.getElementById('body').style.backgroundColor = 'var(--' + theme + '-background-color)';
+    document.getElementById('mainPage').style.backgroundColor = 'var(--' + theme + '-background-color)';
+    document.getElementById('loginPage').style.backgroundColor = 'var(--' + theme + '-background-color)';
     document.getElementById('body').style.color = 'var(--' + theme + '-text-color)';
     document.getElementById('sidebar').style.color = 'var(--' + theme + '-text-color)';
     document.getElementById('logo').src = 'resources/images/logos/logo' + theme+ '.jpg';
@@ -81,6 +82,7 @@ function setTheme(theme) {
     document.getElementsByClassName('sidebarText')[0].style.color = 'var(--' + theme + '-text-color)';
     document.getElementsByClassName('sidebarText')[1].style.color = 'var(--' + theme + '-text-color)';
     document.getElementsByClassName('sidebarText')[2].style.color = 'var(--' + theme + '-text-color)';
+    document.getElementsByClassName('sidebarText')[0].style.webkitTextStrokeColor = '';
     document.getElementsByClassName("sidebarText")[0].classList.add("hover:text-[" + 'var(--' + theme + '-accent-color)' + "]");
     document.getElementsByClassName("sidebarText")[1].classList.add("hover:text-[" + 'var(--' + theme + '-accent-color)' + "]");
     document.getElementsByClassName("sidebarText")[2].classList.add("hover:text-[" + 'var(--' + theme + '-accent-color)' + "]");
