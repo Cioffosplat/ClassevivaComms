@@ -63,7 +63,7 @@ if (!$loggedIn) {
         <img id="logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()" src="resources/images/logos/logoTheme0.jpg">
     </div>
 
-    <div id= "loginPage" class="container mx-auto py-20 h-50 flex justify-center">
+    <div id="loginPage" class="container mx-auto py-20 h-50 flex justify-center">
         <div class="bg-white p-8 rounded-lg shadow-md w-96">
             <h2 class="text-3xl mb-6">Login con Classeviva</h2>
             <form method="post">
@@ -133,7 +133,7 @@ if (!$loggedIn) {
 </div>
 <div id="mainPage" class="h-screen flex-col overflow-hidden bg-gray-200">
     <div>
-        <div class="absolute text-white w-56 min-h-screen overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-300"
+        <div class="absolute w-56 min-h-screen overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-300"
              id="sidebar">
             <button class="absolute top-0 right-0 m-4 text-white">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -143,12 +143,12 @@ if (!$loggedIn) {
                 </svg>
             </button>
             <div class="p-4">
-                <h1 class="text-2xl font-semibold">Sidebar</h1>
+                <h1 class="text-2xl">Sidebar</h1>
                 <ul class="mt-4">
-                    <li class="mb-2"><a href="#" class="block hover:text-indigo-400">Home</a></li>
-                    <li class="mb-2"><a href="#" class="block hover:text-indigo-400">About</a></li>
-                    <li class="mb-2"><a href="#" class="block hover:text-indigo-400">Services</a></li>
-                    <li class="mb-2"><a href="#" class="block hover:text-indigo-400">Contact</a></li>
+                    <li id="sidebarText1" class="mb-10"><a href="" class="block ">Comunicazioni</a></li>
+                    <li id="sidebarText2" class="mb-10"><a href="" class="block ">Preferiti</a></li>
+                    <li id="sidebarText3" class="mb-10"><a href="" class="block ">Gruppi</a></li>
+                    <li id="sidebarText4" class="mb-10"><a href="" class="block ">Logout</a></li>
                 </ul>
             </div>
         </div>

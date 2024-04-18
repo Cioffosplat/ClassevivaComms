@@ -35,13 +35,16 @@ body{
     color: var(--theme0-text-color);
 }
 
-#header,#headerLogin,#loginPage,#theme0 {
+#header,#headerLogin,#theme0 {
     background-color: var(--theme0-secondary-color);
 }
 
 
 #sidebar{
     background-color: var(--theme0-accent2-color);
+    color: var(--theme0-text-color);
+    -webkit-text-stroke-width: 0.3px;
+    -webkit-text-stroke-color: white;
 }
 
 #paintbrushMenu {
