@@ -27,10 +27,6 @@ var theme3Accent2Color = "#C2847A";
 var theme3TextColor = "#FFFFFF";
 var theme3BackgroundColor = "#280003";
 
-//Ajax Script implementation
-var script = document.createElement("SCRIPT");
-script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js';
-script.type = 'text/javascript';
 
 //Saving function for the themes
 window.onload = function () {
@@ -77,16 +73,18 @@ function setTheme(theme) {
     document.getElementById('body').style.backgroundColor = 'var(--' + theme + '-background-color)';
     document.getElementById('body').style.color = 'var(--' + theme + '-text-color)';
     document.getElementById('sidebar').style.color = 'var(--' + theme + '-text-color)';
-    document.getElementById("sidebarText1").classList.add("hover:text-[" + 'var(--' + theme + '-accent-color)' + "]");
-    document.getElementById("sidebarText2").classList.add("hover:text-[" + 'var(--' + theme + '-accent-color)' + "]");
-    document.getElementById("sidebarText3").classList.add("hover:text-[" + 'var(--' + theme + '-accent-color)' + "]");
-    document.getElementById("sidebarText4").classList.add("hover:text-[" + 'var(--' + theme + '-accent-color)' + "]");
-    document.getElementById('logo').src = 'resources/images/logos/logo' + theme.charAt(0).toUpperCase() + theme.slice(1) + '.jpg';
+    document.getElementById('logo').src = 'resources/images/logos/logo' + theme+ '.jpg';
+    document.getElementById('userIcon').src = 'resources/images/users/defaultuser' + theme + '.jpg';
+    document.getElementById('paintbrushButton').src = 'resources/images/paintbrush/paintbrush' + theme + '.png';
     document.getElementById('sidebar').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
-    document.getElementById('cookie-banner').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
     document.getElementById('paintbrushMenu').style.backgroundColor = 'var(--' + theme + '-accent-color)';
-    document.getElementById('userIcon').src = 'resources/images/users/defaultUser' + theme.charAt(0).toUpperCase() + theme.slice(1) + '.jpg';
-    document.getElementById('paintbrushButton').src = `resources/images/paintbrush/paintbrush${theme.charAt(0).toUpperCase() + theme.slice(1)}.png`;
+    document.getElementsByClassName('sidebarText')[0].style.color = 'var(--' + theme + '-text-color)';
+    document.getElementsByClassName('sidebarText')[1].style.color = 'var(--' + theme + '-text-color)';
+    document.getElementsByClassName('sidebarText')[2].style.color = 'var(--' + theme + '-text-color)';
+    document.getElementsByClassName("sidebarText")[0].classList.add("hover:text-[" + 'var(--' + theme + '-accent-color)' + "]");
+    document.getElementsByClassName("sidebarText")[1].classList.add("hover:text-[" + 'var(--' + theme + '-accent-color)' + "]");
+    document.getElementsByClassName("sidebarText")[2].classList.add("hover:text-[" + 'var(--' + theme + '-accent-color)' + "]");
+    if(!getCookie("cookie_consent")) document.getElementById('cookie-banner').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
 }
 
 function redirectToProfile() {

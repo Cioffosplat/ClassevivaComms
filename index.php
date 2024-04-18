@@ -60,7 +60,7 @@ if (!$loggedIn) {
 
     <body>
     <div id="headerLogin" class="px-20 py-2 flex justify-between items-center relative">
-        <img id="logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()" src="resources/images/logos/logoTheme0.jpg">
+        <img id="logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()" src="resources/images/logos/logotheme0.jpg">
     </div>
 
     <div id="loginPage" class="container mx-auto py-20 h-50 flex justify-center">
@@ -123,7 +123,6 @@ if (!$loggedIn) {
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap')
     </style>
-    <link href="style.css" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
@@ -143,12 +142,15 @@ if (!$loggedIn) {
                 </svg>
             </button>
             <div class="p-4">
-                <h1 class="text-2xl">Sidebar</h1>
-                <ul class="mt-4">
-                    <li id="sidebarText1" class="mb-10"><a href="" class="block ">Comunicazioni</a></li>
-                    <li id="sidebarText2" class="mb-10"><a href="" class="block ">Preferiti</a></li>
-                    <li id="sidebarText3" class="mb-10"><a href="" class="block ">Gruppi</a></li>
-                    <li id="sidebarText4" class="mb-10"><a href="" class="block ">Logout</a></li>
+                <h1 class="text-4xl">Sidebar</h1>
+                <ul class="column-flex text-2xl mt-10 ">
+                    <li class="flex mb-10"><a href="" class="block"><h3 class="sidebarText">Comunicazioni</h3></a></li>
+                    <li class="flex mb-10"><a href="" class="block"><h3 class="sidebarText">Preferiti</h3></a></li>
+                    <li class="flex mb-10"><a href="" class="block"><h3 class="sidebarText">Gruppi</h3></a></li>
+                    <li class="flex mb-10"><form method="post">
+                            <input type="hidden" name="logout" value="true">
+                            <input class="cursor-pointer" type="submit" value="Logout">
+                        </form></li>
                 </ul>
             </div>
         </div>
@@ -159,18 +161,18 @@ if (!$loggedIn) {
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
-                <img id="logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()">
+                <img id="logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()" src="resources/images/logos/logotheme0.jpg" alt="Logo">
                 <p class="text-xl pt-6 px-3 ">ClassevivaComms</p>
             </div>
             <div class="flex items-center px-2">
-                <img id="paintbrushButton" class="paintbrush w-7 h-7 cursor-pointer mx-2" src="resources/images/paintbrush/paintbrushTheme0.png" onclick="togglePaintbrushMenu()">
+                <img id="paintbrushButton" class="w-7 h-7 cursor-pointer mx-2" src="resources/images/paintbrush/paintbrushtheme0.png" onclick="togglePaintbrushMenu()" alt="Paintbrush">
                 <div id="paintbrushMenu" class="fixed z-10 p-3 rounded-lg top-20 left-57 scale-100 origin-top shadow-2xl mx-2">
                     <button onclick="setTheme('theme0')" id='theme0' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Default</button>
                     <button onclick="setTheme('theme1')" id='theme1' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Theme 1</button>
                     <button onclick="setTheme('theme2')" id='theme2' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Theme 2</button>
                     <button onclick="setTheme('theme3')" id='theme3' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Theme 3</button>
                 </div>
-                <img id="userIcon" alt="User Icon" class="w-10 h-10 rounded-full ml-2 cursor-pointer" onclick="redirectToProfile()">
+                <img id="userIcon" alt="User Icon" class="w-10 h-10 rounded-full ml-2 cursor-pointer" onclick="redirectToProfile()" src="resources/images/users/defaultusertheme0.jpg">
                 <?php
                 echo "<p class='px-2 mx-2'>{$_SESSION['firstName']} {$_SESSION['lastName']}</p>"
                 ?>
@@ -178,7 +180,7 @@ if (!$loggedIn) {
         </div>
     </div>
 <?php
-echo "<div class='flex'>
+echo "<div class='flex m-9'>
         <p class='px-2'> {$_SESSION['ident']}</p>
         <p class='px-2'> {$_SESSION['id']}</p>  
         <p class='px-2'> {$_SESSION['token']}</p>
@@ -198,10 +200,7 @@ if(!isset($_COOKIE['cookie_consent'])){
     </div>';
 }
 ?>
-<form method="post">
-    <input type="hidden" name="logout" value="true">
-    <input type="submit" value="Logout">
-</form>
+    <link href="style.css" rel="stylesheet">
     <script src="script.js"></script>
 </body>
 
