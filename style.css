@@ -35,6 +35,10 @@ body{
     color: var(--theme0-text-color);
 }
 
+#loginPage{
+    background-color: var(--theme0-background-color) ;
+}
+
 #header,#headerLogin,#theme0 {
     background-color: var(--theme0-secondary-color);
 }
@@ -75,7 +79,6 @@ body{
     background-color: var(--theme0-primary-color)
 }
 
-
 #theme1{
     background-color: var(--theme1-secondary-color)
 }
@@ -89,10 +92,6 @@ body{
 #theme2:hover{
     background-color: var(--theme2-primary-color)
 }
-#theme2:active{
-    background-color: var(--theme2-accent-color)
-}
-
 
 #theme3{
     background-color: var(--theme3-secondary-color)

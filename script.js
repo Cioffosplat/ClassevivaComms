@@ -30,6 +30,7 @@ var theme3BackgroundColor = "#280003";
 
 //Saving function for the themes
 window.onload = function () {
+    const loggedIn = sessionStorage.getItem('loggedIn')
     const savedTheme = sessionStorage.getItem('theme');
     if (savedTheme) {
         setTheme(savedTheme);
@@ -49,6 +50,8 @@ window.onunload = function (){
 }
 
 //Sidebar Functions
+document.getElementById("open-sidebar").addEventListener("click", openSidebar);
+document.getElementById("sidebar").querySelector("button").addEventListener("click", closeSidebar);
 function openSidebar() {
     document.getElementById("sidebar").classList.remove("-translate-x-full");
     document.getElementById("backgroundBlur").style.display = "block";
@@ -57,8 +60,6 @@ function closeSidebar() {
     document.getElementById("sidebar").classList.add("-translate-x-full");
     document.getElementById("backgroundBlur").style.display = "none";
 }
-document.getElementById("open-sidebar").addEventListener("click", openSidebar);
-document.getElementById("sidebar").querySelector("button").addEventListener("click", closeSidebar);
 
 //Paintbrush Menu
 function togglePaintbrushMenu() {
@@ -71,8 +72,6 @@ function setTheme(theme) {
     sessionStorage.setItem('theme', theme);
     document.getElementById('header').style.backgroundColor = 'var(--' + theme + '-secondary-color)';
     document.getElementById('mainPage').style.backgroundColor = 'var(--' + theme + '-background-color)';
-    document.getElementById('loginPage').style.backgroundColor = 'var(--' + theme + '-background-color)';
-    document.getElementById('body').style.color = 'var(--' + theme + '-text-color)';
     document.getElementById('sidebar').style.color = 'var(--' + theme + '-text-color)';
     document.getElementById('logo').src = 'resources/images/logos/logo' + theme+ '.jpg';
     document.getElementById('userIcon').src = 'resources/images/users/defaultuser' + theme + '.jpg';
@@ -110,21 +109,30 @@ function checkCookieConsent() {
     var consent = getCookie("cookie_consent") || sessionStorage.getItem("cookie_consent");
     if (consent === "true") {
         hideCookieBanner();
+        hideCookieBannerMain();
     } else if (consent === "false") {
         hideCookieBanner();
+        hideCookieBannerMain();
     } else {
         showCookieBanner();
+        showCookieBannerMain()
     }
 }
 
 function showCookieBanner() {
-    var banner = document.getElementById("cookie-banner");
-    banner.style.removeProperty("display");
+   document.getElementById("cookie-banner").style.removeProperty("display");
+}
+
+function showCookieBannerMain(){
+    document.getElementById("cookie-bannermain").style.removeProperty("display");
 }
 
 function hideCookieBanner() {
-    var banner = document.getElementById("cookie-banner");
-    banner.style.display = "none";
+    document.getElementById("cookie-banner").style.display = "none";
+}
+
+function hideCookieBannerMain(){
+    document.getElementById("cookie-bannermain").style.display = "none";
 }
 
 function acceptCookies() {
@@ -132,9 +140,19 @@ function acceptCookies() {
     hideCookieBanner();
 }
 
+function acceptCookiesMain(){
+    setCookieConsent(true);
+    hideCookieBannerMain();
+}
+
+function rejectCookiesMain(){
+    setCookieConsent(true);
+    hideCookieBannerMain();
+}
 function rejectCookies() {
     setCookieConsent(false);
     hideCookieBanner();
+    hideCookieBannerMain();
 }
 
 function getCookie(name) {
