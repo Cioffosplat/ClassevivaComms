@@ -2,30 +2,30 @@
     /*Colour Palettes*/
     --theme0-primary-color: #5DFDCB;
     --theme0-secondary-color: #7CC6FE;
-    --theme0-accent-color: #F4FAFF;
-    --theme0-accent2-color: #011627;
-    --theme0-text-color: #000000;
+    --theme0-accent-color: #011627;
+    --theme0-accent2-color: #F4FAFF;
+    --theme0-text-color: black;
     --theme0-background-color: #bdbebd;
 
     --theme1-primary-color: #221d23;
     --theme1-secondary-color: #4f3824;
     --theme1-accent-color: #d1603d;
     --theme1-accent2-color: #ddb967;
-    --theme1-text-color: #000000;
+    --theme1-text-color: white;
     --theme1-background-color: #d0e37f;
 
     --theme2-primary-color: #210B2C;
     --theme2-secondary-color: #55286F;
     --theme2-accent-color: #BC96E6;
     --theme2-accent2-color: #D8B4E2;
-    --theme2-text-color: #FFFFFF;
+    --theme2-text-color: white;
     --theme2-background-color: #AE759F;
 
     --theme3-primary-color: #EEE0CB;
     --theme3-secondary-color: #BAA898;
     --theme3-accent-color: #848586;
     --theme3-accent2-color: #C2847A;
-    --theme3-text-color: #FFFFFF;
+    --theme3-text-color: black;
     --theme3-background-color: #280003;
 }
 
@@ -37,6 +37,10 @@ body{
 
 #loginPage{
     background-color: var(--theme0-background-color) ;
+}
+
+#commsLogo,#starLogo,#groupLogo,#commsSubmit,#starSubmit,#groupSubmit{
+    background-color: var(--theme0-primary-color);
 }
 
 #header,#headerLogin,#theme0 {
@@ -68,7 +72,7 @@ body{
     display: table-column;
     opacity: 1;
     transform: translateY(-10px) translateX(-60px);
-    background-color: var(--theme0-accent-color);
+    background-color: var(--theme0-accent2-color);
 }
 
 #backgroundBlur{

@@ -30,7 +30,6 @@ var theme3BackgroundColor = "#280003";
 
 //Saving function for the themes
 window.onload = function () {
-    const loggedIn = sessionStorage.getItem('loggedIn')
     const savedTheme = sessionStorage.getItem('theme');
     if (savedTheme) {
         setTheme(savedTheme);
@@ -73,15 +72,30 @@ function setTheme(theme) {
     document.getElementById('header').style.backgroundColor = 'var(--' + theme + '-secondary-color)';
     document.getElementById('mainPage').style.backgroundColor = 'var(--' + theme + '-background-color)';
     document.getElementById('sidebar').style.color = 'var(--' + theme + '-text-color)';
+    document.getElementById('sidebar').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
     document.getElementById('logo').src = '../resources/images/logos/logo' + theme+ '.jpg';
     document.getElementById('userIcon').src = '../resources/images/users/defaultuser' + theme + '.jpg';
     document.getElementById('paintbrushButton').src = '../resources/images/paintbrush/paintbrush' + theme + '.png';
-    document.getElementById('sidebar').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
-    document.getElementById('paintbrushMenu').style.backgroundColor = 'var(--' + theme + '-accent-color)';
+    document.getElementById('paintbrushMenu').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
+    document.getElementById('commsForm').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
+    document.getElementById('starForm').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
+    document.getElementById('groupForm').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
+    document.getElementById('commsLogo').style.backgroundColor = 'var(--' + theme + '-primary-color)';
+    document.getElementById('starLogo').style.backgroundColor = 'var(--' + theme + '-primary-color)';
+    document.getElementById('groupLogo').style.backgroundColor = 'var(--' + theme + '-primary-color)';
+    document.getElementById('commsLogoSVG').setAttribute("stroke",'var(--' + theme + '-text-color)');
+    document.getElementById('starLogoSVG').setAttribute("stroke",'var(--' + theme + '-text-color)');
+    document.getElementById('groupLogoSVG').setAttribute("stroke",'var(--' + theme + '-text-color)');
+    document.getElementById('commsSubmit').style.backgroundColor = 'var(--' + theme + '-primary-color)';
+    document.getElementById('starSubmit').style.backgroundColor = 'var(--' + theme + '-primary-color)';
+    document.getElementById('groupSubmit').style.backgroundColor = 'var(--' + theme + '-primary-color)';
+    document.getElementById('commsSubmit').style.color = 'var(--' + theme + '-text-color)';
+    document.getElementById('starSubmit').style.color = 'var(--' + theme + '-text-color)';
+    document.getElementById('groupSubmit').style.color = 'var(--' + theme + '-text-color)';
     document.getElementsByClassName('sidebarText')[0].style.color = 'var(--' + theme + '-text-color)';
     document.getElementsByClassName('sidebarText')[1].style.color = 'var(--' + theme + '-text-color)';
     document.getElementsByClassName('sidebarText')[2].style.color = 'var(--' + theme + '-text-color)';
-    if(!getCookie("cookie_consent")) document.getElementById('cookie-bannermain').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
+    if(!getCookie("cookie_consent")) document.getElementById('cookie-banner').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
 }
 
 function redirectToProfile() {
@@ -98,57 +112,34 @@ function setCookieConsent(consent) {
     d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
     var expires = "expires=" + d.toUTCString();
     document.cookie = "cookie_consent=" + consent + ";" + expires + ";path=/";
-    sessionStorage.setItem("cookie_consent", consent);
 }
 
 function checkCookieConsent() {
-    var consent = getCookie("cookie_consent") || sessionStorage.getItem("cookie_consent");
+    var consent = getCookie("cookie_consent");
     if (consent === "true") {
         hideCookieBanner();
-        hideCookieBannerMain();
     } else if (consent === "false") {
         hideCookieBanner();
-        hideCookieBannerMain();
     } else {
         showCookieBanner();
-        showCookieBannerMain()
     }
 }
 
 function showCookieBanner() {
-   document.getElementById("cookie-banner").style.removeProperty("display");
-}
-
-function showCookieBannerMain(){
-    document.getElementById("cookie-bannermain").style.removeProperty("display");
+   document.getElementById("cookie-banner").style.display= "block";
 }
 
 function hideCookieBanner() {
     document.getElementById("cookie-banner").style.display = "none";
 }
 
-function hideCookieBannerMain(){
-    document.getElementById("cookie-bannermain").style.display = "none";
-}
-
 function acceptCookies() {
     setCookieConsent(true);
     hideCookieBanner();
 }
-
-function acceptCookiesMain(){
-    setCookieConsent(true);
-    hideCookieBannerMain();
-}
-
-function rejectCookiesMain(){
-    setCookieConsent(true);
-    hideCookieBannerMain();
-}
 function rejectCookies() {
-    setCookieConsent(false);
+    setCookieConsent(true);
     hideCookieBanner();
-    hideCookieBannerMain();
 }
 
 function getCookie(name) {

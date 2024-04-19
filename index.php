@@ -73,9 +73,7 @@ session_start();
         </form>
     </div>
 </div>
-<?php
-if(!isset($_COOKIE['cookie_consent'])){
-    echo '<div id="cookie-banner" class="cookie_banner fixed bottom-0 left-0 w-full bg-gray-900 text-white p-4" style="background-color: var(--theme0-accent2-color)">
+<div id="cookie-banner" class="cookie_banner fixed bottom-0 left-0 w-full bg-[#011627] text-white p-4">
         <div class="max-w-screen-lg mx-auto flex items-center justify-center space-x-3">
             <p class="text-sm">Questo sito utilizza i cookie per migliorare l\'esperienza dell\'utente. <br> Per le direttive riguardanti i cookie fare riferimento alla <a class="underline underline-offset-1" href="https://papaya.netsons.org/resources/websitesAndLinks/cookie_policy.html">Cookie Policy</a></p>
             <div class="flex space-x-3">
@@ -83,11 +81,9 @@ if(!isset($_COOKIE['cookie_consent'])){
                 <button onclick="rejectCookies()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">Rifiuta</button>
             </div>
         </div>
-    </div>';
-}
-?>
+    </div>
 
 <link href="style.css" rel="stylesheet">
-<script src="script.js"></script>
+<script src="scripts/index.js"></script>
 </body>
 </html>
