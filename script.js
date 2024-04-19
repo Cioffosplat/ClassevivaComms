@@ -43,7 +43,7 @@ window.onload = function () {
 // Logout Function when tab is closed
 window.onunload = function (){
     $.ajax({
-        url: '<?php echo $_SERVER[\'PHP_SELF\']; ?>',
+        url: 'login.php',
         method: 'POST',
         data: {logout: true},
     });
@@ -73,19 +73,15 @@ function setTheme(theme) {
     document.getElementById('header').style.backgroundColor = 'var(--' + theme + '-secondary-color)';
     document.getElementById('mainPage').style.backgroundColor = 'var(--' + theme + '-background-color)';
     document.getElementById('sidebar').style.color = 'var(--' + theme + '-text-color)';
-    document.getElementById('logo').src = 'resources/images/logos/logo' + theme+ '.jpg';
-    document.getElementById('userIcon').src = 'resources/images/users/defaultuser' + theme + '.jpg';
-    document.getElementById('paintbrushButton').src = 'resources/images/paintbrush/paintbrush' + theme + '.png';
+    document.getElementById('logo').src = '../resources/images/logos/logo' + theme+ '.jpg';
+    document.getElementById('userIcon').src = '../resources/images/users/defaultuser' + theme + '.jpg';
+    document.getElementById('paintbrushButton').src = '../resources/images/paintbrush/paintbrush' + theme + '.png';
     document.getElementById('sidebar').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
     document.getElementById('paintbrushMenu').style.backgroundColor = 'var(--' + theme + '-accent-color)';
     document.getElementsByClassName('sidebarText')[0].style.color = 'var(--' + theme + '-text-color)';
     document.getElementsByClassName('sidebarText')[1].style.color = 'var(--' + theme + '-text-color)';
     document.getElementsByClassName('sidebarText')[2].style.color = 'var(--' + theme + '-text-color)';
-    document.getElementsByClassName('sidebarText')[0].style.webkitTextStrokeColor = '';
-    document.getElementsByClassName("sidebarText")[0].classList.add("hover:text-[" + 'var(--' + theme + '-accent-color)' + "]");
-    document.getElementsByClassName("sidebarText")[1].classList.add("hover:text-[" + 'var(--' + theme + '-accent-color)' + "]");
-    document.getElementsByClassName("sidebarText")[2].classList.add("hover:text-[" + 'var(--' + theme + '-accent-color)' + "]");
-    if(!getCookie("cookie_consent")) document.getElementById('cookie-banner').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
+    if(!getCookie("cookie_consent")) document.getElementById('cookie-bannermain').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
 }
 
 function redirectToProfile() {
@@ -93,7 +89,7 @@ function redirectToProfile() {
 }
 
 function redirectToHomepage() {
-    window.location.href = "index.php";
+    window.location.href = "mainPage.php";
 }
 
 //Sezione per il cookie banner
