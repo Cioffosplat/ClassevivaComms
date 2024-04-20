@@ -7,7 +7,8 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
+    <title>Login-ClassevivaComms</title>
+    <link rel="icon" type="image/x-icon" href="/resources/images/logos/originalLogo.jpeg">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap')
     </style>

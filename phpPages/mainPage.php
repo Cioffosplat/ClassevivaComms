@@ -40,7 +40,8 @@ if (isset($_POST['logout'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
+    <title>Homepage-ClassevivaComms</title>
+    <link id="tabIcon" rel="icon" type="image/x-icon" href="/resources/images/logos/originalLogo.jpeg">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap')
     </style>
@@ -54,7 +55,9 @@ if (isset($_POST['logout'])) {
 <div id="backgroundBlur" class="fixed inset-0 transition-opacity">
     <div class="absolute inset-0 bg-gray-700 opacity-75"></div>
 </div>
+<!-- MainPage Section -->
 <div id="mainPage" class="h-screen overflow-hidden bg-gray-200">
+    <!-- Sidebar Section-->
     <div class=" flex-col absolute w-56 min-h-screen overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-300 rounded-r-2xl"
          id="sidebar">
         <button class="absolute top-0 right-0 m-4 text-white">
@@ -65,8 +68,11 @@ if (isset($_POST['logout'])) {
             </svg>
         </button>
         <div class="p-4">
-            <h1 class="text-4xl">Sidebar</h1>
-            <ul class="column-flex text-2xl mt-10 ">
+            <div class="inline-flex items-center">
+                <img id="logoSidebar" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()" src="../resources/images/logos/logotheme0.jpg" alt="Logo">
+                <h3 class="m-2">ClassevivaComms</h3>
+            </div>
+            <ul class="column-flex text-2xl mt-5 ">
                 <li class="flex mb-10"><a href="" class="block"><h3 class="sidebarText">Comunicazioni</h3></a></li>
                 <li class="flex mb-10"><a href="" class="block"><h3 class="sidebarText">Preferiti</h3></a></li>
                 <li class="flex mb-10"><a href="" class="block"><h3 class="sidebarText">Gruppi</h3></a></li>
@@ -77,6 +83,7 @@ if (isset($_POST['logout'])) {
             </ul>
         </div>
     </div>
+    <!-- Header Section-->
         <div id="header" class="px-20 py-2 flex justify-between items-center rounded-b-2xl">
             <div class="inline-flex">
                 <button class="px-4 text-black hover:text-gray-700" id="open-sidebar">
@@ -102,6 +109,7 @@ if (isset($_POST['logout'])) {
             </div>
         </div>
 
+    <!--Card Forms-->
     <div id="cards" class="flex flex-row w-screen mt-20 place-content-center">
         <form action="comms.php" class=" " style="width: 25%">
             <div id="commsForm" class="bg-white shadow-lg rounded-lg p-6 space-y-4 ">
@@ -124,7 +132,7 @@ if (isset($_POST['logout'])) {
                 </button>
             </div>
         </form>
-        <form action="comms.php" class="mx-10" style="width: 25%">
+        <form action="star.php" class="mx-10" style="width: 25%">
             <div id="starForm" class="bg-white shadow-lg rounded-lg p-6 space-y-4">
                 <div class= "flex items-center space-x-4">
                     <div id="starLogo" class="p-2 rounded-full">
@@ -144,7 +152,7 @@ if (isset($_POST['logout'])) {
                 </button>
             </div>
         </form>
-        <form action="comms.php" class=" " style="width: 25%">
+        <form action="group.php" class=" " style="width: 25%">
             <div id="groupForm" class="bg-white shadow-lg rounded-lg p-6 space-y-4">
                 <div class= "flex items-center space-x-4">
                     <div id="groupLogo" class="p-2 rounded-full">
@@ -174,6 +182,7 @@ if (isset($_POST['logout'])) {
        </div>";
 */
 ?>
+<!-- Cookie Banner -->
 <div id="cookie-banner" class="cookie_banner fixed bottom-0 left-0 w-full text-black p-4" style="background-color: var(--theme0-accent2-color)">
         <div class="max-w-screen-lg mx-auto flex items-center justify-center space-x-3">
             <p class="text-sm">Questo sito utilizza i cookie per migliorare l\'esperienza dell\'utente. <br> Per le direttive riguardanti i cookie fare riferimento alla <a class="underline underline-offset-1" href="https://papaya.netsons.org/resources/websitesAndLinks/cookie_policy.html">Cookie Policy</a></p>
