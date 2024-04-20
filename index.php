@@ -19,7 +19,7 @@ session_start();
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-<div id="header" class="px-20 py-2 flex justify-between items-center rounded-b-2xl">
+<div id="header" class="py-2 flex justify-between items-center rounded-b-2xl">
     <div class="inline-flex px-12">
         <img id="logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()" src="resources/images/logos/logotheme0.jpg" alt="Logo">
         <p class="text-xl pt-6 px-3 ">ClassevivaComms</p>

@@ -58,7 +58,7 @@ if (isset($_POST['logout'])) {
 <!-- MainPage Section -->
 <div id="mainPage" class="h-screen overflow-hidden bg-gray-200">
     <!-- Sidebar Section-->
-    <div class=" flex-col absolute w-56 min-h-screen overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-300 rounded-r-2xl"
+    <div class=" flex-col absolute w-60 min-h-screen overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-300 rounded-r-2xl"
          id="sidebar">
         <button class="absolute top-0 right-0 m-4 text-white">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
@@ -84,7 +84,7 @@ if (isset($_POST['logout'])) {
         </div>
     </div>
     <!-- Header Section-->
-        <div id="header" class="px-20 py-2 flex justify-between items-center rounded-b-2xl">
+        <div id="header" class="py-2 flex justify-between items-center rounded-b-2xl">
             <div class="inline-flex">
                 <button class="px-4 text-black hover:text-gray-700" id="open-sidebar">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
