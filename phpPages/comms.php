@@ -31,7 +31,7 @@ $commsData = json_decode($response_comms, true);
     <div class="absolute inset-0 bg-gray-700 opacity-75"></div>
 </div>
 <!-- MainPage Section -->
-<div id="mainPage" class="h-screen overflow-hidden bg-gray-200">
+<div id="mainPage" class="h-screen overflow-auto bg-gray-200">
     <!-- Sidebar Section-->
     <div class="flex-col fixed w-60 min-h-screen overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-300 rounded-r-2xl"
          id="sidebar">
@@ -82,6 +82,80 @@ $commsData = json_decode($response_comms, true);
             ?>
         </div>
     </div>
+
+    <div class="container mx-auto overflow-x-auto mt-5">
+        <h1 class="text-2xl font-bold mb-4">Comunicazioni</h1>
+    </div>
+
+    <?php
+    $commsPerPage = 10;
+    $page = isset($_GET['page']) ? $_GET['page'] : 1;
+    $startIndex = ($page - 1) * $commsPerPage;
+    $currentPageData = array_slice($commsData['items'], $startIndex, $commsPerPage);
+    $totalPages = ceil(count($commsData['items']) / $commsPerPage);
+    ?>
+
+    <div class="container mx-auto overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+            <!-- Intestazione della tabella -->
+            <thead class="bg-gray-50">
+            <tr>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Id
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Titolo
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Categoria
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Data di Inserimento
+                </th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Allegati
+                </th>
+            </tr>
+            </thead>
+            <!-- Corpo della tabella -->
+            <tbody class="bg-white divide-y divide-gray-200">
+            <?php foreach ($currentPageData as $item) { ?>
+                <tr>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900"><?php echo $item['pubId']; ?></div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900"><?php echo $item['cntTitle']; ?></div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900"><?php echo $item['cntCategory']; ?></div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <div class="text-sm text-gray-900"><?php echo $item['dinsert_allegato']; ?></div>
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap">
+                        <?php if ($item['cntHasAttach']) { ?>
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                Allegato
+                            </span>
+                        <?php } else { ?>
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                Nessun Allegato
+                            </span>
+                        <?php } ?>
+                    </td>
+                </tr>
+            <?php } ?>
+            </tbody>
+        </table>
+
+        <div class="mt-4">
+            <?php for ($i = 1; $i <= $totalPages; $i++) { ?>
+                <a href="?page=<?php echo $i; ?>" class="inline-block px-4 py-2 mx-1 bg-gray-200 text-gray-800 rounded"><?php echo $i; ?></a>
+            <?php } ?>
+        </div>
+    </div>
+</div>
 
 <!-- Cookie Banner -->
 <div id="cookie-banner" class="cookie_banner fixed bottom-0 left-0 w-full text-black p-4" style="background-color: var(--theme0-accent2-color)">
