@@ -7,6 +7,15 @@ curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id'=> $_SESSI
 curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);
 $response_comms = curl_exec($ch_comms);
 $commsData = json_decode($response_comms, true);
+
+//Session dedicated to the Comms Table
+$commsPerPage = 10;
+$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
+$startIndex = ($current_page - 1) * $commsPerPage;
+$currentPageData = array_slice($commsData['items'], $startIndex, $commsPerPage);
+$total_pages = ceil(count($commsData['items']) / $commsPerPage);
+$prev_page = ($current_page > 1) ? $current_page - 1 : 1;
+$next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
 ?>
 
 <!DOCTYPE html>
@@ -87,38 +96,30 @@ $commsData = json_decode($response_comms, true);
         <h1 class="text-2xl font-bold mb-4">Comunicazioni</h1>
     </div>
 
-    <?php
-    $commsPerPage = 10;
-    $page = isset($_GET['page']) ? $_GET['page'] : 1;
-    $startIndex = ($page - 1) * $commsPerPage;
-    $currentPageData = array_slice($commsData['items'], $startIndex, $commsPerPage);
-    $totalPages = ceil(count($commsData['items']) / $commsPerPage);
-    ?>
-
-    <div class="container mx-auto overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-200">
-            <!-- Intestazione della tabella -->
-            <thead class="bg-gray-50">
+    <div class="container mx-auto overflow-x-auto rounded-t-2xl">
+        <table class="min-w-full divide-y divide-gray-900">
+            <!-- Top values of the table-->
+            <thead class="" id="tableBack">
             <tr>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                     Id
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                     Titolo
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                     Categoria
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                     Data di Inserimento
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                     Allegati
                 </th>
             </tr>
             </thead>
-            <!-- Corpo della tabella -->
-            <tbody class="bg-white divide-y divide-gray-200">
+            <!-- Table content-->
+            <tbody id ="tableRows" class="divide-y divide-gray-900">
             <?php foreach ($currentPageData as $item) { ?>
                 <tr>
                     <td class="px-6 py-4 whitespace-nowrap">
@@ -148,11 +149,15 @@ $commsData = json_decode($response_comms, true);
             <?php } ?>
             </tbody>
         </table>
-
-        <div class="mt-4">
-            <?php for ($i = 1; $i <= $totalPages; $i++) { ?>
-                <a href="?page=<?php echo $i; ?>" class="inline-block px-4 py-2 mx-1 bg-gray-200 text-gray-800 rounded"><?php echo $i; ?></a>
-            <?php } ?>
+        <!-- Table navigation-->
+        <div class="flex justify-end mt-4">
+            <?php if ($current_page > 1): ?>
+                <a href="?page=<?php echo $prev_page; ?>" class="tableNav mr-2 px-3 py-1 text-gray-900 font-bold rounded">&lt;</a>
+            <?php endif; ?>
+            <span class="tableNav mr-2 px-3 py-1 text-gray-900 font-bold rounded"><?php echo $current_page; ?></span>
+            <?php if ($current_page < $total_pages): ?>
+                <a href="?page=<?php echo $next_page; ?>" class="tableNav px-3 py-1 text-gray-900 font-bold rounded">&gt;</a>
+            <?php endif; ?>
         </div>
     </div>
 </div>

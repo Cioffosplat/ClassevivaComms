@@ -53,7 +53,12 @@ function setTheme(theme) {
     document.getElementsByClassName('sidebarText')[0].style.color = 'var(--' + theme + '-text-color)';
     document.getElementsByClassName('sidebarText')[1].style.color = 'var(--' + theme + '-text-color)';
     document.getElementsByClassName('sidebarText')[2].style.color = 'var(--' + theme + '-text-color)';
+    document.getElementById('tableBack').style.backgroundColor = 'var(--' + theme + '-accent-color)';
+    document.getElementById('tableRows').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
     if(!getCookie("cookie_consent")) document.getElementById('cookie-banner').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
+    document.getElementsByClassName('tableNav')[0].style.backgroundColor = 'var(--' + theme + '-accent-color)';
+    document.getElementsByClassName('tableNav')[1].style.backgroundColor = 'var(--' + theme + '-accent-color)';
+    document.getElementsByClassName('tableNav')[2].style.backgroundColor = 'var(--' + theme + '-accent-color)';
 }
 
 function redirectToProfile() {

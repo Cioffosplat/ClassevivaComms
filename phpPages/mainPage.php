@@ -72,9 +72,9 @@ if (isset($_POST['logout'])) {
                 <h3 class="m-2">ClassevivaComms</h3>
             </div>
             <ul class="column-flex text-2xl mt-5 ">
-                <li class="flex mb-10"><a href="" class="block"><h3 class="sidebarText">Comunicazioni</h3></a></li>
-                <li class="flex mb-10"><a href="" class="block"><h3 class="sidebarText">Preferiti</h3></a></li>
-                <li class="flex mb-10"><a href="" class="block"><h3 class="sidebarText">Gruppi</h3></a></li>
+                <li class="flex mb-10"><a href="comms.php" class="block"><h3 class="sidebarText">Comunicazioni</h3></a></li>
+                <li class="flex mb-10"><a href="star.php" class="block"><h3 class="sidebarText">Preferiti</h3></a></li>
+                <li class="flex mb-10"><a href="group.php" class="block"><h3 class="sidebarText">Gruppi</h3></a></li>
                 <li class="flex mb-10"><form action="../index.php" method="post">
                         <input type="hidden" name="logout" value="true">
                         <input class="cursor-pointer" type="submit" value="Logout">

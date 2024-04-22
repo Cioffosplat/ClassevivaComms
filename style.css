@@ -2,7 +2,7 @@
     /*Colour Palettes*/
     --theme0-primary-color: #5DFDCB;
     --theme0-secondary-color: #7CC6FE;
-    --theme0-accent-color: #011627;
+    --theme0-accent-color: #50858B;
     --theme0-accent2-color: #F4FAFF;
     --theme0-text-color: black;
     --theme0-background-color: #bdbebd;
@@ -102,5 +102,15 @@ body{
 }
 #theme3:hover{
     background-color: var(--theme3-primary-color);
+}
+
+/*Reserved Part for Comms.php*/
+
+#tableBack, #tableNav{
+    background-color: var(--theme0-accent-color);
+}
+
+#tableRows{
+    background-color: var(--theme0-accent2-color);
 }
 
