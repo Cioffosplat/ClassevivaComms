@@ -93,8 +93,14 @@ use Papaya\Classeviva\ClassevivaEvent;
         return $this->Request("/auth/_zsid");
     }
 
-    public function status(): bool|string
+    public function status($token): bool|string
     {
+        curl_setopt($this->curl, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/json',
+            'Z-Dev-Apikey: Tg1NWEwNGIgIC0K',
+            'User-Agent: CVVS/std/4.1.7 Android/10',
+            'Z-Auth-Token: ' . $token,
+        ));
         return $this->Request('/auth/status');
     }
 

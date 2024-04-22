@@ -28,13 +28,13 @@ $f3->route('POST /login', function($f3) {
     }
 });
 
-$f3->route('POST /status', function($f3) {
+$f3->route('POST /card', function($f3) {
+    $id = $_POST['id'];
     $token = $_POST['token'];
 
     try {
         $classeviva = new Classeviva();
-        $status = $classeviva->status();
-        $status = json_decode($status, true);
+        $status = $classeviva->card($id,$token);
         echo $status;
     } catch (Exception $e) {
         $f3->status(500);

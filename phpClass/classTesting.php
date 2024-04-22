@@ -32,7 +32,7 @@ try {
     $token = $loginData["token"];
     echo "\n", $id,"\n";
     echo $_SESSION['token'];
-    $grades = $classeviva->grades($id,$token);
+    $grades = $classeviva->status($token);
     echo "\n$grades\n";
 } catch (Exception $e) {
     echo 'Errore: ' . $e->getMessage();
