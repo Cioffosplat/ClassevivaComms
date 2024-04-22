@@ -58,11 +58,10 @@ if (isset($_POST['logout'])) {
 <!-- MainPage Section -->
 <div id="mainPage" class="h-screen overflow-hidden bg-gray-200">
     <!-- Sidebar Section-->
-    <div class=" flex-col absolute w-60 min-h-screen overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-300 rounded-r-2xl"
+    <div class="flex-col fixed w-60 min-h-screen overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-300 rounded-r-2xl"
          id="sidebar">
         <button class="absolute top-0 right-0 m-4 text-white">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                 stroke="currentColor">
+            <svg id="sidebarX" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M6  18L18 6M6 6l12 12" />
             </svg>
@@ -192,7 +191,6 @@ if (isset($_POST['logout'])) {
             </div>
         </div>
     </div>
-}
     <link href="../style.css" rel="stylesheet">
     <script src="../scripts/mainPage.js"></script>
 </body>

@@ -85,6 +85,7 @@ function setTheme(theme) {
     document.getElementById('commsLogo').style.backgroundColor = 'var(--' + theme + '-primary-color)';
     document.getElementById('starLogo').style.backgroundColor = 'var(--' + theme + '-primary-color)';
     document.getElementById('groupLogo').style.backgroundColor = 'var(--' + theme + '-primary-color)';
+    document.getElementById('sidebarX').setAttribute("stroke",'var(--' + theme + '-text-color)');
     document.getElementById('commsLogoSVG').setAttribute("stroke",'var(--' + theme + '-text-color)');
     document.getElementById('starLogoSVG').setAttribute("stroke",'var(--' + theme + '-text-color)');
     document.getElementById('groupLogoSVG').setAttribute("stroke",'var(--' + theme + '-text-color)');

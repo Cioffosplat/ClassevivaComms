@@ -14,7 +14,6 @@ $f3->route('GET /',
 );
 
 $f3->route('POST /login', function($f3) {
-    $body = json_decode($f3->BODY, true);
     $username = $_POST['username'];
     $password = $_POST['password'];
 
@@ -22,7 +21,6 @@ $f3->route('POST /login', function($f3) {
         $classeviva = new Classeviva();
         $responseLogin = $classeviva->login($username, $password);
         $f3->status(200);
-        $f3->set('HEADERS.Content-Type', 'application/json');
         echo $responseLogin;
     } catch (Exception $e) {
         $f3->status(500);
@@ -31,17 +29,12 @@ $f3->route('POST /login', function($f3) {
 });
 
 $f3->route('POST /status', function($f3) {
-    $body = json_decode($f3->BODY, true);
-    $id = $body['id'];
-    $token = $body['token'];
+    $token = $_POST['token'];
 
     try {
         $classeviva = new Classeviva();
-        $status = $classeviva->status($id, $token);
+        $status = $classeviva->status();
         $status = json_decode($status, true);
-        $f3->set('HEADERS.Content-Type', 'application/json');
-        $f3->set('HEADERS.Z-Dev-Apikey', 'Tg1NWEwNGIgIC0K');
-        $f3->set('HEADERS.Z-Auth-Token', $token);
         echo $status;
     } catch (Exception $e) {
         $f3->status(500);
@@ -50,14 +43,12 @@ $f3->route('POST /status', function($f3) {
 });
 
 $f3->route('POST /grades', function($f3) {
-    $body = json_decode($f3->BODY, true);
-    $id = $body['id'];
-    $token = $body['token'];
+    $id = $_POST['id'];
+    $token = $_POST['token'];
 
     try {
         $classeviva = new Classeviva();
         $grades = $classeviva->grades($id, $token);
-        $f3->set('HEADERS.Content-Type', 'application/json');
         echo $grades;
     } catch (Exception $e) {
         $f3->status(500);
@@ -66,14 +57,12 @@ $f3->route('POST /grades', function($f3) {
 });
 
 $f3->route('POST /noticeboard', function($f3) {
-    $body = json_decode($f3->BODY, true);
-    $id = $body['id'];
-    $token = $body['token'];
+    $id = $_POST['id'];
+    $token = $_POST['token'];
 
     try {
         $classeviva = new Classeviva();
         $grades = $classeviva->noticeBoard($id, $token);
-        $f3->set('HEADERS.Content-Type', 'application/json');
         echo $grades;
     } catch (Exception $e) {
         $f3->status(500);
