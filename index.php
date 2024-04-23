@@ -8,7 +8,7 @@ session_start();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login-ClassevivaComms</title>
-    <link rel="icon" type="image/x-icon" href="/resources/images/logos/originalLogo.jpeg">
+    <link rel="icon" type="image/x-icon" href="/resources/images/logos/logotheme0.jpg">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap')
     </style>
@@ -66,7 +66,7 @@ session_start();
             }
             ?>
             <class="inline-flex">
-                <button type="submit" class=" flex bg-[#011627] text-white px-20 py-3 ml-12 rounded-md hover:bg-[#7CC6FE]">Login
+                <button type="submit" class=" flex bg-[#50858B] text-white px-20 py-3 ml-12 rounded-md hover:bg-[#7CC6FE]">Login
                     <svg class="h-6 w-6 ml-1 flex" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg></button>
@@ -74,9 +74,9 @@ session_start();
         </form>
     </div>
 </div>
-<div id="cookie-banner" class="cookie_banner fixed bottom-0 left-0 w-full bg-[#011627] text-white p-4">
+<div id="cookie-banner" class="cookie_banner fixed bottom-0 left-0 w-full bg-[#50858B] text-white p-4">
         <div class="max-w-screen-lg mx-auto flex items-center justify-center space-x-3">
-            <p class="text-sm">Questo sito utilizza i cookie per migliorare l\'esperienza dell\'utente. <br> Per le direttive riguardanti i cookie fare riferimento alla <a class="underline underline-offset-1" href="https://papaya.netsons.org/resources/websitesAndLinks/cookie_policy.html">Cookie Policy</a></p>
+            <p class="text-sm">Questo sito utilizza i cookie per migliorare l'esperienza dell'utente. <br> Per le direttive riguardanti i cookie fare riferimento alla <a class="underline underline-offset-1" href="https://papaya.netsons.org/resources/websitesAndLinks/cookie_policy.html">Cookie Policy</a></p>
             <div class="flex space-x-3">
                 <button onclick="acceptCookies()" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">Accetta</button>
                 <button onclick="rejectCookies()" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">Rifiuta</button>

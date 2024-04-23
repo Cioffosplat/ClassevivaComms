@@ -1,7 +1,7 @@
 <?php
 session_start();
 $ch_comms = curl_init();
-$url_comms = 'http://192.168.1.177/projects/ClassevivaComms/Fat3/noticeboard';
+$url_comms = 'http://192.168.244.35/projects/ClassevivaComms/Fat3/noticeboard';
 curl_setopt($ch_comms, CURLOPT_URL, $url_comms);
 curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id'=> $_SESSION['id'], 'token' => $_SESSION['token'])));
 curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);
@@ -165,7 +165,7 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
 <!-- Cookie Banner -->
 <div id="cookie-banner" class="cookie_banner fixed bottom-0 left-0 w-full text-black p-4" style="background-color: var(--theme0-accent2-color)">
     <div class="max-w-screen-lg mx-auto flex items-center justify-center space-x-3">
-        <p class="text-sm">Questo sito utilizza i cookie per migliorare l\'esperienza dell\'utente. <br> Per le direttive riguardanti i cookie fare riferimento alla <a class="underline underline-offset-1" href="https://papaya.netsons.org/resources/websitesAndLinks/cookie_policy.html">Cookie Policy</a></p>
+        <p class="text-sm">Questo sito utilizza i cookie per migliorare l'esperienza dell'utente. <br> Per le direttive riguardanti i cookie fare riferimento alla <a class="underline underline-offset-1" href="https://papaya.netsons.org/resources/websitesAndLinks/cookie_policy.html">Cookie Policy</a></p>
         <div class="flex space-x-3">
             <button onclick="acceptCookies()" class="bg-green-500 hover:bg-green-600 text-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500">Accetta</button>
             <button onclick="rejectCookies()" class="bg-red-500 hover:bg-red-600 text-black px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">Rifiuta</button>
