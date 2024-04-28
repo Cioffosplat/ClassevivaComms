@@ -152,11 +152,11 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
         <!-- Table navigation-->
         <div class="flex justify-end mt-4">
             <?php if ($current_page > 1): ?>
-                <a href="?page=<?php echo $prev_page; ?>" class="tableNav mr-2 px-3 py-1 text-gray-900 font-bold rounded">&lt;</a>
+                <a href="?page=<?php echo $prev_page; ?>" class="tableNav mr-2 px-3 py-1 text-gray-900 font-bold rounded-xl">&lt;</a>
             <?php endif; ?>
-            <span class="tableNav mr-2 px-3 py-1 text-gray-900 font-bold rounded"><?php echo $current_page; ?></span>
+            <span class="tableNav mr-2 px-3 py-1 text-gray-900 font-bold rounded-xl"><?php echo $current_page; ?></span>
             <?php if ($current_page < $total_pages): ?>
-                <a href="?page=<?php echo $next_page; ?>" class="tableNav px-3 py-1 text-gray-900 font-bold rounded">&gt;</a>
+                <a href="?page=<?php echo $next_page; ?>" class="tableNav px-3 py-1 text-gray-900 font-bold rounded-xl">&gt;</a>
             <?php endif; ?>
         </div>
     </div>

@@ -5,13 +5,25 @@ require_once 'Classeviva.php';
 
 use Papaya\Classeviva\Students\Classeviva;
 
+$host = 'localhost';
+$dbname = 'classevivacomms';
+$username = 'root';
+$password = '';
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    echo "Errore di connessione al database: " . $e->getMessage();
+}
+
 $f3 = \Base::instance();
 
-$f3->route('GET /',
-    function() {
-    echo 'hello world';
-    }
-);
+$f3->route('GET /notice',function () use ($pdo) {
+    header('Content-Type: application/json');
+    $result = $pdo->query("SELECT * FROM noticeboard");
+    echo json_encode($result->fetchAll());
+});
 
 $f3->route('POST /login', function($f3) {
     $username = $_POST['username'];
