@@ -49,7 +49,7 @@ $f3->route('POST /login', function($f3) use ($pdo) {
     }
 
     try {
-        $stmt = $pdo->prepare("INSERT INTO users (id, name, surname, birth_date) VALUES (:id, :name, :surname, :birthDate)");
+        $stmt = $pdo->prepare("INSERT IGNORE INTO users (id, name, surname, birth_date) VALUES (:id, :name, :surname, :birthDate)");
         $stmt->bindParam(':id', $ident);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':surname', $surname);
