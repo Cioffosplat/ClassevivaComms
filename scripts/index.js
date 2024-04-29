@@ -12,8 +12,8 @@ window.onunload = function (){
     });
 }
 
-function redirectToHomepage() {
-    window.location.href = "mainPage.php";
+function redirectToLoginpage(){
+    window.location.href = "index.php";
 }
 
 //Sezione per il cookie banner

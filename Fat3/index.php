@@ -32,16 +32,23 @@ $f3->route('POST /login', function($f3) use ($pdo) {
     try {
         $classeviva = new Classeviva();
         $responseLogin = $classeviva->login($username, $password);
-        $ident = $responseLogin['ident'];
-        $name = $responseLogin['firstName'];
-        $surname = $responseLogin['lastName'];
-        $id = filter_var($responseLogin["ident"], FILTER_SANITIZE_NUMBER_INT);
-        $token = $responseLogin['token'];
+        /*$loginData = json_decode($responseLogin, true);
+        $id = filter_var($loginData["ident"], FILTER_SANITIZE_NUMBER_INT);
+        $token = $loginData['token'];
         $responseCard = $classeviva->card($id,$token);
-        $birthDate = $responseCard['birthDate'];
-        if($pdo->query("SELECT id FROM users WHERE id = '$ident'" == null)){
-            $pdo->query("INSERT INTO users (id, name, surname, birth_date) VALUES('$id', '$name', '$surname', '$birthDate')");
-        }
+        $cardData = json_decode($responseCard, true);
+        $ident = $loginData['ident'];
+        $name = $loginData['firstName'];
+        $surname = $loginData['lastName'];
+        $birthDate = $cardData['birthDate'];*/
+
+        /*$stmt = $pdo->prepare("INSERT INTO users (id, name, surname, birth_date) VALUES (:id, :name, :surname, :birthDate)");
+        $stmt->bindParam(':id', $ident);
+        $stmt->bindParam(':name', $name);
+        $stmt->bindParam(':surname', $surname);
+        $stmt->bindParam(':birthDate', $birthDate);
+        $stmt->execute();*/
+
         $f3->status(200);
         echo $responseLogin;
     } catch (Exception $e) {

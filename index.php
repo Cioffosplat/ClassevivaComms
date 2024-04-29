@@ -1,5 +1,10 @@
 <?php
 session_start();
+unset($_SESSION['ident']);
+unset($_SESSION['id']);
+unset($_SESSION['firstName']);
+unset($_SESSION['lastName']);
+unset($_SESSION['token']);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,15 +18,12 @@ session_start();
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap')
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {}
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 <div id="header" class="py-2 flex justify-between items-center rounded-b-2xl">
     <div class="inline-flex px-12">
-        <img id="logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()" src="resources/images/logos/logotheme0.jpg" alt="Logo">
+        <img id="logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToLoginpage()" src="resources/images/logos/logotheme0.jpg" alt="Logo">
         <p class="text-xl pt-6 px-3 ">ClassevivaComms</p>
     </div>
 </div>

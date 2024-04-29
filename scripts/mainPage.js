@@ -109,6 +109,10 @@ function redirectToHomepage() {
     window.location.href = "mainPage.php";
 }
 
+function redirectToHomepage() {
+    window.location.href = "../index.php";
+}
+
 //Sezione per il cookie banner
 function setCookieConsent(consent) {
     var d = new Date();

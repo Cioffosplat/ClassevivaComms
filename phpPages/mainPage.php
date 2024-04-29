@@ -1,15 +1,15 @@
 <?php
 session_start();
-
 //login
 if (isset($_POST['username']) && isset($_POST['password'])) {
     $ch_login = curl_init();
-    $url_login = 'http://192.168.244.35/projects/ClassevivaComms/Fat3/login';
+    $url_login = 'http://192.168.1.177/projects/ClassevivaComms/Fat3/login';
     curl_setopt($ch_login, CURLOPT_URL, $url_login);
     curl_setopt($ch_login, CURLOPT_POSTFIELDS, http_build_query(array('username' => $_POST['username'], 'password' => $_POST['password'])));
     curl_setopt($ch_login, CURLOPT_RETURNTRANSFER, true);
-    $response_login = curl_exec($ch_login);
-    $loginData = json_decode($response_login, true);
+    $responseLogin = curl_exec($ch_login);
+    $loginData = json_decode($responseLogin, true);
+    echo $responseLogin;
 
     if ($loginData && isset($loginData['ident']) && isset($loginData['token'])) {
         $_SESSION['ident'] = $loginData["ident"];
@@ -21,17 +21,9 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         exit;
     } else {
         $_SESSION['error'] = "Email o password errate. ";
+        header('Location: ../index.php');
+        die();
     }
-}
-
-// Logout
-if (isset($_POST['logout'])) {
-    unset($_SESSION['ident']);
-    unset($_SESSION['id']);
-    unset($_SESSION['firstName']);
-    unset($_SESSION['lastName']);
-    unset($_SESSION['token']);
-    exit;
 }
 ?>
 <!DOCTYPE html>
@@ -46,9 +38,6 @@ if (isset($_POST['logout'])) {
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap')
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {}
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
@@ -75,10 +64,11 @@ if (isset($_POST['logout'])) {
                 <li class="flex mb-10"><a href="comms.php" class="block"><h3 class="sidebarText">Comunicazioni</h3></a></li>
                 <li class="flex mb-10"><a href="star.php" class="block"><h3 class="sidebarText">Preferiti</h3></a></li>
                 <li class="flex mb-10"><a href="group.php" class="block"><h3 class="sidebarText">Gruppi</h3></a></li>
-                <li class="flex mb-10"><form action="../index.php" method="post">
-                        <input type="hidden" name="logout" value="true">
-                        <input class="cursor-pointer" type="submit" value="Logout">
-                    </form></li>
+                <li class="flex mb-10">
+                    <a href="../index.php" class="block">
+                        <h3 class="sidebarText">Logout</h3>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
