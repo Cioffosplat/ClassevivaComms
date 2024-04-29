@@ -163,7 +163,7 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
 </div>
 
 <!-- Cookie Banner -->
-<div id="cookie-banner" class="cookie_banner fixed bottom-0 left-0 w-full text-black p-4" style="background-color: var(--theme0-accent2-color)">
+<div id="cookie-banner" class="cookie_banner fixed bottom-0 left-0 w-full text-black p-4" style="background-color: var(--theme0-accent-color)">
     <div class="max-w-screen-lg mx-auto flex items-center justify-center space-x-3">
         <p class="text-sm">Questo sito utilizza i cookie per migliorare l'esperienza dell'utente. <br> Per le direttive riguardanti i cookie fare riferimento alla <a class="underline underline-offset-1" href="https://papaya.netsons.org/resources/websitesAndLinks/cookie_policy.html">Cookie Policy</a></p>
         <div class="flex space-x-3">

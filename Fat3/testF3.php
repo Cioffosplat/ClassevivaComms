@@ -12,6 +12,10 @@ echo $response_login;
 echo $_SESSION['token'] = $loginData["token"];
 echo "\n";
 echo $_SESSION['id'] = filter_var($loginData["ident"], FILTER_SANITIZE_NUMBER_INT);
+echo "\n";
+echo $_SESSION['name'] = filter_var($loginData["firstName"]);
+echo "\n";
+echo $_SESSION['surname'] = filter_var($loginData["lastName"]);
 
 $ch_comms = curl_init();
 $url_comms = 'http://192.168.1.177/projects/ClassevivaComms/Fat3/card';

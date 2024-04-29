@@ -98,7 +98,8 @@ function setTheme(theme) {
     document.getElementsByClassName('sidebarText')[0].style.color = 'var(--' + theme + '-text-color)';
     document.getElementsByClassName('sidebarText')[1].style.color = 'var(--' + theme + '-text-color)';
     document.getElementsByClassName('sidebarText')[2].style.color = 'var(--' + theme + '-text-color)';
-    if(!getCookie("cookie_consent")) document.getElementById('cookie-banner').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
+    document.getElementsByClassName('sidebarText')[3].style.color = 'var(--' + theme + '-text-color)';
+    if(!getCookie("cookie_consent")) document.getElementById('cookie-banner').style.backgroundColor = 'var(--' + theme + '-accent-color)';
 }
 
 function redirectToProfile() {
@@ -107,10 +108,6 @@ function redirectToProfile() {
 
 function redirectToHomepage() {
     window.location.href = "mainPage.php";
-}
-
-function redirectToHomepage() {
-    window.location.href = "../index.php";
 }
 
 //Sezione per il cookie banner
