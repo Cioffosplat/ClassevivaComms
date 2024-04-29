@@ -3,7 +3,7 @@ session_start();
 $ch_login = curl_init();
 $url_login = 'http://192.168.1.177/projects/ClassevivaComms/Fat3/login';
 curl_setopt($ch_login, CURLOPT_URL, $url_login);
-curl_setopt($ch_login, CURLOPT_POSTFIELDS, http_build_query(array('username' => 'fioccosplat@gmail.com', 'password' => 'Fiocco2018')));
+curl_setopt($ch_login, CURLOPT_POSTFIELDS, http_build_query(array('username' => 'G8183544Y', 'password' => 'sf10796i')));
 curl_setopt($ch_login, CURLOPT_RETURNTRANSFER, true);
 $response_login = curl_exec($ch_login);
 $loginData = json_decode($response_login, true);

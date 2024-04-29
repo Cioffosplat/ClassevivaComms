@@ -24,6 +24,8 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         header('Location: ../index.php');
         die();
     }
+}else if(empty($_SESSION['ident'] || $_SESSION['token'])) {
+    header('Location: error.php');
 }
 ?>
 <!DOCTYPE html>
