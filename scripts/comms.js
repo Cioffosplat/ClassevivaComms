@@ -12,7 +12,7 @@ window.onload = function () {
 // Logout Function when tab is closed
 window.onunload = function (){
     $.ajax({
-        url: 'login.php',
+        url: 'index.php',
         method: 'POST',
         data: {logout: true},
     });

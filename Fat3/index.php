@@ -25,13 +25,23 @@ $f3->route('GET /notice',function () use ($pdo) {
     echo json_encode($result->fetchAll());
 });
 
-$f3->route('POST /login', function($f3) {
+$f3->route('POST /login', function($f3) use ($pdo) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
     try {
         $classeviva = new Classeviva();
         $responseLogin = $classeviva->login($username, $password);
+        $ident = $responseLogin['ident'];
+        $name = $responseLogin['firstName'];
+        $surname = $responseLogin['lastName'];
+        $id = filter_var($responseLogin["ident"], FILTER_SANITIZE_NUMBER_INT);
+        $token = $responseLogin['token'];
+        $responseCard = $classeviva->card($id,$token);
+        $birthDate = $responseCard['birthDate'];
+        if($pdo->query("SELECT id FROM users WHERE id = '$ident'" == null)){
+            $pdo->query("INSERT INTO users (id, name, surname, birth_date) VALUES('$id', '$name', '$surname', '$birthDate')");
+        }
         $f3->status(200);
         echo $responseLogin;
     } catch (Exception $e) {
