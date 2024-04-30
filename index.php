@@ -5,6 +5,7 @@ unset($_SESSION['id']);
 unset($_SESSION['firstName']);
 unset($_SESSION['lastName']);
 unset($_SESSION['token']);
+unset($_SESSION['commsNumber']);
 ?>
 <!DOCTYPE html>
 <html lang="en">

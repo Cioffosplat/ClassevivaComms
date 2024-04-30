@@ -2,6 +2,7 @@
 session_start();
 //login
 if (isset($_POST['username']) && isset($_POST['password'])) {
+    //login serverRest Request
     $ch_login = curl_init();
     $url_login = 'http://192.168.248.35/projects/ClassevivaComms/Fat3/login';
     curl_setopt($ch_login, CURLOPT_URL, $url_login);
@@ -12,11 +13,25 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     echo $responseLogin;
 
     if ($loginData && isset($loginData['ident']) && isset($loginData['token'])) {
+        //sensitive data session saving
         $_SESSION['ident'] = $loginData["ident"];
         $_SESSION['id'] = filter_var($loginData["ident"], FILTER_SANITIZE_NUMBER_INT);
         $_SESSION['token'] = $loginData["token"];
         $_SESSION['firstName'] = $loginData["firstName"];
         $_SESSION['lastName'] = $loginData["lastName"];
+
+        //comms request
+        $ch_comms = curl_init();
+        $url_comms = 'http://192.168.248.35/projects/ClassevivaComms/Fat3/noticeboard';
+        curl_setopt($ch_comms, CURLOPT_URL, $url_comms);
+        curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id'=> $_SESSION['id'], 'token' => $_SESSION['token'])));
+        curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);
+        $response_comms = curl_exec($ch_comms);
+        $commsData = json_decode($response_comms, true);
+
+        //logging number of communications
+        $_SESSION['commsNumber'] = count($commsData['items']);
+
         header("Location: {$_SERVER['PHP_SELF']}");
         exit;
     } else {
@@ -87,11 +102,13 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
             </div>
             <div class="flex items-center px-2">
                 <img id="paintbrushButton" class="w-7 h-7 cursor-pointer mx-2" src="../resources/images/paintbrush/paintbrushtheme0.png" onclick="togglePaintbrushMenu()" alt="Paintbrush">
-                <div id="paintbrushMenu" class="fixed z-10 p-3 rounded-lg top-20 left-57 scale-100 origin-top shadow-2xl mx-2">
-                    <button onclick="setTheme('theme0')" id='theme0' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Default</button>
-                    <button onclick="setTheme('theme1')" id='theme1' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Theme 1</button>
-                    <button onclick="setTheme('theme2')" id='theme2' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Theme 2</button>
-                    <button onclick="setTheme('theme3')" id='theme3' class="block my-2 p-2 rounded-md focus:ring shadow-2xl">Theme 3</button>
+                <div id="paintbrushMenu" class="fixed p-2 rounded-lg top-20 left-50 shadow-2xl mx-2">
+                    <div class="py-2 text-base flex justify-between">
+                        <button onclick="setTheme('theme0')" id='theme0' class="mx-2 w-8 h-8 bg-[#5DFDCB] transition-all rounded-full block ring-[#5DFDCB] hover:ring-2 ring-offset-1 "></button>
+                        <button onclick="setTheme('theme1')" id='theme1' class="mx-2 w-8 h-8 bg-[#221d23] transition-all rounded-full block ring-[#221d23] hover:ring-2 ring-offset-1"></button>
+                        <button onclick="setTheme('theme2')" id='theme2' class="mx-2 w-8 h-8 bg-[#210B2C] transition-all rounded-full block ring-[#210B2C] hover:ring-2 ring-offset-1"></button>
+                        <button onclick="setTheme('theme3')" id='theme3' class="mx-2 w-8 h-8 bg-[#EEE0CB] transition-all rounded-full block ring-[#EEE0CB] hover:ring-2 ring-offset-1"></button>
+                    </div>
                 </div>
                 <img id="userIcon" alt="User Icon" class="w-10 h-10 rounded-full ml-2 cursor-pointer" onclick="redirectToProfile()" src="../resources/images/users/defaultusertheme0.jpg">
                 <?php
@@ -113,7 +130,9 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                     <div>
                         <div class="text-gray-600 text-sm">Comunicazioni Totali</div>
                         <div class="text-gray-900 text-2xl font-semibold">
-                            71,897
+                            <?php
+                            echo $_SESSION['commsNumber'];
+                            ?>
                         </div>
                     </div>
                 </div>
