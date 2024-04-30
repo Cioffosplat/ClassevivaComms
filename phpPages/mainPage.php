@@ -3,7 +3,7 @@ session_start();
 //login
 if (isset($_POST['username']) && isset($_POST['password'])) {
     $ch_login = curl_init();
-    $url_login = 'http://192.168.1.177/projects/ClassevivaComms/Fat3/login';
+    $url_login = 'http://192.168.248.35/projects/ClassevivaComms/Fat3/login';
     curl_setopt($ch_login, CURLOPT_URL, $url_login);
     curl_setopt($ch_login, CURLOPT_POSTFIELDS, http_build_query(array('username' => $_POST['username'], 'password' => $_POST['password'])));
     curl_setopt($ch_login, CURLOPT_RETURNTRANSFER, true);
@@ -163,8 +163,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
             </div>
         </form>
     </div>
-
-
 </div>
 <?php
 /*echo "<div class='flex m-9'>
