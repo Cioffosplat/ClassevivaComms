@@ -13,18 +13,18 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     echo $responseLogin;
 
     if ($loginData && isset($loginData['ident']) && isset($loginData['token'])) {
-        //sensitive data session saving
+        //Sensitive data session saving
         $_SESSION['ident'] = $loginData["ident"];
         $_SESSION['id'] = filter_var($loginData["ident"], FILTER_SANITIZE_NUMBER_INT);
         $_SESSION['token'] = $loginData["token"];
         $_SESSION['firstName'] = $loginData["firstName"];
         $_SESSION['lastName'] = $loginData["lastName"];
 
-        //comms request
+        //Comms request
         $ch_comms = curl_init();
         $url_comms = 'http://192.168.1.187/projects/ClassevivaComms/Fat3/noticeboard';
         curl_setopt($ch_comms, CURLOPT_URL, $url_comms);
-        curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id'=> $_SESSION['id'], 'token' => $_SESSION['token'])));
+        curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id' => $_SESSION['id'], 'token' => $_SESSION['token'])));
         curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);
         $response_comms = curl_exec($ch_comms);
         $commsData = json_decode($response_comms, true);
@@ -34,13 +34,13 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
         header("Location: {$_SERVER['PHP_SELF']}");
         exit;
+    } else if(empty($_SESSION['ident'] || $_SESSION['token']) && !isset($_POST['username']) && !isset($_POST['password'])) {
+        header('Location: error.php');
     } else {
         $_SESSION['error'] = "Email o password errate. ";
         header('Location: ../index.php');
         die();
     }
-}else if(empty($_SESSION['ident'] || $_SESSION['token'])) {
-    header('Location: error.php');
 }
 ?>
 <!DOCTYPE html>
