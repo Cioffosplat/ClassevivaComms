@@ -19,8 +19,6 @@ window.onunload = function (){
 }
 
 //Sidebar Functions
-document.getElementById("open-sidebar").addEventListener("click", openSidebar);
-document.getElementById("sidebar").querySelector("button").addEventListener("click", closeSidebar);
 function openSidebar() {
     document.getElementById("sidebar").classList.remove("-translate-x-full");
     document.getElementById("backgroundBlur").style.display = "block";
@@ -30,11 +28,22 @@ function closeSidebar() {
     document.getElementById("backgroundBlur").style.display = "none";
 }
 
-//Paintbrush Menu
-function togglePaintbrushMenu() {
-    const paintbrushMenu = document.getElementById('paintbrushMenu');
-    paintbrushMenu.classList.toggle('show');
+document.getElementById("open-sidebar").addEventListener("click", openSidebar);
+document.getElementById("sidebar").querySelector("button").addEventListener("click", closeSidebar);
+
+//Paintbrush Menu Functions
+function openPaint() {
+    document.getElementById("paint").classList.add("translate-x-0");
+    document.getElementById("backgroundBlur").style.display = "block";
 }
+function closePaint() {
+    document.getElementById("paint").classList.remove("translate-x-0");
+    document.getElementById("backgroundBlur").style.display = "none";
+}
+
+document.getElementById("open-paint").addEventListener("click", openPaint);
+document.getElementById("paint").querySelector("button").addEventListener("click", closePaint);
+
 
 //Setting of the Themes
 function setTheme(theme) {
@@ -42,19 +51,20 @@ function setTheme(theme) {
     if(!getCookie("cookie_consent")) document.getElementById('cookie-banner').style.backgroundColor = 'var(--' + theme + '-accent-color)';
     document.getElementById('header').style.backgroundColor = 'var(--' + theme + '-secondary-color)';
     document.getElementById('mainPage').style.backgroundColor = 'var(--' + theme + '-background-color)';
-    document.getElementById('paintbrushButton').src = '../resources/images/paintbrush/paintbrush' + theme + '.png';
-    document.getElementById('paintbrushMenu').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
     document.getElementById('sidebar').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
+    document.getElementById('paint').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
+    document.getElementById('sidebarX').setAttribute("stroke",'var(--' + theme + '-text-color)');
+    document.getElementById('paintX').setAttribute("stroke",'var(--' + theme + '-text-color)');
     document.getElementById('logo').src = '../resources/images/logos/logo' + theme+ '.jpg';
     document.getElementById('logoSidebar').src = '../resources/images/logos/logo' + theme+ '.jpg';
-    document.getElementById('sidebarX').setAttribute("stroke",'var(--' + theme + '-text-color)');
+    document.getElementById('tabIcon').setAttribute('href', '/resources/images/logos/logo' + theme+ '.jpg');
+    document.getElementById('userIcon').src = '../resources/images/users/defaultuser' + theme + '.jpg';
+    document.getElementById('paintbrushButton').src = '../resources/images/paintbrush/paintbrush' + theme + '.png';
+    document.getElementById('tableBack').style.backgroundColor = 'var(--' + theme + '-accent-color)';
+    document.getElementById('tableRows').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
     document.getElementsByClassName('tableNav')[0].style.backgroundColor = 'var(--' + theme + '-accent-color)';
     document.getElementsByClassName('tableNav')[1].style.backgroundColor = 'var(--' + theme + '-accent-color)';
     document.getElementsByClassName('tableNav')[2].style.backgroundColor = 'var(--' + theme + '-accent-color)';
-    document.getElementById('tabIcon').setAttribute('href', '/resources/images/logos/logo' + theme+ '.jpg');
-    document.getElementById('userIcon').src = '../resources/images/users/defaultuser' + theme + '.jpg';
-    document.getElementById('tableBack').style.backgroundColor = 'var(--' + theme + '-accent-color)';
-    document.getElementById('tableRows').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
 }
 
 function redirectToProfile() {

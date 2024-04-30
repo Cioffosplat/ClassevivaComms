@@ -13,7 +13,7 @@ unset($_SESSION['commsNumber']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login-ClassevivaComms</title>
+    <title>Login-Classeviva Comms</title>
     <link rel="icon" type="image/x-icon" href="/resources/images/logos/logotheme0.jpg">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap')
@@ -25,7 +25,7 @@ unset($_SESSION['commsNumber']);
 <div id="header" class="py-2 flex justify-between items-center rounded-b-2xl">
     <div class="inline-flex px-12">
         <img id="logo" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToLoginpage()" src="resources/images/logos/logotheme0.jpg" alt="Logo">
-        <p class="text-xl pt-6 px-3 ">ClassevivaComms</p>
+        <p class="text-xl pt-6 px-3 ">Classeviva Comms</p>
     </div>
 </div>
 

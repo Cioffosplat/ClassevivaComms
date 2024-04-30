@@ -4,7 +4,7 @@ session_start();
 if (isset($_POST['username']) && isset($_POST['password'])) {
     //login serverRest Request
     $ch_login = curl_init();
-    $url_login = 'http://192.168.248.35/projects/ClassevivaComms/Fat3/login';
+    $url_login = 'http://192.168.1.187/projects/ClassevivaComms/Fat3/login';
     curl_setopt($ch_login, CURLOPT_URL, $url_login);
     curl_setopt($ch_login, CURLOPT_POSTFIELDS, http_build_query(array('username' => $_POST['username'], 'password' => $_POST['password'])));
     curl_setopt($ch_login, CURLOPT_RETURNTRANSFER, true);
@@ -22,7 +22,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
         //comms request
         $ch_comms = curl_init();
-        $url_comms = 'http://192.168.248.35/projects/ClassevivaComms/Fat3/noticeboard';
+        $url_comms = 'http://192.168.1.187/projects/ClassevivaComms/Fat3/noticeboard';
         curl_setopt($ch_comms, CURLOPT_URL, $url_comms);
         curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id'=> $_SESSION['id'], 'token' => $_SESSION['token'])));
         curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);
@@ -49,7 +49,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage-ClassevivaComms</title>
+    <title>Homepage-Classeviva Comms</title>
     <link id="tabIcon" rel="icon" type="image/x-icon" href="/resources/images/logos/originalLogo.jpeg">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap')
@@ -63,8 +63,41 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 </div>
 <!-- MainPage Section -->
 <div id="mainPage" class="h-screen overflow-hidden bg-gray-200">
+
+    <!-- Theme Color Section -->
+    <div class="fixed w-60 min-h-screen overflow-y-auto transition-transform transform translate-x-full ease-in-out duration-300 rounded-l-2xl right-0"
+         id="paint">
+    <button class="absolute top-0 right-0 m-4 text-white">
+            <svg id="paintX" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M6  18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+        <div class="flex flex-col pt-5 pl-5">
+            <a class="text-4xl">Temi:</a>
+        </div>
+        <div class="flex flex-col p-5">
+            <div class="inline-flex items-center">
+                <a class="text-xl p-5">Acqua</a>
+                <button class="w-12 h-12 rounded-full bg-[#5DFDCB]" onclick="setTheme('theme0')"></button>
+            </div>
+            <div class="inline-flex items-center">
+                <a class="text-xl p-5">Brown</a>
+                <button class="w-12 h-12 rounded-full bg-[#221d23]" onclick="setTheme('theme1')"></button>
+            </div>
+            <div class="inline-flex items-center">
+                <a class="text-xl p-5">Purple</a>
+                <button class="w-12 h-12 rounded-full bg-[#210B2C]" onclick="setTheme('theme2')"></button>
+            </div>
+            <div class="inline-flex items-center">
+                <a class="text-xl p-5">Cream</a>
+                <button class="w-12 h-12 rounded-full bg-[#EEE0CB]" onclick="setTheme('theme3')"></button>
+            </div>
+        </div>
+    </div>
+
     <!-- Sidebar Section-->
-    <div class="flex-col fixed w-60 min-h-screen overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-300 rounded-r-2xl"
+    <div class="fixed w-60 min-h-screen overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-300 rounded-r-2xl"
          id="sidebar">
         <button class="absolute top-0 right-0 m-4 text-white">
             <svg id="sidebarX" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24">
@@ -101,15 +134,9 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                 <p class="text-xl mt-6 mx-3 ">Classeviva Comms</p>
             </div>
             <div class="flex items-center px-2">
-                <img id="paintbrushButton" class="w-7 h-7 cursor-pointer mx-2" src="../resources/images/paintbrush/paintbrushtheme0.png" onclick="togglePaintbrushMenu()" alt="Paintbrush">
-                <div id="paintbrushMenu" class="fixed p-2 rounded-lg top-20 left-50 shadow-2xl mx-2">
-                    <div class="py-2 text-base flex justify-between">
-                        <button onclick="setTheme('theme0')" id='theme0' class="mx-2 w-8 h-8 bg-[#5DFDCB] transition-all rounded-full block ring-[#5DFDCB] hover:ring-2 ring-offset-1 "></button>
-                        <button onclick="setTheme('theme1')" id='theme1' class="mx-2 w-8 h-8 bg-[#221d23] transition-all rounded-full block ring-[#221d23] hover:ring-2 ring-offset-1"></button>
-                        <button onclick="setTheme('theme2')" id='theme2' class="mx-2 w-8 h-8 bg-[#210B2C] transition-all rounded-full block ring-[#210B2C] hover:ring-2 ring-offset-1"></button>
-                        <button onclick="setTheme('theme3')" id='theme3' class="mx-2 w-8 h-8 bg-[#EEE0CB] transition-all rounded-full block ring-[#EEE0CB] hover:ring-2 ring-offset-1"></button>
-                    </div>
-                </div>
+                <button class="w-7 h-7 cursor-pointer mx-2" id="open-paint">
+                    <img id="paintbrushButton" src="../resources/images/paintbrush/paintbrushtheme0.png" alt="paintbrushButton">
+                </button>
                 <img id="userIcon" alt="User Icon" class="w-10 h-10 rounded-full ml-2 cursor-pointer" onclick="redirectToProfile()" src="../resources/images/users/defaultusertheme0.jpg">
                 <?php
                 echo "<p style='font-family: 'Ubuntu Condensed';' class='px-2 mx-2'>{$_SESSION['firstName']} {$_SESSION['lastName']}</p>"

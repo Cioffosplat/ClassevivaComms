@@ -55,24 +55,17 @@ body{
     -webkit-text-stroke-color: white;
 }
 
-.sidebarText{
+#paint{
+    background-color: var(--theme0-accent2-color);
     color: var(--theme0-text-color);
     -webkit-text-stroke-width: 0.3px;
     -webkit-text-stroke-color: white;
 }
 
-#paintbrushMenu {
-    display: none;
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.5s ease-in, transform 0.5s ease-in;
-}
-
-#paintbrushMenu.show {
-    display: table-column;
-    opacity: 1;
-    transform: translateY(-10px) translateX(-60px);
-    background-color: var(--theme0-accent2-color);
+.sidebarText{
+    color: var(--theme0-text-color);
+    -webkit-text-stroke-width: 0.3px;
+    -webkit-text-stroke-color: white;
 }
 
 #backgroundBlur{
