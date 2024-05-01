@@ -1,14 +1,15 @@
 <?php
 session_start();
+//Section dedicated to the viewing of the noticeboard
 $ch_comms = curl_init();
-$url_comms = 'http://192.168.1.187/projects/ClassevivaComms/Fat3/noticeboard';
+$url_comms = 'http://192.168.1.177/projects/ClassevivaComms/Fat3/noticeboard';
 curl_setopt($ch_comms, CURLOPT_URL, $url_comms);
 curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id'=> $_SESSION['id'], 'token' => $_SESSION['token'])));
 curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);
 $response_comms = curl_exec($ch_comms);
 $commsData = json_decode($response_comms, true);
 
-//Session dedicated to the Comms Table
+//Section dedicated to the Comms Table
 $commsPerPage = 10;
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
 $startIndex = ($current_page - 1) * $commsPerPage;
@@ -16,6 +17,7 @@ $currentPageData = array_slice($commsData['items'], $startIndex, $commsPerPage);
 $total_pages = ceil(count($commsData['items']) / $commsPerPage);
 $prev_page = ($current_page > 1) ? $current_page - 1 : 1;
 $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
+
 ?>
 
 <!DOCTYPE html>
@@ -30,9 +32,6 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap')
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {}
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>

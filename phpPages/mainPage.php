@@ -1,10 +1,9 @@
 <?php
 session_start();
-//login
 if (isset($_POST['username']) && isset($_POST['password'])) {
     //login serverRest Request
     $ch_login = curl_init();
-    $url_login = 'http://192.168.1.187/projects/ClassevivaComms/Fat3/login';
+    $url_login = 'http://192.168.1.177/projects/ClassevivaComms/Fat3/login';
     curl_setopt($ch_login, CURLOPT_URL, $url_login);
     curl_setopt($ch_login, CURLOPT_POSTFIELDS, http_build_query(array('username' => $_POST['username'], 'password' => $_POST['password'])));
     curl_setopt($ch_login, CURLOPT_RETURNTRANSFER, true);
@@ -20,16 +19,16 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         $_SESSION['firstName'] = $loginData["firstName"];
         $_SESSION['lastName'] = $loginData["lastName"];
 
-        //Comms request
+        //Comms request for comms counter
         $ch_comms = curl_init();
-        $url_comms = 'http://192.168.1.187/projects/ClassevivaComms/Fat3/noticeboard';
+        $url_comms = 'http://192.168.1.177/projects/ClassevivaComms/Fat3/noticeboard';
         curl_setopt($ch_comms, CURLOPT_URL, $url_comms);
         curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id' => $_SESSION['id'], 'token' => $_SESSION['token'])));
         curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);
         $response_comms = curl_exec($ch_comms);
         $commsData = json_decode($response_comms, true);
 
-        //logging number of communications
+        //Logging number of communications
         $_SESSION['commsNumber'] = count($commsData['items']);
 
         header("Location: {$_SERVER['PHP_SELF']}");

@@ -126,3 +126,5 @@ function getCookie(name) {
     }
     return "";
 }
+//New unexplored javascript section
+

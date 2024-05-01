@@ -1,5 +1,6 @@
 <?php
 session_start();
+//Unsetting of the session items
 unset($_SESSION['ident']);
 unset($_SESSION['id']);
 unset($_SESSION['firstName']);
