@@ -121,9 +121,10 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
         <h1 class="text-2xl font-bold mb-4">Comunicazioni</h1>
     </div>
 
+    <!--Comms Filters-->
     <div id="filters">
         <label for="category">Categoria:</label>
-        <select id="category">
+        <select id="category" onchange="applyFilters()">
             <option value="">Tutte</option>
             <option value="Circolare">Circolare</option>
             <option value="Scuola/Famiglia">Scuola/Famiglia</option>
@@ -131,14 +132,11 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
         </select>
 
         <label for="sort">Ordina per data:</label>
-        <select id="sort">
+        <select id="sort" onchange="applyFilters()">
             <option value="asc">Crescente</option>
             <option value="desc">Decrescente</option>
         </select>
-
-        <button onclick="applyFilters()">Applica filtri</button>
     </div>
-
 
     <!--Comms Table-->
     <div class="container mx-auto overflow-x-auto rounded-t-2xl">
@@ -152,7 +150,7 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
                     Categoria
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Data di Inserimento
+                    Data
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                     Allegati

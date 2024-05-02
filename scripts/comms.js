@@ -126,75 +126,123 @@ function getCookie(name) {
 }
 
 //Table Rendering Script
-
 var itemsPerPage = 10;
 var currentPage = 1;
+var filters = {
+    category: "",
+    sort: "asc" // Default sort order
+};
 
 function renderTable(page) {
     var tableBody = document.getElementById("tableRows");
     tableBody.innerHTML = '';
+    var filteredItems = filterItems(commsData.items);
     var startIndex = (page - 1) * itemsPerPage;
-    var endIndex = Math.min(startIndex + itemsPerPage, commsData.items.length);
+    var endIndex = Math.min(startIndex + itemsPerPage, filteredItems.length);
 
     for (var i = startIndex; i < endIndex; i++) {
-        var item = commsData.items[i];
+        var item = filteredItems[i];
         var row = document.createElement("tr");
-        row.innerHTML = `
-            <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">${item.cntTitle}</div>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">${item.cntCategory}</div>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">${item.dinsert_allegato}</div>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-                ${item.cntHasAttach ?
-            `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Allegato</span>` :
-            `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Nessun Allegato</span>`}
-            </td>
-        `;
+
+        var titleCell = document.createElement("td");
+        titleCell.className = "px-6 py-4 whitespace-nowrap";
+        var titleContent = document.createElement("div");
+        titleContent.className = "text-sm text-gray-900";
+        titleContent.textContent = item.cntTitle;
+        titleCell.appendChild(titleContent);
+        row.appendChild(titleCell);
+
+        var categoryCell = document.createElement("td");
+        categoryCell.className = "px-6 py-4 whitespace-nowrap";
+        var categoryContent = document.createElement("div");
+        categoryContent.className = "text-sm text-gray-900";
+        categoryContent.textContent = item.cntCategory;
+        categoryCell.appendChild(categoryContent);
+        row.appendChild(categoryCell);
+
+        var allegatoCell = document.createElement("td");
+        allegatoCell.className = "px-6 py-4 whitespace-nowrap";
+        var allegatoContent = document.createElement("div");
+        allegatoContent.className = "text-sm text-gray-900";
+        allegatoContent.textContent = item.dinsert_allegato;
+        allegatoCell.appendChild(allegatoContent);
+        row.appendChild(allegatoCell);
+
+        var attachmentCell = document.createElement("td");
+        attachmentCell.className = "px-6 py-4 whitespace-nowrap";
+        attachmentCell.innerHTML = item.cntHasAttach ?
+            `<span class="badge badge-success">Allegato</span>` :
+            `<span class="badge badge-danger">Nessun Allegato</span>`;
+        row.appendChild(attachmentCell);
+
         tableBody.appendChild(row);
     }
 }
 
 function renderPagination() {
-    var totalPages = Math.ceil(commsData.items.length / itemsPerPage);
+    var totalPages = Math.ceil(filterItems(commsData.items).length / itemsPerPage);
     var paginationDiv = document.getElementById("pagination");
     paginationDiv.innerHTML = '';
 
-    var prevButton = document.createElement("button");
-    prevButton.textContent = "<";
-    prevButton.className = "tableNav mr-2 px-3 py-1 text-gray-900 font-bold rounded-xl";
-    prevButton.onclick = function() {
+    var prevButton = createPaginationButton("<", function () {
         if (currentPage > 1) {
             currentPage--;
             renderTable(currentPage);
             renderPagination();
         }
-    };
+    });
     paginationDiv.appendChild(prevButton);
 
     var currentPageSpan = document.createElement("span");
     currentPageSpan.textContent = currentPage;
-    currentPageSpan.className = "mr-2 px-3 py-1 text-gray-900 font-bold rounded-xl";
     paginationDiv.appendChild(currentPageSpan);
 
-    var nextButton = document.createElement("button");
-    nextButton.textContent = ">";
-    nextButton.className = "mr-2 px-3 py-1 text-gray-900 font-bold rounded-xl";
-    nextButton.onclick = function() {
+    var nextButton = createPaginationButton(">", function () {
         if (currentPage < totalPages) {
             currentPage++;
             renderTable(currentPage);
             renderPagination();
         }
-    };
+    });
     paginationDiv.appendChild(nextButton);
 }
 
+function createPaginationButton(text, onclickFunction) {
+    var button = document.createElement("button");
+    button.textContent = text;
+    button.className = "tableNav mr-2 px-3 py-1 text-gray-900 font-bold rounded-xl";
+    button.onclick = onclickFunction;
+    return button;
+}
+
+function applyFilters() {
+    filters.category = document.getElementById("category").value;
+    filters.sort = document.getElementById("sort").value;
+    renderTable(1);
+    renderPagination();
+}
+
+function filterItems(items) {
+    var filteredItems = items.filter(function (item) {
+        return (filters.category === "" || item.cntCategory === filters.category);
+    });
+
+    if (filters.sort === "asc") {
+        filteredItems.sort(function (a, b) {
+            return new Date(a.dinsert_allegato) - new Date(b.dinsert_allegato);
+        });
+    } else {
+        filteredItems.sort(function (a, b) {
+            return new Date(b.dinsert_allegato) - new Date(a.dinsert_allegato);
+        });
+    }
+
+    return filteredItems;
+}
+
+// Initial rendering
 renderTable(currentPage);
 renderPagination();
+
 
 
