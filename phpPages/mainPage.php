@@ -54,7 +54,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap')
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 <div id="backgroundBlur" class="fixed inset-0 transition-opacity">

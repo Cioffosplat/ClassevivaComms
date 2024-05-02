@@ -62,9 +62,6 @@ function setTheme(theme) {
     document.getElementById('paintbrushButton').src = '../resources/images/paintbrush/paintbrush' + theme + '.png';
     document.getElementById('tableBack').style.backgroundColor = 'var(--' + theme + '-accent-color)';
     document.getElementById('tableRows').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
-    document.getElementsByClassName('tableNav')[0].style.backgroundColor = 'var(--' + theme + '-accent-color)';
-    document.getElementsByClassName('tableNav')[1].style.backgroundColor = 'var(--' + theme + '-accent-color)';
-    document.getElementsByClassName('tableNav')[2].style.backgroundColor = 'var(--' + theme + '-accent-color)';
 }
 
 function redirectToProfile() {
@@ -126,5 +123,79 @@ function getCookie(name) {
     }
     return "";
 }
-//New unexplored javascript section
+
+//Table Rendering Script
+
+var itemsPerPage = 10;
+var currentPage = 1;
+
+function renderTable(page) {
+    var tableBody = document.getElementById("tableRows");
+    tableBody.innerHTML = '';
+    var startIndex = (page - 1) * itemsPerPage;
+    var endIndex = Math.min(startIndex + itemsPerPage, commsData.items.length);
+
+    for (var i = startIndex; i < endIndex; i++) {
+        var item = commsData.items[i];
+        var row = document.createElement("tr");
+        row.innerHTML = `
+      <td class="px-6 py-4 whitespace-nowrap">
+        <div class="text-sm text-gray-900">${item.pubId}</div>
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap">
+        <div class="text-sm text-gray-900">${item.cntTitle}</div>
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap">
+        <div class="text-sm text-gray-900">${item.cntCategory}</div>
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap">
+        <div class="text-sm text-gray-900">${item.dinsert_allegato}</div>
+      </td>
+      <td class="px-6 py-4 whitespace-nowrap">
+        ${item.cntHasAttach ?
+            `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Allegato</span>` :
+            `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Nessun Allegato</span>`}
+      </td>
+    `;
+        tableBody.appendChild(row);
+    }
+}
+
+function renderPagination() {
+    var totalPages = Math.ceil(commsData.items.length / itemsPerPage);
+    var paginationDiv = document.getElementById("pagination");
+    paginationDiv.innerHTML = '';
+
+    var prevButton = document.createElement("button");
+    prevButton.textContent = "<";
+    prevButton.className = "tableNav mr-2 px-3 py-1 text-gray-900 font-bold rounded-xl";
+    prevButton.onclick = function() {
+        if (currentPage > 1) {
+            currentPage--;
+            renderTable(currentPage);
+            renderPagination();
+        }
+    };
+    paginationDiv.appendChild(prevButton);
+
+    var currentPageSpan = document.createElement("span");
+    currentPageSpan.textContent = currentPage;
+    currentPageSpan.className = "mr-2 px-3 py-1 text-gray-900 font-bold rounded-xl";
+    paginationDiv.appendChild(currentPageSpan);
+
+    var nextButton = document.createElement("button");
+    nextButton.textContent = ">";
+    nextButton.className = "mr-2 px-3 py-1 text-gray-900 font-bold rounded-xl";
+    nextButton.onclick = function() {
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderTable(currentPage);
+            renderPagination();
+        }
+    };
+    paginationDiv.appendChild(nextButton);
+}
+
+renderTable(currentPage);
+renderPagination();
 

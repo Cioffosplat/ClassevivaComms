@@ -8,7 +8,6 @@ curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id'=> $_SESSI
 curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);
 $response_comms = curl_exec($ch_comms);
 $commsData = json_decode($response_comms, true);
-
 //Section dedicated to the Comms Table
 $commsPerPage = 10;
 $current_page = isset($_GET['page']) ? $_GET['page'] : 1;
@@ -17,12 +16,13 @@ $currentPageData = array_slice($commsData['items'], $startIndex, $commsPerPage);
 $total_pages = ceil(count($commsData['items']) / $commsPerPage);
 $prev_page = ($current_page > 1) ? $current_page - 1 : 1;
 $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
-
 ?>
+
+<!--Send via javascript the json array with the commsData-->
+<script>var commsData = <?php echo json_encode($commsData); ?>;</script>
 
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -32,7 +32,6 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
         @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap')
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 <div id="backgroundBlur" class="fixed inset-0 transition-opacity">
@@ -122,9 +121,8 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
         <h1 class="text-2xl font-bold mb-4">Comunicazioni</h1>
     </div>
 
-    <div class="container mx-auto overflow-x-auto rounded-t-2xl">
+    <div class="paginationContainer mx-auto overflow-x-auto rounded-t-2xl">
         <table class="min-w-full divide-y divide-gray-900">
-            <!-- Top values of the table-->
             <thead class="" id="tableBack">
             <tr>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
@@ -144,47 +142,11 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
                 </th>
             </tr>
             </thead>
-            <!-- Table content-->
-            <tbody id ="tableRows" class="divide-y divide-gray-900">
-            <?php foreach ($currentPageData as $item) { ?>
-                <tr>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900"><?php echo $item['pubId']; ?></div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900"><?php echo $item['cntTitle']; ?></div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900"><?php echo $item['cntCategory']; ?></div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <div class="text-sm text-gray-900"><?php echo $item['dinsert_allegato']; ?></div>
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap">
-                        <?php if ($item['cntHasAttach']) { ?>
-                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-                                Allegato
-                            </span>
-                        <?php } else { ?>
-                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-                                Nessun Allegato
-                            </span>
-                        <?php } ?>
-                    </td>
-                </tr>
-            <?php } ?>
+            <tbody id="tableRows" class="divide-y divide-gray-900">
             </tbody>
         </table>
-        <!-- Table navigation-->
-        <div class="flex justify-end mt-4">
-            <?php if ($current_page > 1): ?>
-                <a href="?page=<?php echo $prev_page; ?>" class="tableNav mr-2 px-3 py-1 text-gray-900 font-bold rounded-xl">&lt;</a>
-            <?php endif; ?>
-            <span class="tableNav mr-2 px-3 py-1 text-gray-900 font-bold rounded-xl"><?php echo $current_page; ?></span>
-            <?php if ($current_page < $total_pages): ?>
-                <a href="?page=<?php echo $next_page; ?>" class="tableNav px-3 py-1 text-gray-900 font-bold rounded-xl">&gt;</a>
-            <?php endif; ?>
-        </div>
+
+        <div id="pagination" class="flex justify-center mt-4"></div>
     </div>
 </div>
 

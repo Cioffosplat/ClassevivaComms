@@ -19,7 +19,7 @@ try {
 
 $f3 = \Base::instance();
 
-$f3->route('GET /notice',function () use ($pdo) {
+$f3->route('GET /notice', function () use ($pdo) {
     header('Content-Type: application/json');
     $result = $pdo->query("SELECT * FROM noticeboard");
     echo json_encode($result->fetchAll());
