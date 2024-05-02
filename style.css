@@ -72,32 +72,16 @@ body{
     display: none;
 }
 
-#theme0:hover{
-    background-color: var(--theme0-primary-color)
-}
-
-#theme1{
-    background-color: var(--theme1-secondary-color)
-}
-#theme1:hover{
-    background-color: var(--theme1-primary-color)
-}
-
-#theme2{
-    background-color: var(--theme2-secondary-color)
-}
-#theme2:hover{
-    background-color: var(--theme2-primary-color)
-}
-
-#theme3{
-    background-color: var(--theme3-secondary-color)
-}
-#theme3:hover{
-    background-color: var(--theme3-primary-color);
-}
-
 /*Reserved Part for Comms.php*/
+
+#searchInput{
+    background-color: var(--theme0-secondary-color);
+    color: var(--theme0-text-color);
+}
+
+#searchInput::placeholder {
+    color: var(--theme0-text-color);
+}
 
 #tableBack, #tableNav, #category{
     background-color: var(--theme0-accent-color);

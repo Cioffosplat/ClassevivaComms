@@ -61,6 +61,7 @@ function setTheme(theme) {
     document.getElementById('tabIcon').setAttribute('href', '/resources/images/logos/logo' + theme+ '.jpg');
     document.getElementById('userIcon').src = '../resources/images/users/defaultuser' + theme + '.jpg';
     document.getElementById('paintbrushButton').src = '../resources/images/paintbrush/paintbrush' + theme + '.png';
+    document.getElementById('searchInput').style.backgroundColor = 'var(--' + theme + '-secondary-color)';
     document.getElementById('tableBack').style.backgroundColor = 'var(--' + theme + '-accent-color)';
     document.getElementById('category').style.backgroundColor = 'var(--' + theme + '-accent-color)';
     document.getElementById('tableRows').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
@@ -131,7 +132,7 @@ var itemsPerPage = 10;
 var currentPage = 1;
 var filters = {
     category: "",
-    sort: "asc"
+    sort: "desc"
 };
 
 function renderTable(page) {
@@ -177,6 +178,15 @@ function renderTable(page) {
         row.appendChild(attachmentCell);
 
         tableBody.appendChild(row);
+    }
+    var ascIcon = document.getElementById("ascIcon");
+    var descIcon = document.getElementById("descIcon");
+    if (filters.sort === "desc") {
+        ascIcon.style.display = "none";
+        descIcon.style.display = "inline";
+    } else {
+        ascIcon.style.display = "inline";
+        descIcon.style.display = "none";
     }
 }
 
@@ -227,10 +237,12 @@ function applyFilters() {
     renderPagination();
 }
 
-
 function filterItems(items) {
     var filteredItems = items.filter(function (item) {
-        return (filters.category === "" || item.cntCategory === filters.category);
+        var categoryMatch = filters.category === "" || item.cntCategory === filters.category;
+        var searchMatch = document.getElementById("searchInput").value.trim() === "" ||
+            item.cntTitle.toLowerCase().includes(document.getElementById("searchInput").value.trim().toLowerCase());
+        return categoryMatch && searchMatch;
     });
 
     if (filters.sort === "asc") {
@@ -259,6 +271,10 @@ document.getElementById("sortToggle").addEventListener("click", function() {
         filters.sort = "desc";
     }
 
+    applyFilters();
+});
+
+document.getElementById("searchInput").addEventListener("input", function() {
     applyFilters();
 });
 

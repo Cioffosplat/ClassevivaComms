@@ -122,9 +122,13 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
     </div>
 
     <!--Search Field-->
-    <div class="container mx-auto overflow-x-auto">
-        <input type="text" id="searchInput" placeholder="Cerca comunicazioni..." class="p-2 border border-gray-300 rounded-md">
-        <button onclick="applyFilters()" class="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md">Cerca</button>
+
+    <div class="flex flex-column container mx-auto overflow-x-auto justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mt-2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+        </svg>
+        <input id="searchInput" class="h-10 w-full px-3 pr-16 rounded-lg text-sm"
+               type="search" name="search" placeholder="Cerca comunicazioni...">
     </div>
 
     <!--Comms Table-->
