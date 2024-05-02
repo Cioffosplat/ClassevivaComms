@@ -2,7 +2,7 @@
 session_start();
 //Section dedicated to the viewing of the noticeboard
 $ch_comms = curl_init();
-$url_comms = 'http://192.168.1.177/projects/ClassevivaComms/Fat3/noticeboard';
+$url_comms = 'http://192.168.1.187/projects/ClassevivaComms/Fat3/noticeboard';
 curl_setopt($ch_comms, CURLOPT_URL, $url_comms);
 curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id'=> $_SESSION['id'], 'token' => $_SESSION['token'])));
 curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);
@@ -121,7 +121,7 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
         <h1 class="text-2xl font-bold mb-4">Comunicazioni</h1>
     </div>
 
-    <div class="paginationContainer mx-auto overflow-x-auto rounded-t-2xl">
+    <div class="container mx-auto overflow-x-auto rounded-t-2xl">
         <table class="min-w-full divide-y divide-gray-900">
             <thead class="" id="tableBack">
             <tr>

@@ -139,24 +139,24 @@ function renderTable(page) {
         var item = commsData.items[i];
         var row = document.createElement("tr");
         row.innerHTML = `
-      <td class="px-6 py-4 whitespace-nowrap">
-        <div class="text-sm text-gray-900">${item.pubId}</div>
-      </td>
-      <td class="px-6 py-4 whitespace-nowrap">
-        <div class="text-sm text-gray-900">${item.cntTitle}</div>
-      </td>
-      <td class="px-6 py-4 whitespace-nowrap">
-        <div class="text-sm text-gray-900">${item.cntCategory}</div>
-      </td>
-      <td class="px-6 py-4 whitespace-nowrap">
-        <div class="text-sm text-gray-900">${item.dinsert_allegato}</div>
-      </td>
-      <td class="px-6 py-4 whitespace-nowrap">
-        ${item.cntHasAttach ?
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">${item.pubId}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">${item.cntTitle}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">${item.cntCategory}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">${item.dinsert_allegato}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                ${item.cntHasAttach ?
             `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Allegato</span>` :
             `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Nessun Allegato</span>`}
-      </td>
-    `;
+            </td>
+        `;
         tableBody.appendChild(row);
     }
 }
@@ -198,4 +198,5 @@ function renderPagination() {
 
 renderTable(currentPage);
 renderPagination();
+
 
