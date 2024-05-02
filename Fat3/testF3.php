@@ -1,7 +1,7 @@
 <?php
 session_start();
 $ch_login = curl_init();
-$url_login = 'http://192.168.1.187/projects/ClassevivaComms/Fat3/login';
+$url_login = 'http://192.168.248.35/projects/ClassevivaComms/Fat3/login';
 curl_setopt($ch_login, CURLOPT_URL, $url_login);
 curl_setopt($ch_login, CURLOPT_POSTFIELDS, http_build_query(array('username' => 'G8183544Y', 'password' => 'sf10796i')));
 curl_setopt($ch_login, CURLOPT_RETURNTRANSFER, true);
@@ -18,7 +18,7 @@ echo $_SESSION['id'] = filter_var($loginData["ident"], FILTER_SANITIZE_NUMBER_IN
 //echo $_SESSION['surname'] = filter_var($loginData["lastName"]);
 
 $ch_comms = curl_init();
-$url_comms = 'http://192.168.1.177/projects/ClassevivaComms/Fat3/noticeboard';
+$url_comms = 'http://192.168.248.35/projects/ClassevivaComms/Fat3/noticeboard';
 curl_setopt($ch_comms, CURLOPT_URL, $url_comms);
 curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id'=> $_SESSION['id'], 'token' => $_SESSION['token'])));
 curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);

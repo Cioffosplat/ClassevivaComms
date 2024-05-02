@@ -171,8 +171,8 @@ function renderTable(page) {
         var attachmentCell = document.createElement("td");
         attachmentCell.className = "px-6 py-4 whitespace-nowrap";
         attachmentCell.innerHTML = item.cntHasAttach ?
-            `<span class="badge badge-success">Allegato</span>` :
-            `<span class="badge badge-danger">Nessun Allegato</span>`;
+            `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Allegato</span>` :
+            `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Nessun Allegato</span>`;
         row.appendChild(attachmentCell);
 
         tableBody.appendChild(row);
@@ -180,7 +180,8 @@ function renderTable(page) {
 }
 
 function renderPagination() {
-    var totalPages = Math.ceil(filterItems(commsData.items).length / itemsPerPage);
+    var filteredItems = filterItems(commsData.items);
+    var totalPages = Math.ceil(filteredItems.length / itemsPerPage);
     var paginationDiv = document.getElementById("pagination");
     paginationDiv.innerHTML = '';
 
@@ -194,7 +195,8 @@ function renderPagination() {
     paginationDiv.appendChild(prevButton);
 
     var currentPageSpan = document.createElement("span");
-    currentPageSpan.textContent = currentPage;
+    currentPageSpan.textContent = currentPage + "/" + totalPages;
+    currentPageSpan.className = "mx-4 px-3 py-1 text-gray-900 font-bold rounded-xl";
     paginationDiv.appendChild(currentPageSpan);
 
     var nextButton = createPaginationButton(">", function () {
@@ -205,7 +207,10 @@ function renderPagination() {
         }
     });
     paginationDiv.appendChild(nextButton);
+
+    paginationDiv.style.textAlign = "center";
 }
+
 
 function createPaginationButton(text, onclickFunction) {
     var button = document.createElement("button");

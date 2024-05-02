@@ -122,13 +122,14 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
     </div>
 
     <!--Comms Filters-->
-    <div id="filters">
+    <div id="filters" class="container mx-auto overflow-x-auto rounded-t-2xl">
         <label for="category">Categoria:</label>
         <select id="category" onchange="applyFilters()">
             <option value="">Tutte</option>
             <option value="Circolare">Circolare</option>
-            <option value="Scuola/Famiglia">Scuola/Famiglia</option>
-            <option value="News e Documenti - Segreteria Digitale">News e Documenti - Segreteria Digitale</option>
+            <option value="Scuola/famiglia">Scuola/Famiglia</option>
+            <option value="News">News</option>
+            <option value="Documenti - Segreteria Digitale">Documenti-Segreteria Digitale</option>
         </select>
 
         <label for="sort">Ordina per data:</label>
@@ -139,7 +140,7 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
     </div>
 
     <!--Comms Table-->
-    <div class="container mx-auto overflow-x-auto rounded-t-2xl">
+    <div class="container mt-2 mx-auto overflow-x-auto rounded-t-2xl">
         <table class="min-w-full divide-y divide-gray-900">
             <thead class="" id="tableBack">
             <tr>
