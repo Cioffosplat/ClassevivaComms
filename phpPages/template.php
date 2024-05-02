@@ -1,25 +1,6 @@
 <?php
 session_start();
-//Section dedicated to the viewing of the noticeboard
-$ch_comms = curl_init();
-$url_comms = 'http://192.168.1.177/projects/ClassevivaComms/Fat3/noticeboard';
-curl_setopt($ch_comms, CURLOPT_URL, $url_comms);
-curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id'=> $_SESSION['id'], 'token' => $_SESSION['token'])));
-curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);
-$response_comms = curl_exec($ch_comms);
-$commsData = json_decode($response_comms, true);
-//Section dedicated to the Comms Table
-$commsPerPage = 10;
-$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-$startIndex = ($current_page - 1) * $commsPerPage;
-$currentPageData = array_slice($commsData['items'], $startIndex, $commsPerPage);
-$total_pages = ceil(count($commsData['items']) / $commsPerPage);
-$prev_page = ($current_page > 1) ? $current_page - 1 : 1;
-$next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
 ?>
-
-<!--Send via javascript the json array with the commsData-->
-<script>var commsData = <?php echo json_encode($commsData); ?>;</script>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -117,56 +98,6 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
         </div>
     </div>
 
-    <div class="container mx-auto overflow-x-auto mt-5">
-        <h1 class="text-2xl font-bold mb-2">Comunicazioni</h1>
-    </div>
-
-    <!--Search Field-->
-    <div class="flex flex-column container mx-auto overflow-x-auto justify-center">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mt-2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-        </svg>
-        <input id="searchInput" class="h-10 w-full px-3 pr-16 rounded-lg text-sm"
-               type="search" name="search" placeholder="Cerca comunicazioni...">
-    </div>
-
-    <!--Comms Table-->
-    <div class="container mt-2 mx-auto overflow-x-auto rounded-t-2xl">
-        <table class="min-w-full divide-y divide-gray-900">
-            <thead class="" id="tableBack">
-            <tr>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Titolo
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    <div id="filters" class="container mx-auto overflow-x-auto">
-                    <select id="category" onchange="applyFilters()" class="rounded-md p-1">
-                        <option value="">Tutte</option>
-                        <option value="Circolare">Circolare</option>
-                        <option value="Scuola/famiglia">Scuola/Famiglia</option>
-                        <option value="News">News</option>
-                        <option value="Documenti - Segreteria Digitale">Documenti-Segreteria Digitale</option>
-                    </select>
-                    </div>
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    <div id="sortToggle" class="cursor-pointer">
-                        Data
-                        <span id="ascIcon">▲</span>
-                        <span id="descIcon" style="display: none;">▼</span>
-                    </div>
-                </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Allegati
-                </th>
-            </tr>
-            </thead>
-            <tbody id="tableRows" class="divide-y divide-gray-900">
-            </tbody>
-        </table>
-
-        <div id="pagination" class="flex justify-center mt-4"></div>
-    </div>
 </div>
 
 <!-- Cookie Banner -->
@@ -180,7 +111,7 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
     </div>
 </div>
 <link href="../style.css" rel="stylesheet">
-<script src="../scripts/comms.js"></script>
+<script src="../scripts/profile.js"></script>
 </body>
 
 </html>
