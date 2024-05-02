@@ -2,7 +2,7 @@
 session_start();
 //Section dedicated to the viewing of the noticeboard
 $ch_comms = curl_init();
-$url_comms = 'http://192.168.248.35/projects/ClassevivaComms/Fat3/noticeboard';
+$url_comms = 'http://192.168.1.177/projects/ClassevivaComms/Fat3/noticeboard';
 curl_setopt($ch_comms, CURLOPT_URL, $url_comms);
 curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id'=> $_SESSION['id'], 'token' => $_SESSION['token'])));
 curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);
@@ -121,6 +121,12 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
         <h1 class="text-2xl font-bold mb-4">Comunicazioni</h1>
     </div>
 
+    <!--Search Field-->
+    <div class="container mx-auto overflow-x-auto">
+        <input type="text" id="searchInput" placeholder="Cerca comunicazioni..." class="p-2 border border-gray-300 rounded-md">
+        <button onclick="applyFilters()" class="ml-2 px-4 py-2 bg-blue-500 text-white rounded-md">Cerca</button>
+    </div>
+
     <!--Comms Table-->
     <div class="container mt-2 mx-auto overflow-x-auto rounded-t-2xl">
         <table class="min-w-full divide-y divide-gray-900">
@@ -141,11 +147,11 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
                     </div>
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Data:
-                    <select id="sort" onchange="applyFilters()" class="rounded-md p-1">
-                        <option value="asc">ᐱ</option>
-                        <option value="desc">ᐯ</option>
-                    </select>
+                    <div id="sortToggle" class="cursor-pointer">
+                        Data
+                        <span id="ascIcon">▲</span>
+                        <span id="descIcon" style="display: none;">▼</span>
+                    </div>
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                     Allegati

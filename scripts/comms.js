@@ -62,6 +62,7 @@ function setTheme(theme) {
     document.getElementById('userIcon').src = '../resources/images/users/defaultuser' + theme + '.jpg';
     document.getElementById('paintbrushButton').src = '../resources/images/paintbrush/paintbrush' + theme + '.png';
     document.getElementById('tableBack').style.backgroundColor = 'var(--' + theme + '-accent-color)';
+    document.getElementById('category').style.backgroundColor = 'var(--' + theme + '-accent-color)';
     document.getElementById('tableRows').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
 }
 
@@ -130,7 +131,7 @@ var itemsPerPage = 10;
 var currentPage = 1;
 var filters = {
     category: "",
-    sort: "asc" // Default sort order
+    sort: "asc"
 };
 
 function renderTable(page) {
@@ -222,10 +223,10 @@ function createPaginationButton(text, onclickFunction) {
 
 function applyFilters() {
     filters.category = document.getElementById("category").value;
-    filters.sort = document.getElementById("sort").value;
     renderTable(1);
     renderPagination();
 }
+
 
 function filterItems(items) {
     var filteredItems = items.filter(function (item) {
@@ -244,9 +245,24 @@ function filterItems(items) {
 
     return filteredItems;
 }
+document.getElementById("sortToggle").addEventListener("click", function() {
+    var ascIcon = document.getElementById("ascIcon");
+    var descIcon = document.getElementById("descIcon");
 
+    if (ascIcon.style.display === "none") {
+        ascIcon.style.display = "inline";
+        descIcon.style.display = "none";
+        filters.sort = "asc";
+    } else {
+        ascIcon.style.display = "none";
+        descIcon.style.display = "inline";
+        filters.sort = "desc";
+    }
 
-// Initial rendering
+    applyFilters();
+});
+
+// Initial rendering of the table
 renderTable(currentPage);
 renderPagination();
 

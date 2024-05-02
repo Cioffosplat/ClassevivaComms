@@ -99,7 +99,7 @@ body{
 
 /*Reserved Part for Comms.php*/
 
-#tableBack, #tableNav{
+#tableBack, #tableNav, #category{
     background-color: var(--theme0-accent-color);
 }
 
