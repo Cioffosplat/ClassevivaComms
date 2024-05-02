@@ -1,6 +1,7 @@
 //Saving function for the themes
+let savedTheme = sessionStorage.getItem('theme');
 window.onload = function () {
-    const savedTheme = sessionStorage.getItem('theme');
+    savedTheme = sessionStorage.getItem('theme');
     if (savedTheme) {
         setTheme(savedTheme);
     } else {

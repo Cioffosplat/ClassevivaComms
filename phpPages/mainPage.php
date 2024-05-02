@@ -1,4 +1,5 @@
 <?php
+global $commsData;
 session_start();
 if (isset($_POST['username']) && isset($_POST['password'])) {
     //login serverRest Request
@@ -42,6 +43,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -142,8 +144,14 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
             </div>
         </div>
 
+    <div class="flex justify-center mt-10 text-6xl font-bold">
+        <?php
+        echo "<p style='font-family: \"Ubuntu Condensed\";' class='px-2 mx-2'>Benvenuto {$_SESSION['firstName']} {$_SESSION['lastName']} a Classeviva Comms!</p>";
+        ?>
+    </div>
+
     <!--Card Forms-->
-    <div id="cards" class="flex flex-col sm:flex-row w-full mt-20 justify-center">
+    <div id="cards" class="flex flex-column sm:flex-row w-full mt-20 justify-center">
         <form action="comms.php" class="w-full sm:w-1/3 mb-0 md:w-1/4 lg:w-1/4 mb-5 sm:mx-5">
             <div id="commsForm" class="bg-white shadow-lg rounded-lg p-6 space-y-4">
                 <div class="flex items-center space-x-4">
