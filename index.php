@@ -7,6 +7,7 @@ unset($_SESSION['firstName']);
 unset($_SESSION['lastName']);
 unset($_SESSION['token']);
 unset($_SESSION['commsNumber']);
+unset($_SESSION['commsResponse']);
 ?>
 <!DOCTYPE html>
 <html lang="en">

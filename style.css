@@ -39,7 +39,7 @@ body{
     background-color: var(--theme0-background-color) ;
 }
 
-#commsLogo,#starLogo,#groupLogo,#commsSubmit,#starSubmit,#groupSubmit{
+#commsLogo,#starLogo,#groupLogo,#moduleLogo,#commsSubmit,#starSubmit,#groupSubmit,#moduleSubmit{
     background-color: var(--theme0-primary-color);
 }
 

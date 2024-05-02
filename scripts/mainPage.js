@@ -29,8 +29,9 @@ var theme3BackgroundColor = "#280003";
 
 
 //Saving function for the themes
+let savedTheme = sessionStorage.getItem('theme');
 window.onload = function () {
-    const savedTheme = sessionStorage.getItem('theme');
+    savedTheme = sessionStorage.getItem('theme');
     if (savedTheme) {
         setTheme(savedTheme);
     } else {
@@ -83,18 +84,23 @@ function setTheme(theme) {
     document.getElementById('commsForm').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
     document.getElementById('starForm').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
     document.getElementById('groupForm').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
+    document.getElementById('moduleForm').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
     document.getElementById('commsLogo').style.backgroundColor = 'var(--' + theme + '-primary-color)';
     document.getElementById('starLogo').style.backgroundColor = 'var(--' + theme + '-primary-color)';
     document.getElementById('groupLogo').style.backgroundColor = 'var(--' + theme + '-primary-color)';
+    document.getElementById('moduleLogo').style.backgroundColor = 'var(--' + theme + '-primary-color)';
     document.getElementById('commsLogoSVG').setAttribute("stroke",'var(--' + theme + '-text-color)');
     document.getElementById('starLogoSVG').setAttribute("stroke",'var(--' + theme + '-text-color)');
     document.getElementById('groupLogoSVG').setAttribute("stroke",'var(--' + theme + '-text-color)');
+    document.getElementById('moduleLogoSVG').setAttribute("stroke",'var(--' + theme + '-text-color)');
     document.getElementById('commsSubmit').style.backgroundColor = 'var(--' + theme + '-primary-color)';
     document.getElementById('starSubmit').style.backgroundColor = 'var(--' + theme + '-primary-color)';
     document.getElementById('groupSubmit').style.backgroundColor = 'var(--' + theme + '-primary-color)';
+    document.getElementById('moduleSubmit').style.backgroundColor = 'var(--' + theme + '-primary-color)';
     document.getElementById('commsSubmit').style.color = 'var(--' + theme + '-text-color)';
     document.getElementById('starSubmit').style.color = 'var(--' + theme + '-text-color)';
     document.getElementById('groupSubmit').style.color = 'var(--' + theme + '-text-color)';
+    document.getElementById('moduleSubmit').style.color = 'var(--' + theme + '-text-color)';
     document.getElementById('sidebar').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
     document.getElementById('paint').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
     document.getElementById('sidebarX').setAttribute("stroke",'var(--' + theme + '-text-color)');
@@ -104,6 +110,8 @@ function setTheme(theme) {
     document.getElementById('tabIcon').setAttribute('href', '/resources/images/logos/logo' + theme+ '.jpg');
     document.getElementById('userIcon').src = '../resources/images/users/defaultuser' + theme + '.jpg';
     document.getElementById('paintbrushButton').src = '../resources/images/paintbrush/paintbrush' + theme + '.png';
+    document.getElementById('tableBack').style.backgroundColor = 'var(--' + theme + '-accent-color)';
+    document.getElementById('tableRows').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
 }
 
 function redirectToProfile() {
@@ -166,4 +174,44 @@ function getCookie(name) {
     return "";
 }
 
+//Table Rendering Script
+var itemsPerPage = 4;
+var currentPage = 1;
 
+function renderTable(page) {
+    var tableBody = document.getElementById("tableRows");
+    tableBody.innerHTML = '';
+    var startIndex = (page - 1) * itemsPerPage;
+    var endIndex = Math.min(startIndex + itemsPerPage, commsData.items.length);
+
+    for (var i = startIndex; i < endIndex; i++) {
+        var item = commsData.items[i];
+        var row = document.createElement("tr");
+        row.innerHTML = `
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">${item.cntTitle}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">${item.cntCategory}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                <div class="text-sm text-gray-900">${item.dinsert_allegato}</div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+                ${item.cntHasAttach ?
+            `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Allegato</span>` :
+            `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Nessun Allegato</span>`}
+            </td>
+        `;
+        tableBody.appendChild(row);
+    }
+}
+
+function renderPagination() {
+    var totalPages = Math.ceil(commsData.items.length / itemsPerPage);
+    var paginationDiv = document.getElementById("pagination");
+    paginationDiv.innerHTML = '';
+}
+
+renderTable(currentPage);
+renderPagination();

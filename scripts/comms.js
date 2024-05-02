@@ -141,9 +141,6 @@ function renderTable(page) {
         var row = document.createElement("tr");
         row.innerHTML = `
             <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">${item.pubId}</div>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">
                 <div class="text-sm text-gray-900">${item.cntTitle}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">

@@ -2,7 +2,7 @@
 session_start();
 //Section dedicated to the viewing of the noticeboard
 $ch_comms = curl_init();
-$url_comms = 'http://192.168.1.187/projects/ClassevivaComms/Fat3/noticeboard';
+$url_comms = 'http://192.168.248.35/projects/ClassevivaComms/Fat3/noticeboard';
 curl_setopt($ch_comms, CURLOPT_URL, $url_comms);
 curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id'=> $_SESSION['id'], 'token' => $_SESSION['token'])));
 curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);
@@ -120,14 +120,31 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
     <div class="container mx-auto overflow-x-auto mt-5">
         <h1 class="text-2xl font-bold mb-4">Comunicazioni</h1>
     </div>
+
+    <div id="filters">
+        <label for="category">Categoria:</label>
+        <select id="category">
+            <option value="">Tutte</option>
+            <option value="Circolare">Circolare</option>
+            <option value="Scuola/Famiglia">Scuola/Famiglia</option>
+            <option value="News e Documenti - Segreteria Digitale">News e Documenti - Segreteria Digitale</option>
+        </select>
+
+        <label for="sort">Ordina per data:</label>
+        <select id="sort">
+            <option value="asc">Crescente</option>
+            <option value="desc">Decrescente</option>
+        </select>
+
+        <button onclick="applyFilters()">Applica filtri</button>
+    </div>
+
+
     <!--Comms Table-->
     <div class="container mx-auto overflow-x-auto rounded-t-2xl">
         <table class="min-w-full divide-y divide-gray-900">
             <thead class="" id="tableBack">
             <tr>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Id
-                </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                     Titolo
                 </th>
