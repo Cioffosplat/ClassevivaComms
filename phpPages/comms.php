@@ -121,24 +121,6 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
         <h1 class="text-2xl font-bold mb-4">Comunicazioni</h1>
     </div>
 
-    <!--Comms Filters-->
-    <div id="filters" class="container mx-auto overflow-x-auto rounded-t-2xl">
-        <label for="category">Categoria:</label>
-        <select id="category" onchange="applyFilters()">
-            <option value="">Tutte</option>
-            <option value="Circolare">Circolare</option>
-            <option value="Scuola/famiglia">Scuola/Famiglia</option>
-            <option value="News">News</option>
-            <option value="Documenti - Segreteria Digitale">Documenti-Segreteria Digitale</option>
-        </select>
-
-        <label for="sort">Ordina per data:</label>
-        <select id="sort" onchange="applyFilters()">
-            <option value="asc">Crescente</option>
-            <option value="desc">Decrescente</option>
-        </select>
-    </div>
-
     <!--Comms Table-->
     <div class="container mt-2 mx-auto overflow-x-auto rounded-t-2xl">
         <table class="min-w-full divide-y divide-gray-900">
@@ -148,10 +130,22 @@ $next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
                     Titolo
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Categoria
+                    <div id="filters" class="container mx-auto overflow-x-auto">
+                    <select id="category" onchange="applyFilters()" class="rounded-md p-1">
+                        <option value="">Tutte</option>
+                        <option value="Circolare">Circolare</option>
+                        <option value="Scuola/famiglia">Scuola/Famiglia</option>
+                        <option value="News">News</option>
+                        <option value="Documenti - Segreteria Digitale">Documenti-Segreteria Digitale</option>
+                    </select>
+                    </div>
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Data
+                    Data:
+                    <select id="sort" onchange="applyFilters()" class="rounded-md p-1">
+                        <option value="asc">ᐱ</option>
+                        <option value="desc">ᐯ</option>
+                    </select>
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                     Allegati

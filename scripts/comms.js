@@ -245,6 +245,7 @@ function filterItems(items) {
     return filteredItems;
 }
 
+
 // Initial rendering
 renderTable(currentPage);
 renderPagination();
