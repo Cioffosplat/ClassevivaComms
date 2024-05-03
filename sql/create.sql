@@ -3,7 +3,7 @@ CREATE TABLE users (
     name VARCHAR(255) NOT NULL,
     surname VARCHAR(255) NOT NULL,
     birth_date DATE NOT NULL,
-    user_pic VARCHAR(255)
+    user_pic BLOB
 );
 
 CREATE TABLE module (

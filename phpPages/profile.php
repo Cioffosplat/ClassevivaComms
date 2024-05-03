@@ -107,8 +107,8 @@ $_SESSION['cardResponse'] = $cardData;
         </div>
     </div>
 
-    <!--Profile Test-->
-    <div id="profileDiv" class="container mx-auto break-words mb-6 shadow-lg rounded-xl mt-16 ">
+    <!--Profile Section-->
+    <div id="profileDiv" class="container mx-auto break-words mb-6 shadow-lg rounded-xl mt-16 pt-4">
         <div class="px-6">
             <div class="flex flex-wrap justify-center">
                 <div class="w-full flex justify-center">
@@ -174,8 +174,6 @@ $_SESSION['cardResponse'] = $cardData;
             </div>
         </div>
     </div>
-
-
 </div>
 
 <!-- Cookie Banner -->
