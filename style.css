@@ -48,14 +48,7 @@ body{
 }
 
 
-#sidebar{
-    background-color: var(--theme0-accent2-color);
-    color: var(--theme0-text-color);
-    -webkit-text-stroke-width: 0.3px;
-    -webkit-text-stroke-color: white;
-}
-
-#paint{
+#sidebar,#paint{
     background-color: var(--theme0-accent2-color);
     color: var(--theme0-text-color);
     -webkit-text-stroke-width: 0.3px;
@@ -72,8 +65,6 @@ body{
     display: none;
 }
 
-/*Reserved Part for Comms.php*/
-
 #searchInput{
     background-color: var(--theme0-secondary-color);
     color: var(--theme0-text-color);
@@ -83,11 +74,15 @@ body{
     color: var(--theme0-text-color);
 }
 
-#tableBack, #tableNav, #category{
+#tableBack, #tableNav, #category, #profileAbout, #profileDiv{
     background-color: var(--theme0-accent-color);
 }
 
 #tableRows{
     background-color: var(--theme0-accent2-color);
 }
+#profileAboutIcon{
+    stroke: var(--theme0-primary-color);
+}
+
 

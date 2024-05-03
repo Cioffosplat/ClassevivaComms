@@ -1,5 +1,14 @@
 <?php
 session_start();
+//Comms request for comms counter
+$ch_card = curl_init();
+$url_card = 'http://192.168.1.177/projects/ClassevivaComms/Fat3/card';
+curl_setopt($ch_card, CURLOPT_URL, $url_card);
+curl_setopt($ch_card, CURLOPT_POSTFIELDS, http_build_query(array('id' => $_SESSION['id'], 'token' => $_SESSION['token'])));
+curl_setopt($ch_card, CURLOPT_RETURNTRANSFER, true);
+$response_card = curl_exec($ch_card);
+$cardData = json_decode($response_card, true);
+$_SESSION['cardResponse'] = $cardData;
 ?>
 
 <!DOCTYPE html>
@@ -97,7 +106,76 @@ session_start();
             ?>
         </div>
     </div>
-    
+
+    <!--Profile Test-->
+    <div id="profileDiv" class="container mx-auto break-words mb-6 shadow-lg rounded-xl mt-16 ">
+        <div class="px-6">
+            <div class="flex flex-wrap justify-center">
+                <div class="w-full flex justify-center">
+                    <div class="relative">
+                        <img src="https://github.com/creativetimofficial/soft-ui-dashboard-tailwind/blob/main/build/assets/img/team-2.jpg?raw=true" class="shadow-xl rounded-full align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-[150px]"/>
+                    </div>
+                </div>
+                <div class="w-full text-center mt-20">
+                    <div class="flex justify-center lg:pt-4 pt-8 pb-0">
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-2 p-2">
+                <h3 class="text-2xl  font-bold leading-normal mb-1 ml-5"><?php echo $_SESSION['cardResponse']['card']['firstName']; ?> <?php echo $_SESSION['cardResponse']['card']['lastName']; ?></h3>
+                <div class="text-xs mt-0 mb-2  font-bold uppercase">
+                    <i class="fas fa-map-marker-alt opacity-75 mb-2 ml-3"></i><?php echo $_SESSION['cardResponse']['card']['schCity']; ?>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--About Profile Section-->
+    <div id="profileAbout" class="container mx-auto overflow-x-auto mt-5 rounded-lg p-3">
+        <div class="flex items-center space-x-2 font-semibold leading-8">
+        <span>
+            <svg id="profileAboutIcon" class="h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+        </span>
+            <span class="tracking-wide">Informazioni Utente</span>
+        </div>
+        <div>
+            <div class="grid md:grid-cols-2 text-sm">
+                <div class="grid grid-cols-2">
+                    <div class="px-4 py-2 font-semibold">Nome</div>
+                    <div class="px-4 py-2"><?php echo $_SESSION['cardResponse']['card']['firstName']; ?></div>
+                </div>
+                <div class="grid grid-cols-2">
+                    <div class="px-4 py-2 font-semibold">Cognome</div>
+                    <div class="px-4 py-2"><?php echo $_SESSION['cardResponse']['card']['lastName']; ?></div>
+                </div>
+                <div class="grid grid-cols-2">
+                    <div class="px-4 py-2 font-semibold">Data di Nascita</div>
+                    <div class="px-4 py-2"><?php echo $_SESSION['cardResponse']['card']['birthDate']; ?></div>
+                </div>
+                <div class="grid grid-cols-2">
+                    <div class="px-4 py-2 font-semibold">Codice Fiscale</div>
+                    <div class="px-4 py-2"><?php echo $_SESSION['cardResponse']['card']['fiscalCode']; ?></div>
+                </div>
+                <div class="grid grid-cols-2">
+                    <div class="px-4 py-2 font-semibold">Scuola</div>
+                    <div class="px-4 py-2"><?php echo $_SESSION['cardResponse']['card']['schName']; ?>, <?php echo $_SESSION['cardResponse']['card']['schDedication']; ?></div>
+                </div>
+                <div class="grid grid-cols-2">
+                    <div class="px-4 py-2 font-semibold">Città</div>
+                    <div class="px-4 py-2"><?php echo $_SESSION['cardResponse']['card']['schCity']; ?></div>
+                </div>
+                <div class="grid grid-cols-2">
+                    <div class="px-4 py-2 font-semibold">Provincia</div>
+                    <div class="px-4 py-2"><?php echo $_SESSION['cardResponse']['card']['schProv']; ?></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 
 <!-- Cookie Banner -->

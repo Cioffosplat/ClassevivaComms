@@ -8,6 +8,7 @@ unset($_SESSION['lastName']);
 unset($_SESSION['token']);
 unset($_SESSION['commsNumber']);
 unset($_SESSION['commsResponse']);
+unset($_SESSION['cardResponse']);
 ?>
 <!DOCTYPE html>
 <html lang="en">

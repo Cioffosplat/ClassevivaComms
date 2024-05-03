@@ -61,6 +61,9 @@ function setTheme(theme) {
     document.getElementById('tabIcon').setAttribute('href', '/resources/images/logos/logo' + theme+ '.jpg');
     document.getElementById('userIcon').src = '../resources/images/users/defaultuser' + theme + '.jpg';
     document.getElementById('paintbrushButton').src = '../resources/images/paintbrush/paintbrush' + theme + '.png';
+    document.getElementById('profileAbout').style.backgroundColor = 'var(--' + theme + '-accent-color)';
+    document.getElementById('profileAboutIcon').setAttribute("stroke",'var(--' + theme + '-primary-color)');
+    document.getElementById('profileDiv').style.backgroundColor = 'var(--' + theme + '-accent-color)';
 }
 
 function redirectToProfile() {
