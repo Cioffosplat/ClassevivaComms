@@ -435,10 +435,6 @@ document.getElementById("closeCommunicationInfo").addEventListener("click", func
     }
 });
 
-function openCommunicationInfo(infoDiv) {
-    infoDiv.style.display = "block";
-}
-
 // Initial rendering of the table
 renderTable(currentPage);
 renderPagination();

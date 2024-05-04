@@ -150,6 +150,23 @@ $f3->route('POST /save-favorite', function($f3) use ($pdo) {
         $f3->status(500);
     }
 });
+$f3->route('POST /remove-favorite', function($f3) use ($pdo) {
+    try {
+        $circolareId = $_POST['circolareId'];
+        $sessionUserId = $_POST['sessionUserId'];
+
+        $stmt = $pdo->prepare("DELETE FROM likes WHERE notice_id = :circolareId AND user_id = :sessionUserId");
+        $stmt->bindParam(':circolareId', $circolareId);
+        $stmt->bindParam(':sessionUserId', $sessionUserId);
+        $stmt->execute();
+        $f3->status(200);
+        echo json_encode(array("message" => "Favorite removed successfully from the database"));
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        $f3->status(500);
+    }
+});
+
 
 $f3->route('POST /insert-notice', function($f3) use ($pdo) {
     header('Access-Control-Allow-Origin: *');
