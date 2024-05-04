@@ -8,14 +8,6 @@ curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id'=> $_SESSI
 curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);
 $response_comms = curl_exec($ch_comms);
 $commsData = json_decode($response_comms, true);
-//Section dedicated to the Comms Table
-$commsPerPage = 10;
-$current_page = isset($_GET['page']) ? $_GET['page'] : 1;
-$startIndex = ($current_page - 1) * $commsPerPage;
-$currentPageData = array_slice($commsData['items'], $startIndex, $commsPerPage);
-$total_pages = ceil(count($commsData['items']) / $commsPerPage);
-$prev_page = ($current_page > 1) ? $current_page - 1 : 1;
-$next_page = ($current_page < $total_pages) ? $current_page + 1 : $total_pages;
 $userIdent = $_SESSION['id'];
 ?>
 
