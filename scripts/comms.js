@@ -174,7 +174,7 @@ function renderTable(page) {
         titleContent.appendChild(favoriteIcon);
         var titleText = document.createElement("span");
         titleText.textContent = item.cntTitle;
-        titleText.addEventListener("click", saveCommunicationToDatabase(i));
+        titleText.addEventListener("click", createShowCommunicationHandler(i));
         titleContent.appendChild(titleText);
 
         titleCell.appendChild(titleContent);
@@ -372,8 +372,6 @@ function addCommunication(pubId, cntCategory, cntTitle, cntValidFrom) {
         });
 }
 
-
-
 document.getElementById("sortToggle").addEventListener("click", function() {
     var ascIcon = document.getElementById("ascIcon");
     var descIcon = document.getElementById("descIcon");
@@ -395,6 +393,44 @@ document.getElementById("sortToggle").addEventListener("click", function() {
 document.getElementById("searchInput").addEventListener("input", function() {
     applyFilters();
 });
+
+//Showing Communication Info
+function createShowCommunicationHandler(index) {
+    return function() {
+        saveCommunicationToDatabase(index)();
+        var item = commsData.items[index];
+        showCommunicationInfo(item.cntTitle, item.cntCategory, item.cntValidFrom, item.attachments);
+    }
+}
+function showCommunicationInfo(title, category, validFrom, attachments) {
+    var infoDiv = document.getElementById("communicationInfo");
+    if (!infoDiv) {
+        console.error("Div delle informazioni della comunicazione non trovato.");
+        return;
+    }
+    var titleElement = document.getElementById("communicationTitle");
+    var dateElement = document.getElementById("communicationDate");
+    var attachmentsElement = document.getElementById("communicationAttachments");
+
+    titleElement.textContent = title;
+    dateElement.textContent = "Data: " + validFrom;
+    attachmentsElement.textContent = "Allegati: " + attachments;
+    infoDiv.classList.remove("hidden");
+}
+
+// Close Communication Info
+document.getElementById("closeCommunicationInfo").addEventListener("click", function() {
+    var infoDiv = document.getElementById("communicationInfo");
+    if (infoDiv) {
+        infoDiv.classList.add("hidden");
+    } else {
+        console.error("Div delle informazioni della comunicazione non trovato.");
+    }
+});
+
+function openCommunicationInfo(infoDiv) {
+    infoDiv.style.display = "block";
+}
 
 // Initial rendering of the table
 renderTable(currentPage);

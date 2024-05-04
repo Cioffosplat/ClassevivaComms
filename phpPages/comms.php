@@ -111,6 +111,7 @@ $userIdent = $_SESSION['id'];
         </div>
     </div>
 
+    <!--Title-->
     <div class="container mx-auto overflow-x-auto mt-5">
         <h1 class="text-2xl font-bold mb-2">Comunicazioni</h1>
     </div>
@@ -125,7 +126,7 @@ $userIdent = $_SESSION['id'];
     </div>
 
     <!--Comms Table-->
-    <div class="container mt-2 mx-auto overflow-x-auto rounded-t-2xl">
+    <div class="container mt-2 mx-auto overflow-x-auto rounded-2xl">
         <table class="min-w-full divide-y divide-gray-900">
             <thead class="" id="tableBack">
             <tr>
@@ -161,6 +162,17 @@ $userIdent = $_SESSION['id'];
 
         <div id="pagination" class="flex justify-center mt-4"></div>
     </div>
+
+    <!--Comunication Popup Div-->
+    <div id="communicationInfo" class="fixed inset-0 z-50 hidden flex justify-center items-center bg-gray-900 bg-opacity-50">
+        <div class="container mx-auto bg-white rounded-lg p-6 h-3/4 w-3/4 flex flex-col justify-center items-center">
+            <h2 id="communicationTitle" class="text-2xl font-bold mb-4 text-center"></h2>
+            <p id="communicationDate" class="text-lg text-gray-500 mb-4"></p>
+            <p id="communicationAttachments" class="text-lg text-gray-700 mb-4"></p>
+            <button id="closeCommunicationInfo" class="px-6 py-3 bg-blue-500 text-white rounded-md text-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Chiudi</button>
+        </div>
+    </div>
+
 </div>
 
 <!-- Cookie Banner -->
