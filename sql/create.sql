@@ -17,8 +17,7 @@ CREATE TABLE noticeboard (
     id INT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     category VARCHAR(255) NOT NULL,
-    number INT NOT NULL,
-    date DATE NOT NULL
+    date VARCHAR(255)NOT NULL
 );
 
 

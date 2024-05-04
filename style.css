@@ -85,4 +85,13 @@ body{
     stroke: var(--theme0-primary-color);
 }
 
+/*Favourite Star Css*/
+.favorite-icon:hover {
+    cursor: pointer;
+}
+
+.favorite-filled svg {
+    fill: yellow;
+}
+
 

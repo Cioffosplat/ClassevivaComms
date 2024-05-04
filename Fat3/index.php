@@ -19,39 +19,18 @@ try {
 
 $f3 = \Base::instance();
 
+$f3->route('OPTIONS /*', function () {
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Headers: Content-Type');
+    header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+    die();
+});
+
 $f3->route('GET /notice', function () use ($pdo) {
     header('Content-Type: application/json');
     $result = $pdo->query("SELECT * FROM noticeboard");
     echo json_encode($result->fetchAll());
 });
-
-$f3->route('POST /update-profile-pic', function ($f3) use ($pdo) {
-    header("Access-Control-Allow-Origin: *");
-    $userId = $_SESSION['id'];
-    if (isset($_FILES['profile_pic'])) {
-        $tempFilePath = $_FILES['profile_pic']['tmp_name'];
-        $imageData = file_get_contents($tempFilePath);
-
-        $query = "UPDATE users SET user_pic = :user_pic WHERE id = :user_id";
-        $statement = $pdo->prepare($query);
-        $statement->bindParam(':user_pic', $imageData, PDO::PARAM_LOB);
-        $statement->bindParam(':user_id', $userId);
-
-        if ($statement->execute()) {
-            // Invia una risposta JSON con stato 200 (OK)
-            $f3->status(200);
-            echo json_encode(array("message" => "Foto profilo aggiornata con successo"));
-        } else {
-            $f3->status(500);
-            echo json_encode(array("message" => "Si è verificato un errore durante l'aggiornamento dell'immagine del profilo"));
-        }
-    } else {
-        $f3->status(400);
-        echo json_encode(array("message" => "Nessuna immagine caricata"));
-    }
-});
-
-
 $f3->route('POST /login', function($f3) use ($pdo) {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -77,7 +56,7 @@ $f3->route('POST /login', function($f3) use ($pdo) {
 
     try {
         $stmt = $pdo->prepare("INSERT IGNORE INTO users (id, name, surname, birth_date) VALUES (:id, :name, :surname, :birthDate)");
-        $stmt->bindParam(':id', $ident);
+        $stmt->bindParam(':id', $id);
         $stmt->bindParam(':name', $name);
         $stmt->bindParam(':surname', $surname);
         $stmt->bindParam(':birthDate', $birthDate);
@@ -129,6 +108,80 @@ $f3->route('POST /noticeboard', function($f3) {
         echo json_encode(['error' => $e->getMessage()]);
     }
 });
+$f3->route('POST /update-profile-pic', function ($f3) use ($pdo) {
+    $userId = $_SESSION['id'];
+    if (isset($_FILES['profile_pic'])) {
+        $tempFilePath = $_FILES['profile_pic']['tmp_name'];
+        $imageData = file_get_contents($tempFilePath);
+
+        $query = "UPDATE users SET user_pic = :user_pic WHERE id = :user_id";
+        $statement = $pdo->prepare($query);
+        $statement->bindParam(':user_pic', $imageData, PDO::PARAM_LOB);
+        $statement->bindParam(':user_id', $userId);
+
+        if ($statement->execute()) {
+            // Invia una risposta JSON con stato 200 (OK)
+            $f3->status(200);
+            echo json_encode(array("message" => "Foto profilo aggiornata con successo"));
+        } else {
+            $f3->status(500);
+            echo json_encode(array("message" => "Si è verificato un errore durante l'aggiornamento dell'immagine del profilo"));
+        }
+    } else {
+        $f3->status(400);
+        echo json_encode(array("message" => "Nessuna immagine caricata"));
+    }
+});
+
+$f3->route('POST /save-favorite', function($f3) use ($pdo) {
+    header('Access-Control-Allow-Origin: *');
+    try {
+        $circolareId = $_POST['circolareId'];
+        $sessionUserId = $_POST['sessionUserId'];
+
+        $stmt = $pdo->prepare("INSERT IGNORE INTO likes (notice_id, user_id) VALUES (:circolareId, :sessionUserId)");
+        $stmt->bindParam(':circolareId', $circolareId);
+        $stmt->bindParam(':sessionUserId', $sessionUserId);
+        $stmt->execute();
+        $f3->status(200);
+        echo json_encode(array("message" => "Preferito salvato con successo nel database"));
+    } catch (Exception $e) {
+        error_log($e->getMessage());
+        $f3->status(500);
+    }
+});
+
+$f3->route('POST /insert-notice', function($f3) use ($pdo) {
+    header('Access-Control-Allow-Origin: *');
+    try {
+        $circolareId = $_POST['pubId'];
+        $cntCategory = $_POST['cntCategory'];
+        $cntTitle = $_POST['cntTitle'];
+        $cntValidFrom = $_POST['cntValidFrom'];
+
+        $stmt = $pdo->prepare("INSERT IGNORE INTO noticeboard (id, name, category, date) VALUES (:pubId, :cntTitle, :cntCategory, :cntValidFrom)");
+        $stmt->bindParam(':pubId', $circolareId);
+        $stmt->bindParam(':cntCategory', $cntCategory);
+        $stmt->bindParam(':cntTitle', $cntTitle);
+        $stmt->bindParam(':cntValidFrom', $cntValidFrom);
+        $stmt->execute();
+
+
+        $userId= $_POST['userId'];
+        $stmt = $pdo->prepare("INSERT IGNORE INTO has_viewed (notice_id, user_id) VALUES (:circolareId, :userId)");
+        $stmt->bindParam(':circolareId', $circolareId);
+        $stmt->bindParam(':userId', $userId);
+        $stmt->execute();
+
+        $f3->status(200);
+        echo json_encode(array("message" => "Dati inseriti con successo nella tabella noticeboard"));
+    } catch (Exception $e) {
+        $f3->status(500);
+        echo json_encode(array("error" => $e->getMessage()));
+    }
+});
+
+
 
 $f3->run();
 ?>
