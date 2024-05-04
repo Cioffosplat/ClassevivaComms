@@ -181,7 +181,5 @@ $f3->route('POST /insert-notice', function($f3) use ($pdo) {
     }
 });
 
-
-
 $f3->run();
 ?>

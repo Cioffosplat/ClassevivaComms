@@ -404,17 +404,24 @@ function createShowCommunicationHandler(index) {
 }
 function showCommunicationInfo(title, category, validFrom, attachments) {
     var infoDiv = document.getElementById("communicationInfo");
-    if (!infoDiv) {
-        console.error("Div delle informazioni della comunicazione non trovato.");
-        return;
-    }
     var titleElement = document.getElementById("communicationTitle");
     var dateElement = document.getElementById("communicationDate");
     var attachmentsElement = document.getElementById("communicationAttachments");
 
     titleElement.textContent = title;
     dateElement.textContent = "Data: " + validFrom;
-    attachmentsElement.textContent = "Allegati: " + attachments;
+
+    var attachmentsList = document.createElement("ul");
+    attachments.forEach(function(attachment) {
+        var attachmentItem = document.createElement("li");
+        var attachmentLink = document.createElement("a");
+        attachmentLink.textContent = attachment.fileName;
+        attachmentLink.href = "#";
+        attachmentItem.appendChild(attachmentLink);
+        attachmentsList.appendChild(attachmentItem);
+    });
+    attachmentsElement.innerHTML = "";
+    attachmentsElement.appendChild(attachmentsList);
     infoDiv.classList.remove("hidden");
 }
 
