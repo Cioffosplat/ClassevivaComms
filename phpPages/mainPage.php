@@ -3,7 +3,7 @@ session_start();
 if (isset($_POST['username']) && isset($_POST['password'])) {
     //login serverRest Request
     $ch_login = curl_init();
-    $url_login = 'http://192.168.1.177/projects/ClassevivaComms/Fat3/login';
+    $url_login = 'http://192.168.248.35/projects/ClassevivaComms/Fat3/login';
     curl_setopt($ch_login, CURLOPT_URL, $url_login);
     curl_setopt($ch_login, CURLOPT_POSTFIELDS, http_build_query(array('username' => $_POST['username'], 'password' => $_POST['password'])));
     curl_setopt($ch_login, CURLOPT_RETURNTRANSFER, true);
@@ -20,7 +20,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
         //Comms request for comms counter
         $ch_comms = curl_init();
-        $url_comms = 'http://192.168.1.177/projects/ClassevivaComms/Fat3/noticeboard';
+        $url_comms = 'http://192.168.248.35/projects/ClassevivaComms/Fat3/noticeboard';
         curl_setopt($ch_comms, CURLOPT_URL, $url_comms);
         curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id' => $_SESSION['id'], 'token' => $_SESSION['token'])));
         curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);

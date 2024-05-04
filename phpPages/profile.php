@@ -2,7 +2,7 @@
 session_start();
 //Comms request for comms counter
 $ch_card = curl_init();
-$url_card = 'http://192.168.1.177/projects/ClassevivaComms/Fat3/card';
+$url_card = 'http://192.168.248.35/projects/ClassevivaComms/Fat3/card';
 curl_setopt($ch_card, CURLOPT_URL, $url_card);
 curl_setopt($ch_card, CURLOPT_POSTFIELDS, http_build_query(array('id' => $_SESSION['id'], 'token' => $_SESSION['token'])));
 curl_setopt($ch_card, CURLOPT_RETURNTRANSFER, true);
@@ -173,6 +173,11 @@ $_SESSION['cardResponse'] = $cardData;
                 </div>
             </div>
         </div>
+        <form action="" method="post" enctype="multipart/form-data">
+            Seleziona un'immagine da caricare:
+            <input type="file" name="profilePicUpload" id="profilePicUpload">
+            <input type="submit" value="Carica Immagine" name="submit">
+        </form>
     </div>
 </div>
 

@@ -25,30 +25,29 @@ $f3->route('GET /notice', function () use ($pdo) {
     echo json_encode($result->fetchAll());
 });
 
-$f3->route('POST /update-profile-pic', function () use ($pdo) {
+$f3->route('POST /update-profile-pic', function ($f3) use ($pdo) {
     header("Access-Control-Allow-Origin: *");
-
-    if (!isset($_FILES['profile_pic'])) {
-        http_response_code(400);
-        echo json_encode(array("message" => "Nessuna immagine caricata"));
-        return;
-    }
-
     $userId = $_SESSION['id'];
-    $tempFilePath = $_FILES["profile_pic"]["tmp_name"];
-    $imageData = file_get_contents($tempFilePath);
+    if (isset($_FILES['profile_pic'])) {
+        $tempFilePath = $_FILES['profile_pic']['tmp_name'];
+        $imageData = file_get_contents($tempFilePath);
 
-    $query = "UPDATE users SET user_pic = :user_pic WHERE id = :user_id";
-    $statement = $pdo->prepare($query);
-    $statement->bindParam(':user_pic', $imageData, PDO::PARAM_LOB);
-    $statement->bindParam(':user_id', $userId);
+        $query = "UPDATE users SET user_pic = :user_pic WHERE id = :user_id";
+        $statement = $pdo->prepare($query);
+        $statement->bindParam(':user_pic', $imageData, PDO::PARAM_LOB);
+        $statement->bindParam(':user_id', $userId);
 
-    if ($statement->execute()) {
-        http_response_code(200);
-        echo json_encode(array("message" => "Foto profilo aggiornata con successo"));
+        if ($statement->execute()) {
+            // Invia una risposta JSON con stato 200 (OK)
+            $f3->status(200);
+            echo json_encode(array("message" => "Foto profilo aggiornata con successo"));
+        } else {
+            $f3->status(500);
+            echo json_encode(array("message" => "Si è verificato un errore durante l'aggiornamento dell'immagine del profilo"));
+        }
     } else {
-        http_response_code(500);
-        echo json_encode(array("message" => "Si è verificato un errore durante l'aggiornamento dell'immagine del profilo"));
+        $f3->status(400);
+        echo json_encode(array("message" => "Nessuna immagine caricata"));
     }
 });
 
