@@ -9,6 +9,8 @@ unset($_SESSION['token']);
 unset($_SESSION['commsNumber']);
 unset($_SESSION['commsResponse']);
 unset($_SESSION['cardResponse']);
+unset($_SESSION['starNumber']);
+unset($_SESSION['starResponse']);
 ?>
 <!DOCTYPE html>
 <html lang="en">

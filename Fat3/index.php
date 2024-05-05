@@ -25,12 +25,6 @@ $f3->route('OPTIONS /*', function () {
     header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
     die();
 });
-
-$f3->route('GET /notice', function () use ($pdo) {
-    header('Content-Type: application/json');
-    $result = $pdo->query("SELECT * FROM noticeboard");
-    echo json_encode($result->fetchAll());
-});
 $f3->route('POST /login', function($f3) use ($pdo) {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -197,6 +191,29 @@ $f3->route('POST /insert-notice', function($f3) use ($pdo) {
         echo json_encode(array("error" => $e->getMessage()));
     }
 });
+
+$f3->route('POST /user-stars', function($f3) use ($pdo) {
+    header('Access-Control-Allow-Origin: *');
+    $sessionUserId= $_POST['sessionUserId'];
+
+    try {
+        $stmt = $pdo->prepare("SELECT nb.id, nb.name, nb.category, nb.date
+                               FROM noticeboard nb
+                               INNER JOIN likes l ON nb.id = l.notice_id
+                               WHERE l.user_id = :sessionUserId");
+        $stmt->bindParam(':sessionUserId', $sessionUserId);
+        $stmt->execute();
+
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $f3->status(200);
+        echo json_encode($result);
+    } catch (Exception $e) {
+        $f3->status(500);
+        echo json_encode(['error' => $e->getMessage()]);
+    }
+});
+
 
 $f3->run();
 ?>

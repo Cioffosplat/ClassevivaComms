@@ -31,6 +31,18 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         //Logging number of communications
         $_SESSION['commsNumber'] = count($commsData['items']);
 
+        //Star request for number of starred comms
+        $ch_star = curl_init();
+        $url_star = 'http://192.168.1.177/projects/ClassevivaComms/Fat3/user-stars';
+        curl_setopt($ch_star, CURLOPT_URL, $url_star);
+        curl_setopt($ch_star, CURLOPT_POSTFIELDS, http_build_query(array('sessionUserId' => $_SESSION['id'])));
+        curl_setopt($ch_star, CURLOPT_RETURNTRANSFER, true);
+        $response_star = curl_exec($ch_star);
+        $starData = json_decode($response_star, true);
+        $_SESSION['starResponse'] = $starData;
+
+        $_SESSION['starNumber'] = sizeof($starData);
+
         header("Location: {$_SERVER['PHP_SELF']}");
         exit;
     } else if(empty($_SESSION['ident'] || $_SESSION['token']) && !isset($_POST['username']) && !isset($_POST['password'])) {
@@ -187,7 +199,9 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                     <div>
                         <div class="text-gray-600 text-sm">Preferiti</div>
                         <div class="text-gray-900 text-2xl font-semibold">
-                            no
+                            <?php
+                            echo $_SESSION['starNumber'];
+                            ?>
                         </div>
                     </div>
                 </div>

@@ -424,7 +424,6 @@ function showCommunicationInfo(title, category, validFrom, attachments) {
     attachmentsElement.appendChild(attachmentsList);
     infoDiv.classList.remove("hidden");
 }
-
 // Close Communication Info
 document.getElementById("closeCommunicationInfo").addEventListener("click", function() {
     var infoDiv = document.getElementById("communicationInfo");
