@@ -142,7 +142,7 @@ function renderTable() {
     var formData = new FormData();
     formData.append('sessionUserId',sessionUserId);
 
-    fetch('http://192.168.1.177/projects/ClassevivaComms/Fat3/user-stars', {
+    fetch('http://192.168.248.35/projects/ClassevivaComms/Fat3/user-stars', {
         method: 'POST',
         body: formData
     })

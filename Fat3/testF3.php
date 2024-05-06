@@ -9,9 +9,9 @@ $response_login = curl_exec($ch_login);
 $loginData = json_decode($response_login, true);
 //echo $response_login;
 //
-echo $_SESSION['token'] = $loginData["token"];
-echo "\n";
-echo $_SESSION['id'] = filter_var($loginData["ident"], FILTER_SANITIZE_NUMBER_INT);
+$_SESSION['token'] = $loginData["token"];
+//echo "\n";
+$_SESSION['id'] = filter_var($loginData["ident"], FILTER_SANITIZE_NUMBER_INT);
 //echo "\n";
 //echo $_SESSION['name'] = filter_var($loginData["firstName"]);
 //echo "\n";
@@ -24,5 +24,6 @@ curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id'=> $_SESSI
 curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);
 $response_comms = curl_exec($ch_comms);
 $commsData = json_decode($response_comms, true);
-echo $response_comms;
+
+echo json_encode($commsData['items'],true);
 ?>

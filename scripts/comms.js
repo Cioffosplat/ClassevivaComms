@@ -174,7 +174,7 @@ function renderTable(page) {
         titleContent.appendChild(favoriteIcon);
         var titleText = document.createElement("span");
         titleText.textContent = item.cntTitle;
-        titleText.addEventListener("click", createShowCommunicationHandler(i));
+        titleText.addEventListener("click", createShowCommunicationHandler(item.pubId));
         titleContent.appendChild(titleText);
 
         titleCell.appendChild(titleContent);
@@ -284,6 +284,7 @@ function filterItems(items) {
     return filteredItems;
 }
 
+
 //Section for adding favoutires
 function toggleFavorite(icon) {
     var index = parseInt(icon.dataset.index);
@@ -311,7 +312,7 @@ function saveFavoriteToDatabase(circolareId, sessionUserId) {
     var formData = new FormData();
     formData.append('circolareId',circolareId);
     formData.append('sessionUserId',sessionUserId);
-    fetch('http://192.168.1.177/projects/ClassevivaComms/Fat3/save-favorite', {
+    fetch('http://192.168.248.35/projects/ClassevivaComms/Fat3/save-favorite', {
         method: 'POST',
         body: formData
     })
@@ -330,20 +331,27 @@ function saveFavoriteToDatabase(circolareId, sessionUserId) {
 }
 
 //Aggiunta della comunicazione al database
-function saveCommunicationToDatabase(index) {
+function saveCommunicationToDatabase(pubId) {
     return function() {
-        var item = commsData.items[index];
-        var pubId = item.pubId;
-        var cntCategory = item.cntCategory;
-        var cntTitle = item.cntTitle;
-        var cntValidFrom = item.cntValidFrom;
-        console.log(pubId);
-        console.log(cntCategory);
-        console.log(cntTitle);
-        console.log(cntValidFrom);
-        addCommunication(pubId, cntCategory, cntTitle, cntValidFrom);
+        var item = commsData.items.find(function(item) {
+            return item.pubId === pubId;
+        });
+
+        if (item) {
+            var cntCategory = item.cntCategory;
+            var cntTitle = item.cntTitle;
+            var cntValidFrom = item.cntValidFrom;
+            console.log("pubId:", pubId);
+            console.log("cntCategory:", cntCategory);
+            console.log("cntTitle:", cntTitle);
+            console.log("cntValidFrom:", cntValidFrom);
+            addCommunication(pubId, cntCategory, cntTitle, cntValidFrom);
+        } else {
+            console.error("Comunicazione non trovata con l'ID:", pubId);
+        }
     }
 }
+
 
 function addCommunication(pubId, cntCategory, cntTitle, cntValidFrom) {
     var formData = new FormData();
@@ -354,7 +362,7 @@ function addCommunication(pubId, cntCategory, cntTitle, cntValidFrom) {
     formData.append('cntValidFrom', cntValidFrom);
 
 
-    fetch('http://192.168.1.177/projects/ClassevivaComms/Fat3/insert-notice', {
+    fetch('http://192.168.248.35/projects/ClassevivaComms/Fat3/insert-notice', {
         method: 'POST',
         body: formData
     })
@@ -395,13 +403,21 @@ document.getElementById("searchInput").addEventListener("input", function() {
 });
 
 //Showing Communication Info
-function createShowCommunicationHandler(index) {
+function createShowCommunicationHandler(pubId) {
     return function() {
-        saveCommunicationToDatabase(index)();
-        var item = commsData.items[index];
-        showCommunicationInfo(item.cntTitle, item.cntCategory, item.cntValidFrom, item.attachments);
+        var item = commsData.items.find(function(item) {
+            return item.pubId === pubId;
+        });
+
+        if (item) {
+            saveCommunicationToDatabase(item.pubId, item.cntCategory, item.cntTitle, item.cntValidFrom)();
+            showCommunicationInfo(item.cntTitle, item.cntCategory, item.cntValidFrom, item.attachments);
+        } else {
+            console.error("Comunicazione non trovata con l'ID:", pubId);
+        }
     }
 }
+
 function showCommunicationInfo(title, category, validFrom, attachments) {
     var infoDiv = document.getElementById("communicationInfo");
     var titleElement = document.getElementById("communicationTitle");

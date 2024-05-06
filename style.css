@@ -33,6 +33,7 @@ body{
     font-family: "Ubuntu Condensed", sans-serif;
     background-color: var(--theme0-background-color);
     color: var(--theme0-text-color);
+    overflow-y: scroll;
 }
 
 #loginPage{

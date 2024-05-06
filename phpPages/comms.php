@@ -2,7 +2,7 @@
 session_start();
 //Section dedicated to the viewing of the noticeboard
 $ch_comms = curl_init();
-$url_comms = 'http://192.168.1.177/projects/ClassevivaComms/Fat3/noticeboard';
+$url_comms = 'http://192.168.248.35/projects/ClassevivaComms/Fat3/noticeboard';
 curl_setopt($ch_comms, CURLOPT_URL, $url_comms);
 curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id'=> $_SESSION['id'], 'token' => $_SESSION['token'])));
 curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);
@@ -12,7 +12,11 @@ $userIdent = $_SESSION['id'];
 ?>
 
 <!--Send via javascript the json array with the commsData-->
-<script>var commsData = <?php echo json_encode($commsData); ?>;</script>
+<script>var commsData = <?php echo json_encode($commsData,true); ?>;
+        console.log(commsData);
+        var commsData4 = <?php echo json_encode($commsData['items'][5],true);?>;
+        console.log(commsData4);
+</script>
 <script>var userId= <?php echo $userIdent;?>;</script>
 
 <!DOCTYPE html>
