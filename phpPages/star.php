@@ -102,7 +102,16 @@ session_start();
 
     <!--Title-->
     <div class="container mx-auto overflow-x-auto mt-5">
-        <h1 class="text-2xl font-bold mb-2">Preferiti</h1>
+        <h1 class="text-2xl font-bold mb-2">I Tuoi Preferiti:</h1>
+    </div>
+
+    <!--Search Field-->
+    <div class="flex flex-column container mx-auto overflow-x-auto justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 mt-2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+        </svg>
+        <input id="searchInput" class="h-10 w-full px-3 pr-16 rounded-lg text-sm"
+               type="search" name="search" placeholder="Cerca comunicazioni...">
     </div>
 
     <!--Comms Table-->
@@ -124,22 +133,23 @@ session_start();
                         </select>
                     </div>
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    <div id="sortToggle" class="cursor-pointer">
-                        Data
-                        <span id="ascIcon">▲</span>
-                        <span id="descIcon" style="display: none;">▼</span>
-                    </div>
-                </th>
             </tr>
             </thead>
             <tbody id="tableRows" class="divide-y divide-gray-900">
             </tbody>
         </table>
+
         <div id="pagination" class="flex justify-center mt-4"></div>
     </div>
 
-
+    <!--Communication Popup Div-->
+    <div id="communicationInfo" class="fixed inset-0 z-50 hidden flex justify-center items-center bg-gray-900 bg-opacity-50">
+        <div class="container mx-auto bg-white rounded-2xl p-6 h-3/4 w-3/4 flex flex-col justify-center items-center">
+            <h2 id="communicationTitle" class="text-2xl font-bold mb-4 text-center"></h2>
+            <p id="communicationDate" class="text-lg text-gray-500 mb-4"></p>
+            <button id="closeCommunicationInfo" class="px-6 py-3 bg-blue-500 text-white rounded-md text-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Chiudi</button>
+        </div>
+    </div>
 
 </div>
 
