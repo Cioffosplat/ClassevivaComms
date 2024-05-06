@@ -204,7 +204,7 @@ function renderTable(page) {
         titleContent.appendChild(favoriteIcon);
         var titleText = document.createElement("span");
         titleText.textContent = item.cntTitle;
-        titleText.addEventListener("click", createShowCommunicationHandler(item.pubId));
+        titleText.addEventListener("click", createShowCommunicationHandler(item.pubId)); // Questa è la modifica qui
         titleContent.appendChild(titleText);
 
         titleCell.appendChild(titleContent);
@@ -325,11 +325,11 @@ function createShowCommunicationHandler(pubId) {
         var infoDiv = document.getElementById("communicationInfo");
         if (infoDiv) {
             var titleElement = document.getElementById("communicationTitle");
-            var dateElement = document.getElementById("communicationDate");
+            var categoryElement = document.getElementById("communicationCategory");
             var communicationData = getCommunicationData(pubId);
             if (communicationData) {
-                titleElement.textContent = communicationData.title;
-                dateElement.textContent = communicationData.date;
+                titleElement.textContent = communicationData.cntTitle;
+                categoryElement.textContent = communicationData.cntCategory;
             } else {
                 console.error("Dati della comunicazione non disponibili.");
                 return;
@@ -341,6 +341,10 @@ function createShowCommunicationHandler(pubId) {
     };
 }
 
+
+function getCommunicationData(pubId) {
+    return globalData.find(item => item.pubId === pubId);
+}
 
 // Close Communication Info
 document.getElementById("closeCommunicationInfo").addEventListener("click", function() {
@@ -363,4 +367,3 @@ async function fetchDataAndRenderTable() {
 }
 
 fetchDataAndRenderTable();
-
