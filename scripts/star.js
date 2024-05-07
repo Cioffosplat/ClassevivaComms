@@ -61,9 +61,12 @@ function setTheme(theme) {
     document.getElementById('tabIcon').setAttribute('href', '/resources/images/logos/logo' + theme+ '.jpg');
     document.getElementById('userIcon').src = '../resources/images/users/defaultuser' + theme + '.jpg';
     document.getElementById('paintbrushButton').src = '../resources/images/paintbrush/paintbrush' + theme + '.png';
+    document.getElementById('searchInput').style.backgroundColor = 'var(--' + theme + '-secondary-color)';
     document.getElementById('tableBack').style.backgroundColor = 'var(--' + theme + '-accent-color)';
     document.getElementById('category').style.backgroundColor = 'var(--' + theme + '-accent-color)';
     document.getElementById('tableRows').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
+    document.getElementById('communicationBannerStar').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
+    document.getElementById('closeCommunicationInfoStar').style.backgroundColor = 'var(--' + theme + '-secondary-color)';
 }
 
 function redirectToProfile() {
@@ -284,18 +287,24 @@ function createPaginationButton(text, onclickFunction) {
 //Section for adding favoutires
 function toggleFavorite(icon) {
     var index = parseInt(icon.dataset.index);
+    var item = globalData[index];
+    var circolareId = item.pubId;
+
+    console.log("ID della circolare:", circolareId);
+    console.log(typeof circolareId);
     favorites[index] = !favorites[index];
     renderTable(currentPage);
 
     var sessionUserId = userId;
     console.log(sessionUserId);
     console.log(typeof userId);
-    saveFavoriteToDatabase(sessionUserId);
+    saveFavoriteToDatabase(circolareId, sessionUserId);
 }
 
-function saveFavoriteToDatabase(sessionUserId) {
+function saveFavoriteToDatabase(circolareId, sessionUserId) {
     var formData = new FormData();
-    formData.append('sessionUserId', sessionUserId);
+    formData.append('circolareId',circolareId);
+    formData.append('sessionUserId',sessionUserId);
     fetch('http://192.168.248.35/projects/ClassevivaComms/Fat3/save-favorite', {
         method: 'POST',
         body: formData
@@ -347,7 +356,7 @@ function getCommunicationData(pubId) {
 }
 
 // Close Communication Info
-document.getElementById("closeCommunicationInfo").addEventListener("click", function() {
+document.getElementById("closeCommunicationInfoStar").addEventListener("click", function() {
     var infoDiv = document.getElementById("communicationInfo");
     if (infoDiv) {
         infoDiv.classList.add("hidden");

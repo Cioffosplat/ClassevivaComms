@@ -44,7 +44,7 @@ body{
     background-color: var(--theme0-primary-color);
 }
 
-#header,#headerLogin,#theme0{
+#header,#headerLogin,#theme0,#closeCommunicationInfo,#closeCommunicationInfoStar{
     background-color: var(--theme0-secondary-color);
 }
 
@@ -79,7 +79,7 @@ body{
     background-color: var(--theme0-accent-color);
 }
 
-#tableRows{
+#tableRows,#communicationBanner,#communicationBannerStar{
     background-color: var(--theme0-accent2-color);
 }
 #profileAboutIcon{

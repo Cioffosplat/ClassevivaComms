@@ -54,7 +54,7 @@ session_start();
         </div>
     </div>
     <!-- Sidebar Section-->
-    <div class="flex-col fixed w-60 min-h-screen overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-300 rounded-r-2xl"
+    <div class="fixed w-60 min-h-screen overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-300 rounded-r-2xl"
          id="sidebar">
         <button class="absolute top-0 right-0 m-4 text-white">
             <svg id="sidebarX" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24">
@@ -65,16 +65,17 @@ session_start();
         <div class="p-4">
             <div class="inline-flex items-center">
                 <img id="logoSidebar" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()" src="../resources/images/logos/logotheme0.jpg" alt="Logo">
-                <h3 class="m-2">Classeviva Comms</h3>
+                <h3 class="m-2">ClassevivaComms</h3>
             </div>
             <ul class="column-flex text-2xl mt-5 ">
-                <li class="flex mb-10"><a href="" class="block"><h3 class="sidebarText">Comunicazioni</h3></a></li>
-                <li class="flex mb-10"><a href="" class="block"><h3 class="sidebarText">Preferiti</h3></a></li>
-                <li class="flex mb-10"><a href="" class="block"><h3 class="sidebarText">Gruppi</h3></a></li>
-                <li class="flex mb-10"><form action="../index.php" method="post">
-                        <input type="hidden" name="logout" value="true">
-                        <input class="cursor-pointer" type="submit" value="Logout">
-                    </form></li>
+                <li class="flex mb-10"><a href="comms.php" class="block"><h3 class="sidebarText">Comunicazioni</h3></a></li>
+                <li class="flex mb-10"><a href="star.php" class="block"><h3 class="sidebarText">Preferiti</h3></a></li>
+                <li class="flex mb-10"><a href="group.php" class="block"><h3 class="sidebarText">Gruppi</h3></a></li>
+                <li class="flex mb-10">
+                    <a href="../index.php" class="block">
+                        <h3 class="sidebarText">Logout</h3>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -144,10 +145,10 @@ session_start();
 
     <!--Communication Popup Div-->
     <div id="communicationInfo" class="fixed inset-0 z-50 hidden flex justify-center items-center bg-gray-900 bg-opacity-50">
-        <div class="container mx-auto bg-white rounded-2xl p-6 h-3/4 w-3/4 flex flex-col justify-center items-center">
+        <div id="communicationBannerStar" class="container mx-auto rounded-2xl p-6 h-3/4 w-3/4 flex flex-col justify-center items-center">
             <h2 id="communicationTitle" class="text-2xl font-bold mb-4 text-center"></h2>
-            <p id="communicationCategory" class="text-lg text-gray-500 mb-4"></p>
-            <button id="closeCommunicationInfo" class="px-6 py-3 bg-blue-500 text-white rounded-md text-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Chiudi</button>
+            <p id="communicationCategory" class="text-lg mb-4"></p>
+            <button id="closeCommunicationInfoStar" class="px-6 py-3 text-black rounded-md text-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Chiudi</button>
         </div>
     </div>
 

@@ -11,6 +11,8 @@ $cardData = json_decode($response_card, true);
 $_SESSION['cardResponse'] = $cardData;
 ?>
 
+<script>var userId= <?php echo $_SESSION['id'];?>;</script>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -175,9 +177,9 @@ $_SESSION['cardResponse'] = $cardData;
         </div>
         <form action="" method="post" enctype="multipart/form-data">
             Seleziona un'immagine da caricare:
-            <input type="file" name="profilePicUpload" id="profilePicUpload">
-            <input type="submit" value="Carica Immagine" name="submit">
+            <input type="file" name="profile_pic" id="profile_pic">
         </form>
+
     </div>
 </div>
 

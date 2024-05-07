@@ -13,9 +13,6 @@ $userIdent = $_SESSION['id'];
 
 <!--Send via javascript the json array with the commsData-->
 <script>var commsData = <?php echo json_encode($commsData,true); ?>;
-        console.log(commsData);
-        var commsData4 = <?php echo json_encode($commsData['items'][5],true);?>;
-        console.log(commsData4);
 </script>
 <script>var userId= <?php echo $userIdent;?>;</script>
 
@@ -170,11 +167,11 @@ $userIdent = $_SESSION['id'];
 
     <!--Comunication Popup Div-->
     <div id="communicationInfo" class="fixed inset-0 z-50 hidden flex justify-center items-center bg-gray-900 bg-opacity-50">
-        <div class="container mx-auto bg-white rounded-2xl p-6 h-3/4 w-3/4 flex flex-col justify-center items-center">
+        <div id="communicationBanner" class="container mx-auto rounded-2xl p-6 h-3/4 w-3/4 flex flex-col justify-center items-center">
             <h2 id="communicationTitle" class="text-2xl font-bold mb-4 text-center"></h2>
-            <p id="communicationDate" class="text-lg text-gray-500 mb-4"></p>
-            <p id="communicationAttachments" class="text-lg text-gray-700 mb-4"></p>
-            <button id="closeCommunicationInfo" class="px-6 py-3 bg-blue-500 text-white rounded-md text-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Chiudi</button>
+            <p id="communicationDate" class="text-lg mb-4"></p>
+            <p id="communicationAttachments" class="text-lg mb-4"></p>
+            <button id="closeCommunicationInfo" class="px-6 py-3 text-black rounded-md text-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Chiudi</button>
         </div>
     </div>
 

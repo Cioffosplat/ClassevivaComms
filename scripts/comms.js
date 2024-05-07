@@ -65,6 +65,8 @@ function setTheme(theme) {
     document.getElementById('tableBack').style.backgroundColor = 'var(--' + theme + '-accent-color)';
     document.getElementById('category').style.backgroundColor = 'var(--' + theme + '-accent-color)';
     document.getElementById('tableRows').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
+    document.getElementById('communicationBanner').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
+    document.getElementById('closeCommunicationInfo').style.backgroundColor = 'var(--' + theme + '-secondary-color)';
 }
 
 function redirectToProfile() {
@@ -192,7 +194,7 @@ function renderTable(page) {
         allegatoCell.className = "px-6 py-4 whitespace-nowrap";
         var allegatoContent = document.createElement("div");
         allegatoContent.className = "text-sm text-gray-900";
-        allegatoContent.textContent = item.dinsert_allegato;
+        allegatoContent.textContent = item.cntValidFrom;
         allegatoCell.appendChild(allegatoContent);
         row.appendChild(allegatoCell);
 
@@ -273,11 +275,11 @@ function filterItems(items) {
 
     if (filters.sort === "asc") {
         filteredItems.sort(function (a, b) {
-            return new Date(a.dinsert_allegato) - new Date(b.dinsert_allegato);
+            return new Date(a.cntValidFrom) - new Date(b.cntValidFrom);
         });
     } else {
         filteredItems.sort(function (a, b) {
-            return new Date(b.dinsert_allegato) - new Date(a.dinsert_allegato);
+            return new Date(b.cntValidFrom) - new Date(a.cntValidFrom);
         });
     }
 
@@ -307,7 +309,6 @@ function toggleFavorite(icon) {
     console.log(typeof userId);
     saveFavoriteToDatabase(circolareId, sessionUserId);
 }
-
 function saveFavoriteToDatabase(circolareId, sessionUserId) {
     var formData = new FormData();
     formData.append('circolareId',circolareId);

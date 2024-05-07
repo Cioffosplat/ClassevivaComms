@@ -126,5 +126,35 @@ function getCookie(name) {
     return "";
 }
 
+//Insertion of the new profile pic
+
+const fileInput = document.getElementById('profile_pic');
+fileInput.addEventListener('change', function() {
+    if (this.files && this.files[0]) {
+        const sessionUserId = userId;
+        const formData = new FormData();
+        formData.append('profile_pic', this.files[0]);
+        formData.append('sessionUserId', sessionUserId);
+
+        // Invia la richiesta POST utilizzando Fetch API
+        fetch('http://192.168.248.35/projects/ClassevivaComms/Fat3/update-profile-pic', {
+            method: 'POST',
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Errore durante l\'invio del modulo.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                console.error('Errore:', error);
+            });
+    }
+});
+
 
 

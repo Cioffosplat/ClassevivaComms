@@ -103,29 +103,37 @@ $f3->route('POST /noticeboard', function($f3) {
     }
 });
 $f3->route('POST /update-profile-pic', function ($f3) use ($pdo) {
-    $userId = $_SESSION['id'];
-    if (isset($_FILES['profile_pic'])) {
+    header('Access-Control-Allow-Origin: *');
+    $sessionUserId = $_POST['sessionUserId'];
+
+    if (isset($_FILES['profile_pic']) && isset($sessionUserId)) {
         $tempFilePath = $_FILES['profile_pic']['tmp_name'];
-        $imageData = file_get_contents($tempFilePath);
 
-        $query = "UPDATE users SET user_pic = :user_pic WHERE id = :user_id";
-        $statement = $pdo->prepare($query);
-        $statement->bindParam(':user_pic', $imageData, PDO::PARAM_LOB);
-        $statement->bindParam(':user_id', $userId);
+        if(is_uploaded_file($tempFilePath)) {
+            $imageData = file_get_contents($tempFilePath);
 
-        if ($statement->execute()) {
-            // Invia una risposta JSON con stato 200 (OK)
-            $f3->status(200);
-            echo json_encode(array("message" => "Foto profilo aggiornata con successo"));
+            $query = "UPDATE users SET user_pic = :user_pic WHERE id = :user_id";
+            $statement = $pdo->prepare($query);
+            $statement->bindParam(':user_pic', $imageData, PDO::PARAM_LOB);
+            $statement->bindParam(':user_id', $sessionUserId);
+
+            if ($statement->execute()) {
+                $f3->status(200);
+                echo json_encode(array("message" => "Foto profilo aggiornata con successo"));
+            } else {
+                $f3->status(500);
+                echo json_encode(array("message" => "Si è verificato un errore durante l'aggiornamento dell'immagine del profilo"));
+            }
         } else {
             $f3->status(500);
-            echo json_encode(array("message" => "Si è verificato un errore durante l'aggiornamento dell'immagine del profilo"));
+            echo json_encode(array("message" => "Errore durante il caricamento dell'immagine"));
         }
     } else {
         $f3->status(400);
-        echo json_encode(array("message" => "Nessuna immagine caricata"));
+        echo json_encode(array("message" => "Nessuna immagine caricata o ID utente mancante"));
     }
 });
+
 
 $f3->route('POST /save-favorite', function($f3) use ($pdo) {
     header('Access-Control-Allow-Origin: *');
