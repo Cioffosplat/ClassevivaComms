@@ -3,7 +3,7 @@ session_start();
 if (isset($_POST['username']) && isset($_POST['password'])) {
     //login serverRest Request
     $ch_login = curl_init();
-    $url_login = 'http://192.168.248.35/projects/ClassevivaComms/Fat3/login';
+    $url_login = 'http://192.168.101.35/projects/ClassevivaComms/Fat3/login';
     curl_setopt($ch_login, CURLOPT_URL, $url_login);
     curl_setopt($ch_login, CURLOPT_POSTFIELDS, http_build_query(array('username' => $_POST['username'], 'password' => $_POST['password'])));
     curl_setopt($ch_login, CURLOPT_RETURNTRANSFER, true);
@@ -20,7 +20,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 
         //Comms request for comms counter
         $ch_comms = curl_init();
-        $url_comms = 'http://192.168.248.35/projects/ClassevivaComms/Fat3/noticeboard';
+        $url_comms = 'http://192.168.101.35/projects/ClassevivaComms/Fat3/noticeboard';
         curl_setopt($ch_comms, CURLOPT_URL, $url_comms);
         curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id' => $_SESSION['id'], 'token' => $_SESSION['token'])));
         curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);
@@ -43,7 +43,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 }
 //Star request for number of starred comms
 $ch_star = curl_init();
-$url_star = 'http://192.168.248.35/projects/ClassevivaComms/Fat3/user-stars';
+$url_star = 'http://192.168.101.35/projects/ClassevivaComms/Fat3/user-stars';
 curl_setopt($ch_star, CURLOPT_URL, $url_star);
 curl_setopt($ch_star, CURLOPT_POSTFIELDS, http_build_query(array('sessionUserId' => $_SESSION['id'])));
 curl_setopt($ch_star, CURLOPT_RETURNTRANSFER, true);
@@ -257,39 +257,33 @@ $_SESSION['starNumber'] = sizeof($starData);
     </div>
 
     <!--Comms Table-->
-    <div class="container mx-auto overflow-x-auto rounded-t-2xl">
-        <table class="w-full divide-y divide-gray-900">
+    <div class="container mt-2 mx-auto overflow-x-auto rounded-2xl">
+        <table class="min-w-full divide-y divide-gray-900">
             <thead class="" id="tableBack">
             <tr>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                     Titolo
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Categoria
+                    <div id="filters" class="container mx-auto overflow-x-auto">
+                        Categoria
+                    </div>
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Data di Inserimento
+                    <div id="sortToggle" class="cursor-pointer">
+                        Data
+                    </div>
                 </th>
                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
                     Allegati
                 </th>
             </tr>
             </thead>
-            <tbody id="tableRows" class="divide-y divide-gray-900 rounded-b-2xl">
+            <tbody id="tableRows" class="divide-y divide-gray-900">
             </tbody>
         </table>
-
-        <div id="pagination" class="flex justify-center mt-4"></div>
     </div>
 </div>
-<?php
-/*echo "<div class='flex m-9'>
-        <p class='px-2'> {$_SESSION['ident']}</p>
-        <p class='px-2'> {$_SESSION['id']}</p>  
-        <p class='px-2'> {$_SESSION['token']}</p>
-       </div>";
-*/
-?>
 <!-- Cookie Banner -->
 <div id="cookie-banner" class="cookie_banner fixed bottom-0 left-0 w-full text-black p-4" style="background-color: var(--theme0-accent-color)">
         <div class="max-w-screen-lg mx-auto flex items-center justify-center space-x-3">

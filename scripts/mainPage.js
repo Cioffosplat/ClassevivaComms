@@ -180,6 +180,10 @@ var currentPage = 1;
 function renderTable(page) {
     var tableBody = document.getElementById("tableRows");
     tableBody.innerHTML = '';
+    commsData.items.sort(function(a, b) {
+        return new Date(b.cntValidFrom) - new Date(a.cntValidFrom);
+    });
+
     var startIndex = (page - 1) * itemsPerPage;
     var endIndex = Math.min(startIndex + itemsPerPage, commsData.items.length);
 
@@ -194,7 +198,7 @@ function renderTable(page) {
                 <div class="text-sm text-gray-900">${item.cntCategory}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">${item.dinsert_allegato}</div>
+                <div class="text-sm text-gray-900">${item.cntValidFrom}</div>
             </td>
             <td class="px-6 py-4 whitespace-nowrap">
                 ${item.cntHasAttach ?
@@ -205,22 +209,15 @@ function renderTable(page) {
         tableBody.appendChild(row);
     }
 }
-
-function renderPagination() {
-    var totalPages = Math.ceil(commsData.items.length / itemsPerPage);
-    var paginationDiv = document.getElementById("pagination");
-    paginationDiv.innerHTML = '';
-}
-
 renderTable(currentPage);
-renderPagination();
+
 
 //Section to update the profile pic
 function updateProfilePic() {
     const sessionUserId = userId;
     const formData = new FormData();
     formData.append('sessionUserId', sessionUserId);
-    fetch('http://192.168.248.35/projects/ClassevivaComms/Fat3/profile-pic', {
+    fetch('http://192.168.101.35/projects/ClassevivaComms/Fat3/profile-pic', {
         method: 'POST',
         body: formData
     })

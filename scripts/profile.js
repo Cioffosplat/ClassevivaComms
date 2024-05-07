@@ -136,7 +136,7 @@ fileInput.addEventListener('change', function() {
         formData.append('profile_pic', this.files[0]);
         formData.append('sessionUserId', sessionUserId);
 
-        fetch('http://192.168.248.35/projects/ClassevivaComms/Fat3/update-profile-pic', {
+        fetch('http://192.168.101.35/projects/ClassevivaComms/Fat3/update-profile-pic', {
             method: 'POST',
             body: formData
         })
@@ -160,7 +160,7 @@ function updateProfilePic() {
     const sessionUserId = userId;
     const formData = new FormData();
     formData.append('sessionUserId', sessionUserId);
-    fetch('http://192.168.248.35/projects/ClassevivaComms/Fat3/profile-pic', {
+    fetch('http://192.168.101.35/projects/ClassevivaComms/Fat3/profile-pic', {
         method: 'POST',
         body: formData
     })

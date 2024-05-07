@@ -65,7 +65,7 @@ function setTheme(theme) {
     document.getElementById('category').style.backgroundColor = 'var(--' + theme + '-accent-color)';
     document.getElementById('tableRows').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
     document.getElementById('communicationBannerStar').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
-    document.getElementById('closeCommunicationInfoStar').style.backgroundColor = 'var(--' + theme + '-secondary-color)';
+    document.getElementById('closeCommunicationInfoStar').setAttribute("stroke",'var(--' + theme + '-text-color)');
 }
 
 function redirectToProfile() {
@@ -134,7 +134,6 @@ var currentPage = 1;
 var filters = {
     category: "",
 };
-var favorites = [];
 var globalData;
 
 function fetchData() {
@@ -142,7 +141,7 @@ function fetchData() {
     var formData = new FormData();
     formData.append('sessionUserId',sessionUserId);
 
-    return fetch('http://192.168.248.35/projects/ClassevivaComms/Fat3/user-stars', {
+    return fetch('http://192.168.101.35/projects/ClassevivaComms/Fat3/user-stars', {
         method: 'POST',
         body: formData
     })
@@ -183,30 +182,10 @@ function renderTable(page) {
         titleCell.className = "px-4 py-4 whitespace-nowrap";
         var titleContent = document.createElement("div");
         titleContent.className = "text-sm text-gray-900 flex items-center";
-
-        var favoriteIcon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-        favoriteIcon.setAttribute("class", "w-6 h-6 fill-current text-yellow-500 favorite-icon");
-        favoriteIcon.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-        favoriteIcon.setAttribute("viewBox", "0 0 24 24");
-        favoriteIcon.setAttribute("stroke-width", "1.5");
-        favoriteIcon.setAttribute("stroke", "currentColor");
-
-        if (favorites[i]) {
-            favoriteIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />';
-        } else {
-            favoriteIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" fill="none"/>';
-        }
-
-        favoriteIcon.dataset.index = i;
-
-        favoriteIcon.addEventListener("click", function() {
-            toggleFavorite(this);
-        });
-
-        titleContent.appendChild(favoriteIcon);
+        
         var titleText = document.createElement("span");
         titleText.textContent = item.cntTitle;
-        titleText.addEventListener("click", createShowCommunicationHandler(item.pubId)); // Questa è la modifica qui
+        titleText.addEventListener("click", createShowCommunicationHandler(item.pubId));
         titleContent.appendChild(titleText);
 
         titleCell.appendChild(titleContent);
@@ -219,6 +198,13 @@ function renderTable(page) {
         categoryContent.textContent = item.cntCategory;
         categoryCell.appendChild(categoryContent);
         row.appendChild(categoryCell);
+
+        var attachmentCell = document.createElement("td");
+        attachmentCell.className = "px-6 py-4 whitespace-nowrap";
+        attachmentCell.innerHTML = item.cntHasAttach ?
+            `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Allegato</span>` :
+            `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Nessun Allegato</span>`;
+        row.appendChild(attachmentCell);
 
         tableBody.appendChild(row);
     }
@@ -283,44 +269,6 @@ function createPaginationButton(text, onclickFunction) {
     return button;
 }
 
-//Section for adding favoutires
-function toggleFavorite(icon) {
-    var index = parseInt(icon.dataset.index);
-    var item = globalData[index];
-    var circolareId = item.pubId;
-
-    console.log("ID della circolare:", circolareId);
-    console.log(typeof circolareId);
-    favorites[index] = !favorites[index];
-    renderTable(currentPage);
-
-    var sessionUserId = userId;
-    console.log(sessionUserId);
-    console.log(typeof userId);
-    saveFavoriteToDatabase(circolareId, sessionUserId);
-}
-
-function saveFavoriteToDatabase(circolareId, sessionUserId) {
-    var formData = new FormData();
-    formData.append('circolareId',circolareId);
-    formData.append('sessionUserId',sessionUserId);
-    fetch('http://192.168.248.35/projects/ClassevivaComms/Fat3/save-favorite', {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Errore durante il salvataggio dei dati nel database');
-            }
-            return response.json();
-        })
-        .then(data => {
-            console.log("Dati salvati nel database:", data);
-        })
-        .catch(error => {
-            console.error(error.message);
-        });
-}
 
 //Search Section
 document.getElementById("searchInput").addEventListener("input", function() {
@@ -329,29 +277,38 @@ document.getElementById("searchInput").addEventListener("input", function() {
 
 //Showing Communication Info
 function createShowCommunicationHandler(pubId) {
+    console.log(commsData)
     return function() {
-        var infoDiv = document.getElementById("communicationInfo");
-        if (infoDiv) {
-            var titleElement = document.getElementById("communicationTitle");
-            var categoryElement = document.getElementById("communicationCategory");
-            var communicationData = getCommunicationData(pubId);
-            if (communicationData) {
-                titleElement.textContent = communicationData.cntTitle;
-                categoryElement.textContent = communicationData.cntCategory;
-            } else {
-                console.error("Dati della comunicazione non disponibili.");
-                return;
-            }
-            infoDiv.classList.remove("hidden");
+        var item = commsData.items.find(function(item) {
+            return item.pubId === pubId;
+        });
+
+        if (item) {
+            showCommunicationInfo(item.pubId,item.cntTitle, item.cntCategory, item.attachments);
         } else {
-            console.error("Div delle informazioni della comunicazione non trovato.");
+            console.error("Comunicazione non trovata con l'ID:", pubId);
         }
-    };
+    }
 }
+function showCommunicationInfo(pubId,title, category, attachments) {
+    var infoDiv = document.getElementById("communicationInfo");
+    var titleElement = document.getElementById("communicationTitle");
+    var attachmentsElement = document.getElementById("communicationAttachments");
 
+    titleElement.textContent = title;
 
-function getCommunicationData(pubId) {
-    return globalData.find(item => item.pubId === pubId);
+    var attachmentsList = document.createElement("ul");
+    attachments.forEach(function(attachment) {
+        var attachmentItem = document.createElement("li");
+        var attachmentLink = document.createElement("a");
+        attachmentLink.textContent = attachment.fileName;
+        attachmentLink.href = "#";
+        attachmentItem.appendChild(attachmentLink);
+        attachmentsList.appendChild(attachmentItem);
+    });
+    attachmentsElement.innerHTML = "";
+    attachmentsElement.appendChild(attachmentsList);
+    infoDiv.classList.remove("hidden");
 }
 
 // Close Communication Info
@@ -381,7 +338,7 @@ function updateProfilePic() {
     const sessionUserId = userId;
     const formData = new FormData();
     formData.append('sessionUserId', sessionUserId);
-    fetch('http://192.168.248.35/projects/ClassevivaComms/Fat3/profile-pic', {
+    fetch('http://192.168.101.35/projects/ClassevivaComms/Fat3/profile-pic', {
         method: 'POST',
         body: formData
     })

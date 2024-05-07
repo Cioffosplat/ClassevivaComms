@@ -44,7 +44,7 @@ body{
     background-color: var(--theme0-primary-color);
 }
 
-#header,#headerLogin,#theme0,#closeCommunicationInfo,#closeCommunicationInfoStar,#buttonUpdate{
+#header,#headerLogin,#theme0,#buttonUpdate,#addStarButton{
     background-color: var(--theme0-secondary-color);
 }
 

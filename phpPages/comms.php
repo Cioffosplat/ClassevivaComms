@@ -2,7 +2,7 @@
 session_start();
 //Section dedicated to the viewing of the noticeboard
 $ch_comms = curl_init();
-$url_comms = 'http://192.168.248.35/projects/ClassevivaComms/Fat3/noticeboard';
+$url_comms = 'http://192.168.101.35/projects/ClassevivaComms/Fat3/noticeboard';
 curl_setopt($ch_comms, CURLOPT_URL, $url_comms);
 curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id'=> $_SESSION['id'], 'token' => $_SESSION['token'])));
 curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);
@@ -12,8 +12,7 @@ $userIdent = $_SESSION['id'];
 ?>
 
 <!--Send via javascript the json array with the commsData-->
-<script>var commsData = <?php echo json_encode($commsData,true); ?>;
-</script>
+<script>var commsData = <?php echo json_encode($commsData,true); ?>;</script>
 <script>var userId= <?php echo $userIdent;?>;</script>
 
 <!DOCTYPE html>
@@ -161,17 +160,23 @@ $userIdent = $_SESSION['id'];
             <tbody id="tableRows" class="divide-y divide-gray-900">
             </tbody>
         </table>
-
-        <div id="pagination" class="flex justify-center mt-4"></div>
     </div>
 
-    <!--Comunication Popup Div-->
+    <div id="pagination" class="flex justify-center mt-4"></div>
+
+    <!--Communication Popup Div-->
     <div id="communicationInfo" class="fixed inset-0 z-50 hidden flex justify-center items-center bg-gray-900 bg-opacity-50">
-        <div id="communicationBanner" class="container mx-auto rounded-2xl p-6 h-3/4 w-3/4 flex flex-col justify-center items-center">
+        <div id="communicationBanner" class="container mx-auto rounded-2xl p-6 h-3/4 w-3/4 flex flex-col justify-center items-center relative">
             <h2 id="communicationTitle" class="text-2xl font-bold mb-4 text-center"></h2>
             <p id="communicationDate" class="text-lg mb-4"></p>
             <p id="communicationAttachments" class="text-lg mb-4"></p>
-            <button id="closeCommunicationInfo" class="px-6 py-3 text-black rounded-md text-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600">Chiudi</button>
+            <button id="addStarButton" class="px-6 py-3 text-black rounded-md text-lg mb-4">Aggiungi ai preferiti</button>
+            <button class="px-6 py-3 absolute top-0 right-0">
+                <svg id="closeCommunicationInfo" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="M6  18L18 6M6 6l12 12" />
+                </svg>
+            </button>
         </div>
     </div>
 
