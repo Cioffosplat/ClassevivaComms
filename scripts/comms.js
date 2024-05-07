@@ -59,7 +59,6 @@ function setTheme(theme) {
     document.getElementById('logo').src = '../resources/images/logos/logo' + theme+ '.jpg';
     document.getElementById('logoSidebar').src = '../resources/images/logos/logo' + theme+ '.jpg';
     document.getElementById('tabIcon').setAttribute('href', '/resources/images/logos/logo' + theme+ '.jpg');
-    document.getElementById('userIcon').src = '../resources/images/users/defaultuser' + theme + '.jpg';
     document.getElementById('paintbrushButton').src = '../resources/images/paintbrush/paintbrush' + theme + '.png';
     document.getElementById('searchInput').style.backgroundColor = 'var(--' + theme + '-secondary-color)';
     document.getElementById('tableBack').style.backgroundColor = 'var(--' + theme + '-accent-color)';
@@ -451,6 +450,32 @@ document.getElementById("closeCommunicationInfo").addEventListener("click", func
     }
 });
 
+//Section to update the profile pic
+function updateProfilePic() {
+    const sessionUserId = userId;
+    const formData = new FormData();
+    formData.append('sessionUserId', sessionUserId);
+    fetch('http://192.168.248.35/projects/ClassevivaComms/Fat3/profile-pic', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.blob();
+            }
+            throw new Error('Errore durante il recupero dell\'immagine del profilo');
+        })
+        .then(blob => {
+            const imgUrl = URL.createObjectURL(blob);
+            document.getElementById('userIcon').src = imgUrl;
+            document.getElementById('profilePicBig').src = imgUrl;
+        })
+        .catch(error => {
+            console.error('Errore:', error);
+        });
+}
+
+updateProfilePic();
 // Initial rendering of the table
 renderTable(currentPage);
 renderPagination();

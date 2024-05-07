@@ -59,11 +59,11 @@ function setTheme(theme) {
     document.getElementById('logo').src = '../resources/images/logos/logo' + theme+ '.jpg';
     document.getElementById('logoSidebar').src = '../resources/images/logos/logo' + theme+ '.jpg';
     document.getElementById('tabIcon').setAttribute('href', '/resources/images/logos/logo' + theme+ '.jpg');
-    document.getElementById('userIcon').src = '../resources/images/users/defaultuser' + theme + '.jpg';
     document.getElementById('paintbrushButton').src = '../resources/images/paintbrush/paintbrush' + theme + '.png';
     document.getElementById('profileAbout').style.backgroundColor = 'var(--' + theme + '-accent-color)';
     document.getElementById('profileAboutIcon').setAttribute("stroke",'var(--' + theme + '-primary-color)');
     document.getElementById('profileDiv').style.backgroundColor = 'var(--' + theme + '-accent-color)';
+    document.getElementById('buttonUpdate').style.backgroundColor = 'var(--' + theme + '-secondary-color)';
 }
 
 function redirectToProfile() {
@@ -136,7 +136,6 @@ fileInput.addEventListener('change', function() {
         formData.append('profile_pic', this.files[0]);
         formData.append('sessionUserId', sessionUserId);
 
-        // Invia la richiesta POST utilizzando Fetch API
         fetch('http://192.168.248.35/projects/ClassevivaComms/Fat3/update-profile-pic', {
             method: 'POST',
             body: formData
@@ -155,6 +154,33 @@ fileInput.addEventListener('change', function() {
             });
     }
 });
+
+//Section to update the profile pic
+function updateProfilePic() {
+    const sessionUserId = userId;
+    const formData = new FormData();
+    formData.append('sessionUserId', sessionUserId);
+    fetch('http://192.168.248.35/projects/ClassevivaComms/Fat3/profile-pic', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.blob();
+            }
+            throw new Error('Errore durante il recupero dell\'immagine del profilo');
+        })
+        .then(blob => {
+            const imgUrl = URL.createObjectURL(blob);
+            document.getElementById('userIcon').src = imgUrl;
+            document.getElementById('profilePicBig').src = imgUrl;
+        })
+        .catch(error => {
+            console.error('Errore:', error);
+        });
+}
+
+updateProfilePic();
 
 
 

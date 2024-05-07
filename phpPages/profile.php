@@ -63,7 +63,7 @@ $_SESSION['cardResponse'] = $cardData;
         </div>
     </div>
     <!-- Sidebar Section-->
-    <div class="flex-col fixed w-60 min-h-screen overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-300 rounded-r-2xl"
+    <div class="fixed w-60 min-h-screen overflow-y-auto transition-transform transform -translate-x-full ease-in-out duration-300 rounded-r-2xl"
          id="sidebar">
         <button class="absolute top-0 right-0 m-4 text-white">
             <svg id="sidebarX" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24">
@@ -74,16 +74,17 @@ $_SESSION['cardResponse'] = $cardData;
         <div class="p-4">
             <div class="inline-flex items-center">
                 <img id="logoSidebar" class="w-20 h-20 rounded-full cursor-pointer shadow-2xl hover" onclick="redirectToHomepage()" src="../resources/images/logos/logotheme0.jpg" alt="Logo">
-                <h3 class="m-2">Classeviva Comms</h3>
+                <h3 class="m-2">ClassevivaComms</h3>
             </div>
             <ul class="column-flex text-2xl mt-5 ">
-                <li class="flex mb-10"><a href="" class="block"><h3 class="sidebarText">Comunicazioni</h3></a></li>
-                <li class="flex mb-10"><a href="" class="block"><h3 class="sidebarText">Preferiti</h3></a></li>
-                <li class="flex mb-10"><a href="" class="block"><h3 class="sidebarText">Gruppi</h3></a></li>
-                <li class="flex mb-10"><form action="../index.php" method="post">
-                        <input type="hidden" name="logout" value="true">
-                        <input class="cursor-pointer" type="submit" value="Logout">
-                    </form></li>
+                <li class="flex mb-10"><a href="comms.php" class="block"><h3 class="sidebarText">Comunicazioni</h3></a></li>
+                <li class="flex mb-10"><a href="star.php" class="block"><h3 class="sidebarText">Preferiti</h3></a></li>
+                <li class="flex mb-10"><a href="group.php" class="block"><h3 class="sidebarText">Gruppi</h3></a></li>
+                <li class="flex mb-10">
+                    <a href="../index.php" class="block">
+                        <h3 class="sidebarText">Logout</h3>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
@@ -102,7 +103,7 @@ $_SESSION['cardResponse'] = $cardData;
             <button class="w-7 h-7 cursor-pointer mx-2" id="open-paint">
                 <img id="paintbrushButton" src="../resources/images/paintbrush/paintbrushtheme0.png" alt="paintbrushButton">
             </button>
-            <img id="userIcon" alt="User Icon" class="w-10 h-10 rounded-full ml-2 cursor-pointer" onclick="redirectToProfile()" src="../resources/images/users/defaultusertheme0.jpg">
+            <img id="userIcon" alt="User Icon" class="w-10 h-10 rounded-full ml-2 cursor-pointer" onclick="redirectToProfile()" src="">
             <?php
             echo "<p style='font-family: 'Ubuntu Condensed';' class='px-2 mx-2'>{$_SESSION['firstName']} {$_SESSION['lastName']}</p>"
             ?>
@@ -115,10 +116,10 @@ $_SESSION['cardResponse'] = $cardData;
             <div class="flex flex-wrap justify-center">
                 <div class="w-full flex justify-center">
                     <div class="relative">
-                        <img src="https://github.com/creativetimofficial/soft-ui-dashboard-tailwind/blob/main/build/assets/img/team-2.jpg?raw=true" class="shadow-xl rounded-full align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-[150px]"/>
+                        <img id="profilePicBig" src="" class="shadow-xl w-40 h-40 rounded-full ml-4"/>
                     </div>
                 </div>
-                <div class="w-full text-center mt-20">
+                <div class="w-full text-center">
                     <div class="flex justify-center lg:pt-4 pt-8 pb-0">
                     </div>
                 </div>
@@ -175,9 +176,10 @@ $_SESSION['cardResponse'] = $cardData;
                 </div>
             </div>
         </div>
-        <form action="" method="post" enctype="multipart/form-data">
-            Seleziona un'immagine da caricare:
-            <input type="file" name="profile_pic" id="profile_pic">
+        <form action="" method="post" enctype="multipart/form-data" class="mt-5 ml-5">
+            <label for="profile_pic" class="block mb-2">Aggiorna la tua foto profilo:</label>
+            <input type="file" name="profile_pic" id="profile_pic" class="mb-2">
+            <button id="buttonUpdate" type="submit" class="text-white font-bold py-2 px-4 rounded">Aggiorna</button>
         </form>
 
     </div>

@@ -134,6 +134,32 @@ $f3->route('POST /update-profile-pic', function ($f3) use ($pdo) {
     }
 });
 
+$f3->route('POST /profile-pic', function ($f3) use ($pdo) {
+    header('Access-Control-Allow-Origin: *');
+
+    if (isset($_POST['sessionUserId'])) {
+        $userId = $_POST['sessionUserId'];
+
+        $query = "SELECT user_pic FROM users WHERE id = :user_id";
+        $statement = $pdo->prepare($query);
+        $statement->bindParam(':user_id', $userId);
+        $statement->execute();
+
+        $result = $statement->fetch(PDO::FETCH_ASSOC);
+        if ($result && isset($result['user_pic'])) {
+            header('Content-Type: image/jpeg');
+            echo $result['user_pic'];
+            return;
+        }
+    }
+
+    $defaultImage = file_get_contents('../resources/users/defaultusertheme0.jpg');
+    header('Content-Type: image/jpeg');
+    echo $defaultImage;
+});
+
+
+
 
 $f3->route('POST /save-favorite', function($f3) use ($pdo) {
     header('Access-Control-Allow-Origin: *');
