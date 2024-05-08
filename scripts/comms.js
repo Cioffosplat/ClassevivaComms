@@ -379,6 +379,22 @@ function createShowCommunicationHandler(pubId) {
     }
 }
 
+//Success Banner
+function showSuccessBanner() {
+    var successBanner = document.getElementById("successBanner");
+    successBanner.classList.remove("hidden");
+
+    setTimeout(function() {
+        hideSuccessBanner();
+    }, 3000);
+}
+
+function hideSuccessBanner() {
+    var successBanner = document.getElementById("successBanner");
+    successBanner.classList.add("hidden");
+}
+
+
 function showCommunicationInfo(pubId,title, category, validFrom, attachments) {
     var infoDiv = document.getElementById("communicationInfo");
     var titleElement = document.getElementById("communicationTitle");
@@ -387,6 +403,7 @@ function showCommunicationInfo(pubId,title, category, validFrom, attachments) {
 
     document.getElementById("addStarButton").addEventListener("click", function() {
         saveFavoriteToDatabase(pubId, userId);
+        showSuccessBanner();
     });
 
     titleElement.textContent = title;

@@ -145,9 +145,6 @@ $userIdent = $_SESSION['id'];
                         </select>
                     </div>
                 </th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-900 uppercase tracking-wider">
-                    Allegati
-                </th>
             </tr>
             </thead>
             <tbody id="tableRows" class="divide-y divide-gray-900">
@@ -160,10 +157,20 @@ $userIdent = $_SESSION['id'];
     <!--Communication Popup Div-->
     <div id="communicationInfo" class="fixed inset-0 z-50 hidden flex justify-center items-center bg-gray-900 bg-opacity-50">
         <div id="communicationBannerStar" class="container mx-auto rounded-2xl p-6 h-3/4 w-3/4 flex flex-col justify-center items-center">
+            <!--Success Banner Section-->
+            <div id="successBanner" class="flex bg-red-100 rounded-lg p-4 mb-4 text-sm text-red-700 hidden" role="alert">
+                <svg class="w-5 h-5 inline mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+                </svg>
+                <div>
+                    <span class="font-medium">Perfetto! </span>E' stata rimossa la comunicazione dai tuoi preferiti!
+                </div>
+            </div>
             <h2 id="communicationTitle" class="text-2xl font-bold mb-4 text-center"></h2>
             <p id="communicationCategory" class="text-lg mb-4"></p>
             <p id="communicationAttachments" class="text-lg mb-4"></p>
-            <button class="px-6 py-3 absolute top-0 right-0">
+            <button id="removeStarButton" class="px-6 py-3 text-black rounded-md text-lg mb-4">Rimuovi dai preferiti</button>
+            <button class="px-6 py-3 ">
                 <svg id="closeCommunicationInfoStar" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="M6  18L18 6M6 6l12 12" />

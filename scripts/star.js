@@ -66,6 +66,7 @@ function setTheme(theme) {
     document.getElementById('tableRows').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
     document.getElementById('communicationBannerStar').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
     document.getElementById('closeCommunicationInfoStar').setAttribute("stroke",'var(--' + theme + '-text-color)');
+    document.getElementById('removeStarButton').style.backgroundColor = 'var(--' + theme + '-secondary-color)';
 }
 
 function redirectToProfile() {
@@ -199,13 +200,6 @@ function renderTable(page) {
         categoryCell.appendChild(categoryContent);
         row.appendChild(categoryCell);
 
-        var attachmentCell = document.createElement("td");
-        attachmentCell.className = "px-6 py-4 whitespace-nowrap";
-        attachmentCell.innerHTML = item.cntHasAttach ?
-            `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Allegato</span>` :
-            `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Nessun Allegato</span>`;
-        row.appendChild(attachmentCell);
-
         tableBody.appendChild(row);
     }
 }
@@ -290,10 +284,30 @@ function createShowCommunicationHandler(pubId) {
         }
     }
 }
+function showSuccessBanner() {
+    var successBanner = document.getElementById("successBanner");
+    successBanner.classList.remove("hidden");
+
+    setTimeout(function() {
+        hideSuccessBanner();
+    }, 3000);
+}
+
+function hideSuccessBanner() {
+    var successBanner = document.getElementById("successBanner");
+    successBanner.classList.add("hidden");
+}
+
 function showCommunicationInfo(pubId,title, category, attachments) {
     var infoDiv = document.getElementById("communicationInfo");
     var titleElement = document.getElementById("communicationTitle");
     var attachmentsElement = document.getElementById("communicationAttachments");
+
+    document.getElementById("removeStarButton").addEventListener("click", function() {
+        removeFavoriteToDatabase(pubId, userId);
+        showSuccessBanner();
+        fetchDataAndRenderTable();
+    });
 
     titleElement.textContent = title;
 
@@ -329,6 +343,31 @@ async function fetchDataAndRenderTable() {
     } catch (error) {
         console.error(error.message);
     }
+}
+
+//Section for adding favoutires
+function removeFavoriteToDatabase(circolareId, sessionUserId) {
+    console.log(circolareId);
+    console.log(sessionUserId);
+    var formData = new FormData();
+    formData.append('circolareId',circolareId);
+    formData.append('sessionUserId',sessionUserId);
+    fetch('http://192.168.101.35/projects/ClassevivaComms/Fat3/remove-favorite', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Errore durante il salvataggio dei dati nel database');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log("Dati salvati nel database:", data);
+        })
+        .catch(error => {
+            console.error(error.message);
+        });
 }
 
 fetchDataAndRenderTable();

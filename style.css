@@ -44,7 +44,7 @@ body{
     background-color: var(--theme0-primary-color);
 }
 
-#header,#headerLogin,#theme0,#buttonUpdate,#addStarButton{
+#header,#headerLogin,#theme0,#buttonUpdate,#addStarButton,#removeStarButton{
     background-color: var(--theme0-secondary-color);
 }
 

@@ -178,7 +178,9 @@ $f3->route('POST /save-favorite', function($f3) use ($pdo) {
         $f3->status(500);
     }
 });
+
 $f3->route('POST /remove-favorite', function($f3) use ($pdo) {
+    header('Access-Control-Allow-Origin: *');
     try {
         $circolareId = $_POST['circolareId'];
         $sessionUserId = $_POST['sessionUserId'];
