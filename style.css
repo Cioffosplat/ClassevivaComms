@@ -82,9 +82,6 @@ body{
 #tableRows,#communicationBanner,#communicationBannerStar{
     background-color: var(--theme0-accent2-color);
 }
-#profileAboutIcon{
-    stroke: var(--theme0-primary-color);
-}
 
 /*Favourite Star Css*/
 .favorite-icon:hover {
