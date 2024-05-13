@@ -1,6 +1,6 @@
 <?php
 session_start();
-//Comms request for comms counter
+//Comms request for comms card
 $ch_card = curl_init();
 $url_card = 'http://192.168.101.35/projects/ClassevivaComms/Fat3/card';
 curl_setopt($ch_card, CURLOPT_URL, $url_card);

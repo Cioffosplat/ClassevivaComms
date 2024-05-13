@@ -123,6 +123,32 @@ function getCookie(name) {
     return "";
 }
 
+//Section to update the profile pic
+function updateProfilePic() {
+    const sessionUserId = userId;
+    const formData = new FormData();
+    formData.append('sessionUserId', sessionUserId);
+    fetch('http://192.168.101.35/projects/ClassevivaComms/Fat3/profile-pic', {
+        method: 'POST',
+        body: formData
+    })
+        .then(response => {
+            if (response.ok) {
+                return response.blob();
+            }
+            throw new Error('Errore durante il recupero dell\'immagine del profilo');
+        })
+        .then(blob => {
+            const imgUrl = URL.createObjectURL(blob);
+            document.getElementById('userIcon').src = imgUrl;
+            document.getElementById('profilePicBig').src = imgUrl;
+        })
+        .catch(error => {
+            console.error('Errore:', error);
+        });
+}
+
+updateProfilePic();
 
 
 

@@ -305,8 +305,9 @@ function showCommunicationInfo(pubId,title, category, attachments) {
 
     document.getElementById("removeStarButton").addEventListener("click", function() {
         removeFavoriteToDatabase(pubId, userId);
-        showSuccessBanner();
         fetchDataAndRenderTable();
+        document.getElementById("communicationInfo").classList.remove("hidden");
+        showSuccessBanner();
     });
 
     titleElement.textContent = title;

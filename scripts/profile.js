@@ -127,7 +127,6 @@ function getCookie(name) {
 }
 
 //Insertion of the new profile pic
-
 const fileInput = document.getElementById('profile_pic');
 fileInput.addEventListener('change', function() {
     if (this.files && this.files[0]) {

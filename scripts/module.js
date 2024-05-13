@@ -1,33 +1,3 @@
-/*Colour Palettes*/
-var theme0PrimaryColor = "#5DFDCB";
-var theme0SecondaryColor = "#7CC6FE";
-var theme0AccentColor = "#F4FAFF";
-var theme0Accent2Color = "#011627";
-var theme0TextColor = "#000000";
-var theme0BackgroundColor = "#bdbebd";
-
-var theme1PrimaryColor = "#221d23";
-var theme1SecondaryColor = "#4f3824";
-var theme1AccentColor = "#d1603d";
-var theme1Accent2Color = "#ddb967";
-var theme1TextColor = "#000000";
-var theme1BackgroundColor = "#d0e37f";
-
-var theme2PrimaryColor = "#210B2C";
-var theme2SecondaryColor = "#55286F";
-var theme2AccentColor = "#BC96E6";
-var theme2Accent2Color = "#D8B4E2";
-var theme2TextColor = "#FFFFFF";
-var theme2BackgroundColor = "#AE759F";
-
-var theme3PrimaryColor = "#EEE0CB";
-var theme3SecondaryColor = "#BAA898";
-var theme3AccentColor = "#848586";
-var theme3Accent2Color = "#C2847A";
-var theme3TextColor = "#FFFFFF";
-var theme3BackgroundColor = "#280003";
-
-
 //Saving function for the themes
 let savedTheme = sessionStorage.getItem('theme');
 window.onload = function () {
@@ -43,7 +13,7 @@ window.onload = function () {
 // Logout Function when tab is closed
 window.onunload = function (){
     $.ajax({
-        url: 'login.php',
+        url: 'index.php',
         method: 'POST',
         data: {logout: true},
     });
@@ -75,32 +45,13 @@ function closePaint() {
 document.getElementById("open-paint").addEventListener("click", openPaint);
 document.getElementById("paint").querySelector("button").addEventListener("click", closePaint);
 
+
 //Setting of the Themes
 function setTheme(theme) {
     sessionStorage.setItem('theme', theme);
     if(!getCookie("cookie_consent")) document.getElementById('cookie-banner').style.backgroundColor = 'var(--' + theme + '-accent-color)';
     document.getElementById('header').style.backgroundColor = 'var(--' + theme + '-secondary-color)';
     document.getElementById('mainPage').style.backgroundColor = 'var(--' + theme + '-background-color)';
-    document.getElementById('commsForm').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
-    document.getElementById('starForm').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
-    document.getElementById('groupForm').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
-    document.getElementById('moduleForm').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
-    document.getElementById('commsLogo').style.backgroundColor = 'var(--' + theme + '-primary-color)';
-    document.getElementById('starLogo').style.backgroundColor = 'var(--' + theme + '-primary-color)';
-    document.getElementById('groupLogo').style.backgroundColor = 'var(--' + theme + '-primary-color)';
-    document.getElementById('moduleLogo').style.backgroundColor = 'var(--' + theme + '-primary-color)';
-    document.getElementById('commsLogoSVG').setAttribute("stroke",'var(--' + theme + '-text-color)');
-    document.getElementById('starLogoSVG').setAttribute("stroke",'var(--' + theme + '-text-color)');
-    document.getElementById('groupLogoSVG').setAttribute("stroke",'var(--' + theme + '-text-color)');
-    document.getElementById('moduleLogoSVG').setAttribute("stroke",'var(--' + theme + '-text-color)');
-    document.getElementById('commsSubmit').style.backgroundColor = 'var(--' + theme + '-primary-color)';
-    document.getElementById('starSubmit').style.backgroundColor = 'var(--' + theme + '-primary-color)';
-    document.getElementById('groupSubmit').style.backgroundColor = 'var(--' + theme + '-primary-color)';
-    document.getElementById('moduleSubmit').style.backgroundColor = 'var(--' + theme + '-primary-color)';
-    document.getElementById('commsSubmit').style.color = 'var(--' + theme + '-text-color)';
-    document.getElementById('starSubmit').style.color = 'var(--' + theme + '-text-color)';
-    document.getElementById('groupSubmit').style.color = 'var(--' + theme + '-text-color)';
-    document.getElementById('moduleSubmit').style.color = 'var(--' + theme + '-text-color)';
     document.getElementById('sidebar').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
     document.getElementById('paint').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
     document.getElementById('sidebarX').setAttribute("stroke",'var(--' + theme + '-text-color)');
@@ -108,9 +59,8 @@ function setTheme(theme) {
     document.getElementById('logo').src = '../resources/images/logos/logo' + theme+ '.jpg';
     document.getElementById('logoSidebar').src = '../resources/images/logos/logo' + theme+ '.jpg';
     document.getElementById('tabIcon').setAttribute('href', '/resources/images/logos/logo' + theme+ '.jpg');
+    document.getElementById('userIcon').src = '../resources/images/users/defaultuser' + theme + '.jpg';
     document.getElementById('paintbrushButton').src = '../resources/images/paintbrush/paintbrush' + theme + '.png';
-    document.getElementById('tableBack').style.backgroundColor = 'var(--' + theme + '-accent-color)';
-    document.getElementById('tableRows').style.backgroundColor = 'var(--' + theme + '-accent2-color)';
 }
 
 function redirectToProfile() {
@@ -141,7 +91,7 @@ function checkCookieConsent() {
 }
 
 function showCookieBanner() {
-   document.getElementById("cookie-banner").style.display= "block";
+    document.getElementById("cookie-banner").style.display= "block";
 }
 
 function hideCookieBanner() {
@@ -173,44 +123,6 @@ function getCookie(name) {
     return "";
 }
 
-//Table Rendering Script
-var itemsPerPage = 4;
-var currentPage = 1;
-
-function renderTable(page) {
-    var tableBody = document.getElementById("tableRows");
-    tableBody.innerHTML = '';
-    commsData.items.sort(function(a, b) {
-        return new Date(b.cntValidFrom) - new Date(a.cntValidFrom);
-    });
-
-    var startIndex = (page - 1) * itemsPerPage;
-    var endIndex = Math.min(startIndex + itemsPerPage, commsData.items.length);
-
-    for (var i = startIndex; i < endIndex; i++) {
-        var item = commsData.items[i];
-        var row = document.createElement("tr");
-        row.innerHTML = `
-            <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">${item.cntTitle}</div>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">${item.cntCategory}</div>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-                <div class="text-sm text-gray-900">${item.cntValidFrom}</div>
-            </td>
-            <td class="px-6 py-4 whitespace-nowrap">
-                ${item.cntHasAttach ?
-            `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Allegato</span>` :
-            `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Nessun Allegato</span>`}
-            </td>
-        `;
-        tableBody.appendChild(row);
-    }
-}
-renderTable(currentPage);
-
 //Section to update the profile pic
 function updateProfilePic() {
     const sessionUserId = userId;
@@ -237,3 +149,6 @@ function updateProfilePic() {
 }
 
 updateProfilePic();
+
+
+

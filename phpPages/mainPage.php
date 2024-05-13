@@ -31,6 +31,14 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         //Logging number of communications
         $_SESSION['commsNumber'] = count($commsData['items']);
 
+//        //Set default profile pic image
+//        $ch_profile = curl_init();
+//        $url_profile = 'http://192.168.101.35/projects/ClassevivaComms/Fat3/update-profile-pic';
+//        curl_setopt($ch_profile, CURLOPT_URL, $url_profile);
+//        curl_setopt($ch_profile, CURLOPT_POSTFIELDS, http_build_query(array('profile_pic' => '../resources/images/users/defaultusertheme0.jpg', 'sessionUserId' => $_SESSION['id'])));
+//        curl_setopt($ch_profile, CURLOPT_RETURNTRANSFER, true);
+//        $response_profile = curl_exec($ch_profile);
+
         header("Location: {$_SERVER['PHP_SELF']}");
         exit;
     } else if(empty($_SESSION['ident'] || $_SESSION['token']) && !isset($_POST['username']) && !isset($_POST['password'])) {
