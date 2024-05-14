@@ -251,5 +251,20 @@ $f3->route('POST /user-stars', function($f3) use ($pdo) {
 });
 
 
+$f3->route('GET /modules', function($f3) use ($pdo) {
+    header('Access-Control-Allow-Origin: *');
+    try {
+        $stmt = $pdo->prepare("SELECT name, id, category FROM module");
+        $stmt->execute();
+        $modules = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $f3->status(200);
+        echo json_encode($modules);
+    } catch (Exception $e) {
+        $f3->status(500);
+        echo json_encode(['error' => $e->getMessage()]);
+    }
+});
+
+
 $f3->run();
 ?>

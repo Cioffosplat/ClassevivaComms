@@ -3,14 +3,14 @@ CREATE TABLE users (
     name VARCHAR(255) NOT NULL,
     surname VARCHAR(255) NOT NULL,
     birth_date DATE NOT NULL,
-    user_pic BLOB
+    user_pic MEDIUMBLOB
 );
 
 CREATE TABLE module (
     id INT AUTO_INCREMENT  PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     category VARCHAR(255) NOT NULL,
-    expiration_date DATE
+    file LONGBLOB
 );
 
 CREATE TABLE noticeboard (

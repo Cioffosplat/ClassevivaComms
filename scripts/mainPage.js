@@ -1,33 +1,3 @@
-/*Colour Palettes*/
-var theme0PrimaryColor = "#5DFDCB";
-var theme0SecondaryColor = "#7CC6FE";
-var theme0AccentColor = "#F4FAFF";
-var theme0Accent2Color = "#011627";
-var theme0TextColor = "#000000";
-var theme0BackgroundColor = "#bdbebd";
-
-var theme1PrimaryColor = "#221d23";
-var theme1SecondaryColor = "#4f3824";
-var theme1AccentColor = "#d1603d";
-var theme1Accent2Color = "#ddb967";
-var theme1TextColor = "#000000";
-var theme1BackgroundColor = "#d0e37f";
-
-var theme2PrimaryColor = "#210B2C";
-var theme2SecondaryColor = "#55286F";
-var theme2AccentColor = "#BC96E6";
-var theme2Accent2Color = "#D8B4E2";
-var theme2TextColor = "#FFFFFF";
-var theme2BackgroundColor = "#AE759F";
-
-var theme3PrimaryColor = "#EEE0CB";
-var theme3SecondaryColor = "#BAA898";
-var theme3AccentColor = "#848586";
-var theme3Accent2Color = "#C2847A";
-var theme3TextColor = "#FFFFFF";
-var theme3BackgroundColor = "#280003";
-
-
 //Saving function for the themes
 let savedTheme = sessionStorage.getItem('theme');
 window.onload = function () {

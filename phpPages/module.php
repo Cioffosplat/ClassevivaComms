@@ -2,6 +2,9 @@
 session_start();
 ?>
 
+<!--Send via javascript the UserId-->
+<script>var userId = <?php echo $_SESSION['id']; ?>;</script>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +22,7 @@ session_start();
     <div class="absolute inset-0 bg-gray-700 opacity-75"></div>
 </div>
 <!-- MainPage Section -->
-<div id="mainPage" class="h-screen overflow-auto bg-gray-200">
+<div id="mainPage" class="overflow-auto bg-gray-200">
     <!-- Theme Color Section -->
     <div class="fixed w-60 min-h-screen overflow-y-auto transition-transform transform translate-x-full ease-in-out duration-300 rounded-l-2xl right-0"
          id="paint">
@@ -92,10 +95,18 @@ session_start();
             <button class="w-7 h-7 cursor-pointer mx-2" id="open-paint">
                 <img id="paintbrushButton" src="../resources/images/paintbrush/paintbrushtheme0.png" alt="paintbrushButton">
             </button>
-            <img id="userIcon" alt="User Icon" class="w-10 h-10 rounded-full ml-2 cursor-pointer" onclick="redirectToProfile()" src="../resources/images/users/defaultusertheme0.jpg">
+            <img id="userIcon" alt="User Icon" class="w-10 h-10 rounded-full ml-2 cursor-pointer" onclick="redirectToProfile()" src="">
             <?php
             echo "<p style='font-family: 'Ubuntu Condensed';' class='px-2 mx-2'>{$_SESSION['firstName']} {$_SESSION['lastName']}</p>"
             ?>
+        </div>
+    </div>
+
+    <!-- Title and Modules Container -->
+    <div class="container mt-5 mb-5 mx-auto">
+        <h1 class="text-2xl font-bold mb-2">Moduli Disponibili:</h1>
+        <div class="grid w-full sm:grid-cols-2 xl:grid-cols-4 gap-6">
+            <!-- Cards will be dynamically inserted here by JavaScript -->
         </div>
     </div>
 
@@ -111,8 +122,9 @@ session_start();
         </div>
     </div>
 </div>
+
 <link href="../style.css" rel="stylesheet">
-<script src="../scripts/profile.js"></script>
+<script src="../scripts/module.js"></script>
 </body>
 
 </html>

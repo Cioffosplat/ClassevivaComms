@@ -156,7 +156,7 @@ $userIdent = $_SESSION['id'];
 
     <!--Communication Popup Div-->
     <div id="communicationInfo" class="fixed inset-0 z-50 hidden flex justify-center items-center bg-gray-900 bg-opacity-50">
-        <div id="communicationBannerStar" class="container mx-auto rounded-2xl p-6 h-3/4 w-3/4 flex flex-col justify-center items-center">
+        <div id="communicationBannerStar" class="container mx-auto rounded-2xl p-6 h-3/4 w-3/4 flex flex-col justify-center items-center relative">
             <!--Success Banner Section-->
             <div id="successBanner" class="flex bg-red-100 rounded-lg p-4 mb-4 text-sm text-red-700 hidden" role="alert">
                 <svg class="w-5 h-5 inline mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -169,8 +169,8 @@ $userIdent = $_SESSION['id'];
             <h2 id="communicationTitle" class="text-2xl font-bold mb-4 text-center"></h2>
             <p id="communicationCategory" class="text-lg mb-4"></p>
             <p id="communicationAttachments" class="text-lg mb-4"></p>
-            <button id="removeStarButton" class="px-6 py-3 text-black rounded-md text-lg mb-4">Rimuovi dai preferiti</button>
-            <button class="px-6 py-3 ">
+            <button id="removeStarButton" class="px-6 py-3 text-black rounded-md text-lg mb-4">Rimuovi dai Preferiti</button>
+            <button class="px-6 py-3 absolute top-0 right-0">
                 <svg id="closeCommunicationInfoStar" xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                           d="M6  18L18 6M6 6l12 12" />

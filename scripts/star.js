@@ -306,7 +306,6 @@ function showCommunicationInfo(pubId,title, category, attachments) {
     document.getElementById("removeStarButton").addEventListener("click", function() {
         removeFavoriteToDatabase(pubId, userId);
         fetchDataAndRenderTable();
-        document.getElementById("communicationInfo").classList.remove("hidden");
         showSuccessBanner();
     });
 
@@ -354,7 +353,7 @@ function removeFavoriteToDatabase(circolareId, sessionUserId) {
     formData.append('circolareId',circolareId);
     formData.append('sessionUserId',sessionUserId);
     fetch('http://192.168.101.35/projects/ClassevivaComms/Fat3/remove-favorite', {
-        method: 'POST',
+        method: 'DELETE',
         body: formData
     })
         .then(response => {
