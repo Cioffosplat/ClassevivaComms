@@ -265,6 +265,37 @@ $f3->route('GET /modules', function($f3) use ($pdo) {
     }
 });
 
+$f3->route('POST /download-pdf', function($f3) use ($pdo) {
+    $moduleId = $_POST['module_id'];
+
+    if (!$moduleId) {
+        $f3->status(400);
+        echo json_encode(['error' => 'ID del modulo non fornito.']);
+        return;
+    }
+
+    try {
+        $stmt = $pdo->prepare("SELECT name, file FROM module WHERE id = :moduleId");
+        $stmt->bindParam(':moduleId', $moduleId, PDO::PARAM_INT);
+        $stmt->execute();
+        $stmt->bindColumn('name', $moduleName);
+        $stmt->bindColumn('file', $pdfFile, PDO::PARAM_LOB);
+
+        if ($stmt->fetch(PDO::FETCH_BOUND)) {
+            header('Content-Type: application/pdf');
+            header('Content-Disposition: attachment; filename="' . $moduleName . '.pdf"');
+            header('Content-Length: ' . strlen($pdfFile));
+            echo $pdfFile;
+        } else {
+            $f3->status(404);
+            echo json_encode(['error' => 'File PDF non trovato.']);
+        }
+    } catch (Exception $e) {
+        $f3->status(500);
+        echo json_encode(['error' => $e->getMessage()]);
+    }
+});
+
 
 $f3->run();
 ?>

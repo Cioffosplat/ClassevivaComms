@@ -11,6 +11,8 @@ unset($_SESSION['commsResponse']);
 unset($_SESSION['cardResponse']);
 unset($_SESSION['starNumber']);
 unset($_SESSION['starResponse']);
+unset($_SESSION['modulesNumber']);
+unset($_SESSION['modulesResponse']);
 ?>
 <!DOCTYPE html>
 <html lang="en">

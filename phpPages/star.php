@@ -82,6 +82,7 @@ $userIdent = $_SESSION['id'];
                 <li class="flex mb-10"><a href="comms.php" class="block"><h3 class="sidebarText">Comunicazioni</h3></a></li>
                 <li class="flex mb-10"><a href="star.php" class="block"><h3 class="sidebarText">Preferiti</h3></a></li>
                 <li class="flex mb-10"><a href="group.php" class="block"><h3 class="sidebarText">Gruppi</h3></a></li>
+                <li class="flex mb-10"><a href="module.php" class="block"><h3 class="sidebarText">Moduli</h3></a></li>
                 <li class="flex mb-10">
                     <a href="../index.php" class="block">
                         <h3 class="sidebarText">Logout</h3>

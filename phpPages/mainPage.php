@@ -18,19 +18,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         $_SESSION['firstName'] = $loginData["firstName"];
         $_SESSION['lastName'] = $loginData["lastName"];
 
-        //Comms request for comms counter
-        $ch_comms = curl_init();
-        $url_comms = 'http://192.168.101.35/projects/ClassevivaComms/Fat3/noticeboard';
-        curl_setopt($ch_comms, CURLOPT_URL, $url_comms);
-        curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id' => $_SESSION['id'], 'token' => $_SESSION['token'])));
-        curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);
-        $response_comms = curl_exec($ch_comms);
-        $commsData = json_decode($response_comms, true);
-        $_SESSION['commsResponse'] = $commsData;
-
-        //Logging number of communications
-        $_SESSION['commsNumber'] = count($commsData['items']);
-
 //        //Set default profile pic image
 //        $ch_profile = curl_init();
 //        $url_profile = 'http://192.168.101.35/projects/ClassevivaComms/Fat3/update-profile-pic';
@@ -49,6 +36,19 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         die();
     }
 }
+//Comms request for comms counter
+$ch_comms = curl_init();
+$url_comms = 'http://192.168.101.35/projects/ClassevivaComms/Fat3/noticeboard';
+curl_setopt($ch_comms, CURLOPT_URL, $url_comms);
+curl_setopt($ch_comms, CURLOPT_POSTFIELDS, http_build_query(array('id' => $_SESSION['id'], 'token' => $_SESSION['token'])));
+curl_setopt($ch_comms, CURLOPT_RETURNTRANSFER, true);
+$response_comms = curl_exec($ch_comms);
+$commsData = json_decode($response_comms, true);
+$_SESSION['commsResponse'] = $commsData;
+
+//Logging number of communications
+$_SESSION['commsNumber'] = count($commsData['items']);
+
 //Star request for number of starred comms
 $ch_star = curl_init();
 $url_star = 'http://192.168.101.35/projects/ClassevivaComms/Fat3/user-stars';
@@ -60,6 +60,18 @@ $starData = json_decode($response_star, true);
 $_SESSION['starResponse'] = $starData;
 
 $_SESSION['starNumber'] = sizeof($starData);
+
+//Modules request for module counter
+$ch_modules = curl_init();
+$url_modules = 'http://192.168.101.35/projects/ClassevivaComms/Fat3/modules';
+curl_setopt($ch_modules, CURLOPT_URL, $url_modules);
+curl_setopt($ch_modules, CURLOPT_RETURNTRANSFER, true);
+$response_modules = curl_exec($ch_modules);
+$modulesData = json_decode($response_modules, true);
+$_SESSION['modulesReponse'] = $modulesData;
+
+//Loggin number of modules
+$_SESSION['modulesNumber'] = count($modulesData);
 ?>
 
 <!--Send via javascript the json array with the commsData-->
@@ -136,6 +148,7 @@ $_SESSION['starNumber'] = sizeof($starData);
                 <li class="flex mb-10"><a href="comms.php" class="block"><h3 class="sidebarText">Comunicazioni</h3></a></li>
                 <li class="flex mb-10"><a href="star.php" class="block"><h3 class="sidebarText">Preferiti</h3></a></li>
                 <li class="flex mb-10"><a href="group.php" class="block"><h3 class="sidebarText">Gruppi</h3></a></li>
+                <li class="flex mb-10"><a href="module.php" class="block"><h3 class="sidebarText">Moduli</h3></a></li>
                 <li class="flex mb-10">
                     <a href="../index.php" class="block">
                         <h3 class="sidebarText">Logout</h3>
@@ -249,7 +262,9 @@ $_SESSION['starNumber'] = sizeof($starData);
                     <div>
                         <div class="text-gray-600 text-sm">Moduli</div>
                         <div class="text-gray-900 text-2xl font-semibold">
-                            no
+                            <?php
+                            echo $_SESSION['modulesNumber'];
+                            ?>
                         </div>
                     </div>
                 </div>
