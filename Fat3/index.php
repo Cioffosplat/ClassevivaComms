@@ -22,7 +22,7 @@ $f3 = \Base::instance();
 $f3->route('OPTIONS /*', function () {
     header('Access-Control-Allow-Origin: *');
     header('Access-Control-Allow-Headers: Content-Type');
-    header('Access-Control-Allow-Methods: POST, GET, OPTIONS');
+    header('Access-Control-Allow-Methods: POST, GET, OPTIONS,DELETE');
     die();
 });
 $f3->route('POST /login', function($f3) use ($pdo) {
@@ -266,6 +266,7 @@ $f3->route('GET /modules', function($f3) use ($pdo) {
 });
 
 $f3->route('POST /download-pdf', function($f3) use ($pdo) {
+    header('Access-Control-Allow-Origin: *');
     $moduleId = $_POST['module_id'];
 
     if (!$moduleId) {

@@ -58,7 +58,7 @@ function setTheme(theme) {
     document.getElementById('paintX').setAttribute("stroke",'var(--' + theme + '-text-color)');
     document.getElementById('logo').src = '../resources/images/logos/logo' + theme+ '.jpg';
     document.getElementById('logoSidebar').src = '../resources/images/logos/logo' + theme+ '.jpg';
-    document.getElementById('tabIcon').setAttribute('href', '/resources/images/logos/logo' + theme+ '.jpg');
+    document.getElementById('tabIcon').setAttribute('href', '../resources/images/logos/logo' + theme+ '.jpg');
     document.getElementById('paintbrushButton').src = '../resources/images/paintbrush/paintbrush' + theme + '.png';
     document.getElementById('searchInput').style.backgroundColor = 'var(--' + theme + '-secondary-color)';
     document.getElementById('tableBack').style.backgroundColor = 'var(--' + theme + '-accent-color)';
@@ -353,7 +353,7 @@ function removeFavoriteToDatabase(circolareId, sessionUserId) {
     formData.append('circolareId',circolareId);
     formData.append('sessionUserId',sessionUserId);
     fetch('http://192.168.101.35/projects/ClassevivaComms/Fat3/remove-favorite', {
-        method: 'DELETE',
+        method: 'POST',
         body: formData
     })
         .then(response => {

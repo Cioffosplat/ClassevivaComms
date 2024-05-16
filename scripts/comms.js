@@ -58,7 +58,7 @@ function setTheme(theme) {
     document.getElementById('paintX').setAttribute("stroke",'var(--' + theme + '-text-color)');
     document.getElementById('logo').src = '../resources/images/logos/logo' + theme+ '.jpg';
     document.getElementById('logoSidebar').src = '../resources/images/logos/logo' + theme+ '.jpg';
-    document.getElementById('tabIcon').setAttribute('href', '/resources/images/logos/logo' + theme+ '.jpg');
+    document.getElementById('tabIcon').setAttribute('href', '../resources/images/logos/logo' + theme+ '.jpg');
     document.getElementById('paintbrushButton').src = '../resources/images/paintbrush/paintbrush' + theme + '.png';
     document.getElementById('searchInput').style.backgroundColor = 'var(--' + theme + '-secondary-color)';
     document.getElementById('tableBack').style.backgroundColor = 'var(--' + theme + '-accent-color)';

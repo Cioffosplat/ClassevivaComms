@@ -1,4 +1,4 @@
-//Saving function for the themes
+// Saving function for the themes
 let savedTheme = sessionStorage.getItem('theme');
 window.onload = function () {
     savedTheme = sessionStorage.getItem('theme');
@@ -11,7 +11,7 @@ window.onload = function () {
 }
 
 // Logout Function when tab is closed
-window.onunload = function (){
+window.onunload = function () {
     $.ajax({
         url: 'index.php',
         method: 'POST',
@@ -19,7 +19,7 @@ window.onunload = function (){
     });
 }
 
-//Sidebar Functions
+// Sidebar Functions
 function openSidebar() {
     document.getElementById("sidebar").classList.remove("-translate-x-full");
     document.getElementById("backgroundBlur").style.display = "block";
@@ -32,7 +32,7 @@ function closeSidebar() {
 document.getElementById("open-sidebar").addEventListener("click", openSidebar);
 document.getElementById("sidebar").querySelector("button").addEventListener("click", closeSidebar);
 
-//Paintbrush Menu Functions
+// Paintbrush Menu Functions
 function openPaint() {
     document.getElementById("paint").classList.add("translate-x-0");
     document.getElementById("backgroundBlur").style.display = "block";
@@ -45,8 +45,7 @@ function closePaint() {
 document.getElementById("open-paint").addEventListener("click", openPaint);
 document.getElementById("paint").querySelector("button").addEventListener("click", closePaint);
 
-
-//Setting of the Themes
+// Setting of the Themes
 function setTheme(theme) {
     sessionStorage.setItem('theme', theme);
     if(!getCookie("cookie_consent")) document.getElementById('cookie-banner').style.backgroundColor = 'var(--' + theme + '-accent-color)';
@@ -58,7 +57,7 @@ function setTheme(theme) {
     document.getElementById('paintX').setAttribute("stroke",'var(--' + theme + '-text-color)');
     document.getElementById('logo').src = '../resources/images/logos/logo' + theme+ '.jpg';
     document.getElementById('logoSidebar').src = '../resources/images/logos/logo' + theme+ '.jpg';
-    document.getElementById('tabIcon').setAttribute('href', '/resources/images/logos/logo' + theme+ '.jpg');
+    document.getElementById('tabIcon').setAttribute('href', '../resources/images/logos/logo' + theme+ '.jpg');
     document.getElementById('paintbrushButton').src = '../resources/images/paintbrush/paintbrush' + theme + '.png';
 }
 
@@ -70,7 +69,7 @@ function redirectToHomepage() {
     window.location.href = "mainPage.php";
 }
 
-//Sezione per il cookie banner
+// Sezione per il cookie banner
 function setCookieConsent(consent) {
     var d = new Date();
     d.setTime(d.getTime() + (30 * 24 * 60 * 60 * 1000));
@@ -122,7 +121,7 @@ function getCookie(name) {
     return "";
 }
 
-//Section to update the profile pic
+// Section to update the profile pic
 function updateProfilePic() {
     const sessionUserId = userId;
     const formData = new FormData();
@@ -149,7 +148,7 @@ function updateProfilePic() {
 
 updateProfilePic();
 
-//Module cards generation
+// Module cards generation
 document.addEventListener('DOMContentLoaded', () => {
     fetch('http://192.168.101.35/projects/ClassevivaComms/Fat3/modules')
         .then(response => response.json())
@@ -157,12 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const container = document.querySelector('.grid');
             modules.forEach(module => {
                 const moduleCard = document.createElement('div');
-                moduleCard.classList.add('flex', 'flex-col', 'shadow-md', 'rounded-xl', 'border-current', 'border-solid', 'border-2', 'overflow-hidden', 'transition-all', 'duration-300', 'max-w-sm','mt-5');
+                moduleCard.classList.add('flex', 'flex-col', 'shadow-md', 'rounded-xl', 'border-current', 'border-solid', 'border-2', 'overflow-hidden', 'transition-all', 'duration-300', 'max-w-sm', 'mt-5');
                 moduleCard.innerHTML = `
-                    <a href="#" class="absolute overflow-hidden">&nbsp;</a>
+                    <a class="absolute overflow-hidden">&nbsp;</a>
                     <div class="h-auto overflow-hidden">
                         <div class="h-44 overflow-hidden flex justify-center items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-20 h-20">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-20 h-20" data-id="${module.id}">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
                             </svg>
                         </div>
@@ -172,8 +171,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <div class="flex justify-between items-center">
                             <p class="text-xs">Tipologia File: ${module.category}</p>
                             <div class="overflow-hidden flex items-center gap-2">
-                                <a href="#">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <a class="download-icon" href="download.php?module_id=${module.id}" target="_blank">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 download-icon" data-id="${module.id}">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
                                     </svg>
                                 </a>
@@ -189,5 +188,6 @@ document.addEventListener('DOMContentLoaded', () => {
             container.innerHTML = `<p class="text-red-500">Errore nel caricamento dei moduli: ${error.message}</p>`;
         });
 });
+
 
 
